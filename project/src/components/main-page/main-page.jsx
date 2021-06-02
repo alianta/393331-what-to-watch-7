@@ -2,6 +2,10 @@ import React from 'react';
 import FilmCard from '../film-card/film-card';
 import PropTypes from 'prop-types';
 
+const FILM_CARD_COUNT = 20;
+let FILM_CARD_START_ID = 1;
+
+
 function MainPage(props) {
   const {filmName, filmGenre, filmYear} = props;
 
@@ -137,22 +141,7 @@ function MainPage(props) {
           </ul>
 
           <div className="catalog__films-list">
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
+            {Array.from({length: FILM_CARD_COUNT}).map(() => <FilmCard key={FILM_CARD_START_ID++}/>)}
           </div>
 
           <div className="catalog__more">
