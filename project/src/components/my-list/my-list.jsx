@@ -1,20 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Footer from '../footer/footer';
+import Logo from '../logo/logo';
 
 function MyList() {
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
-        <div className="logo">
-          <a href="main.html" className="logo__link">
-            <span className="logo__letter logo__letter--1">W</span>
-            <span className="logo__letter logo__letter--2">T</span>
-            <span className="logo__letter logo__letter--3">W</span>
-          </a>
-        </div>
-
+        <Logo />
         <h1 className="page-title user-page__title">My list</h1>
-
         <ul className="user-block">
           <li className="user-block__item">
             <div className="user-block__avatar">
@@ -22,7 +16,7 @@ function MyList() {
             </div>
           </li>
           <li className="user-block__item">
-            <a href="/#" className="user-block__link">Sign out</a>
+            <Link to="/#" className="user-block__link">Sign out</Link>
           </li>
         </ul>
       </header>
@@ -36,7 +30,7 @@ function MyList() {
               <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175" />
             </div>
             <h3 className="small-film-card__title">
-              <a className="small-film-card__link" href="film-page.html">Fantastic Beasts: The Crimes of Grindelwald</a>
+              <Link className="small-film-card__link" to="film-page.html">Fantastic Beasts: The Crimes of Grindelwald</Link>
             </h3>
           </article>
 
@@ -45,7 +39,7 @@ function MyList() {
               <img src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" width="280" height="175" />
             </div>
             <h3 className="small-film-card__title">
-              <a className="small-film-card__link" href="film-page.html">Bohemian Rhapsody</a>
+              <Link className="small-film-card__link" to="film-page.html">Bohemian Rhapsody</Link>
             </h3>
           </article>
 
@@ -54,7 +48,7 @@ function MyList() {
               <img src="img/macbeth.jpg" alt="Macbeth" width="280" height="175" />
             </div>
             <h3 className="small-film-card__title">
-              <a className="small-film-card__link" href="film-page.html">Macbeth</a>
+              <Link className="small-film-card__link" to="film-page.html">Macbeth</Link>
             </h3>
           </article>
 
@@ -63,7 +57,7 @@ function MyList() {
               <img src="img/aviator.jpg" alt="Aviator" width="280" height="175" />
             </div>
             <h3 className="small-film-card__title">
-              <a className="small-film-card__link" href="film-page.html">Aviator</a>
+              <Link className="small-film-card__link" to="film-page.html">Aviator</Link>
             </h3>
           </article>
 
@@ -73,7 +67,7 @@ function MyList() {
               <img src="img/we-need-to-talk-about-kevin.jpg" alt="We need to talk about Kevin" width="280" height="175" />
             </div>
             <h3 className="small-film-card__title">
-              <a className="small-film-card__link" href="film-page.html">We need to talk about Kevin</a>
+              <Link className="small-film-card__link" to="film-page.html">We need to talk about Kevin</Link>
             </h3>
           </article>
 
@@ -82,7 +76,7 @@ function MyList() {
               <img src="img/what-we-do-in-the-shadows.jpg" alt="What We Do in the Shadows" width="280" height="175" />
             </div>
             <h3 className="small-film-card__title">
-              <a className="small-film-card__link" href="film-page.html">What We Do in the Shadows</a>
+              <Link className="small-film-card__link" to="film-page.html">What We Do in the Shadows</Link>
             </h3>
           </article>
 
@@ -91,7 +85,7 @@ function MyList() {
               <img src="img/revenant.jpg" alt="Revenant" width="280" height="175" />
             </div>
             <h3 className="small-film-card__title">
-              <a className="small-film-card__link" href="film-page.html">Revenant</a>
+              <Link className="small-film-card__link" to="film-page.html">Revenant</Link>
             </h3>
           </article>
 
@@ -100,7 +94,7 @@ function MyList() {
               <img src="img/johnny-english.jpg" alt="Johnny English" width="280" height="175" />
             </div>
             <h3 className="small-film-card__title">
-              <a className="small-film-card__link" href="film-page.html">Johnny English</a>
+              <Link className="small-film-card__link" to="film-page.html">Johnny English</Link>
             </h3>
           </article>
 
@@ -110,7 +104,7 @@ function MyList() {
               <img src="img/shutter-island.jpg" alt="Shutter Island" width="280" height="175" />
             </div>
             <h3 className="small-film-card__title">
-              <a className="small-film-card__link" href="film-page.html">Shutter Island</a>
+              <Link className="small-film-card__link" to="film-page.html">Shutter Island</Link>
             </h3>
           </article>
         </div>

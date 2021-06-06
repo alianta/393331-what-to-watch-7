@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Footer from '../footer/footer';
 import Logo from '../logo/logo';
 
@@ -53,7 +54,7 @@ function Film() {
                 </div>
               </li>
               <li className="user-block__item">
-                <a href ="/#" className="user-block__link">Sign out</a>
+                <Link to ="/#" className="user-block__link">Sign out</Link>
               </li>
             </ul>
           </header>
@@ -79,7 +80,7 @@ function Film() {
                   </svg>
                   <span>My list</span>
                 </button>
-                <a href="add-review.html" className="btn film-card__button">Add review</a>
+                <Link to="add-review.html" className="btn film-card__button">Add review</Link>
               </div>
             </div>
           </div>
@@ -95,13 +96,13 @@ function Film() {
               <nav className="film-nav film-card__nav">
                 <ul className="film-nav__list">
                   <li className="film-nav__item film-nav__item--active">
-                    <a href="/#" className="film-nav__link">Overview</a>
+                    <Link to="/#" className="film-nav__link">Overview</Link>
                   </li>
                   <li className="film-nav__item">
-                    <a href="/#" className="film-nav__link">Details</a>
+                    <Link to="/#" className="film-nav__link">Details</Link>
                   </li>
                   <li className="film-nav__item">
-                    <a href="/#" className="film-nav__link">Reviews</a>
+                    <Link to="/#" className="film-nav__link">Reviews</Link>
                   </li>
                 </ul>
               </nav>
@@ -137,7 +138,7 @@ function Film() {
                 <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175" />
               </div>
               <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">Fantastic Beasts: The Crimes of Grindelwald</a>
+                <Link className="small-film-card__link" to="film-page.html">Fantastic Beasts: The Crimes of Grindelwald</Link>
               </h3>
             </article>
 
@@ -146,7 +147,7 @@ function Film() {
                 <img src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" width="280" height="175" />
               </div>
               <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">Bohemian Rhapsody</a>
+                <Link className="small-film-card__link" to="film-page.html">Bohemian Rhapsody</Link>
               </h3>
             </article>
 
@@ -155,7 +156,7 @@ function Film() {
                 <img src="img/macbeth.jpg" alt="Macbeth" width="280" height="175" />
               </div>
               <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">Macbeth</a>
+                <Link className="small-film-card__link" to="film-page.html">Macbeth</Link>
               </h3>
             </article>
 
@@ -164,7 +165,7 @@ function Film() {
                 <img src="img/aviator.jpg" alt="Aviator" width="280" height="175" />
               </div>
               <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">Aviator</a>
+                <Link className="small-film-card__link" to="film-page.html">Aviator</Link>
               </h3>
             </article>
           </div>

@@ -7,7 +7,6 @@ function SignIn() {
     <div className="user-page">
       <header className="page-header user-page__head">
         <Logo />
-
         <h1 className="page-title user-page__title">Sign in</h1>
       </header>
 
@@ -28,7 +27,6 @@ function SignIn() {
           </div>
         </form>
       </div>
-
       <Footer />
     </div>
   );

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Logo from '../logo/logo';
 
 function AddReview () {
@@ -17,10 +18,10 @@ function AddReview () {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <a href="film-page.html" className="breadcrumbs__link">The Grand Budapest Hotel</a>
+                <Link to="film-page.html" className="breadcrumbs__link">The Grand Budapest Hotel</Link>
               </li>
               <li className="breadcrumbs__item">
-                <a href="/#" className="breadcrumbs__link">Add review</a>
+                <Link to="/#" className="breadcrumbs__link">Add review</Link>
               </li>
             </ul>
           </nav>
@@ -32,7 +33,7 @@ function AddReview () {
               </div>
             </li>
             <li className="user-block__item">
-              <a href="/#" className="user-block__link">Sign out</a>
+              <Link to="/#" className="user-block__link">Sign out</Link>
             </li>
           </ul>
         </header>
