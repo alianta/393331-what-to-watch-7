@@ -1,6 +1,8 @@
 import React from 'react';
 import FilmCard from '../film-card/film-card';
 import PropTypes from 'prop-types';
+import Footer from '../footer/footer';
+import Logo from '../logo/logo';
 
 const FILM_CARD_COUNT = 20;
 let FILM_CARD_START_ID = 1;
@@ -51,13 +53,7 @@ function MainPage(props) {
         <h1 className="visually-hidden">WTW</h1>
 
         <header className="page-header film-card__head">
-          <div className="logo">
-            <a className="logo__link" href="/#">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+          <Logo />
 
           <ul className="user-block">
             <li className="user-block__item">
@@ -149,19 +145,7 @@ function MainPage(props) {
           </div>
         </section>
 
-        <footer className="page-footer">
-          <div className="logo">
-            <a className="logo__link logo__link--light" href="/#">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </div>
   );
