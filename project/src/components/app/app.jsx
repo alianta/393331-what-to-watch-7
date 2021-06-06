@@ -12,7 +12,6 @@ import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 function App(props) {
   const {filmName, filmGenre, filmYear} = props;
-  //return <MainPage filmName={filmName} filmGenre={filmGenre} filmYear={filmYear}/>;
   return (
     <BrowserRouter>
       <Switch>
