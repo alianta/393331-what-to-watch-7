@@ -9,12 +9,12 @@ function FilmList(props) {
 
   return (
     <div className="catalog__films-list">
-      <p> STATE={activeFilmCard}</p>
       {films.map((film) => (
         <FilmCard key = {film.id}
           filmId = {film.id}
           filmName = {film.title}
           previewImage = {film.poster}
+          activeFilmCard = {activeFilmCard}
           onMouseEnter = {(target) => {
             setActiveFilmCard(film.id);}}
         />
