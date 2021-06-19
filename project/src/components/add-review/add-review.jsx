@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../logo/logo';
 import PropTypes from 'prop-types';
@@ -7,6 +7,7 @@ import films from '../../mocks/films';
 function AddReview (props) {
   const filmId = parseInt(props.match.params.id,10);
   const filmData = films.find((film) => (film.id === filmId));
+  const [currentReview, updateReview] = useState('');
 
   return (
     <section className="film-card film-card--full">
@@ -49,7 +50,13 @@ function AddReview (props) {
       </div>
 
       <div className="add-review">
-        <form action="#" className="add-review__form">
+        <form
+          className="add-review__form"
+          onSubmit={(evt) => {
+            evt.preventDefault();
+            updateReview();
+          }}
+        >
           <div className="rating">
             <div className="rating__stars">
               <input className="rating__input" id="star-10" type="radio" name="rating" value="10" />
@@ -85,7 +92,17 @@ function AddReview (props) {
           </div>
 
           <div className="add-review__text">
-            <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"></textarea>
+            <textarea
+              className="add-review__textarea"
+              name="review-text"
+              id="review-text"
+              placeholder="Review text"
+              currentreview = {currentReview}
+              onChange={({target}) => {
+                updateReview(target.value);
+              }}
+            >
+            </textarea>
             <div className="add-review__submit">
               <button className="add-review__btn" type="submit">Post</button>
             </div>
