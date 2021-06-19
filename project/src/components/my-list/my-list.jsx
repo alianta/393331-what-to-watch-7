@@ -2,8 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../footer/footer';
 import Logo from '../logo/logo';
+import FilmList from '../film-list/film-list';
+import PropTypes from 'prop-types';
+import filmProp from '../film/filmProp';
 
-function MyList() {
+function MyList(props) {
+  const {films} = props;
+
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -25,88 +30,7 @@ function MyList() {
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
         <div className="catalog__films-list">
-          <article className="small-film-card catalog__films-card">
-            <div className="small-film-card__image">
-              <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175" />
-            </div>
-            <h3 className="small-film-card__title">
-              <Link className="small-film-card__link" to="film-page.html">Fantastic Beasts: The Crimes of Grindelwald</Link>
-            </h3>
-          </article>
-
-          <article className="small-film-card catalog__films-card">
-            <div className="small-film-card__image">
-              <img src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" width="280" height="175" />
-            </div>
-            <h3 className="small-film-card__title">
-              <Link className="small-film-card__link" to="film-page.html">Bohemian Rhapsody</Link>
-            </h3>
-          </article>
-
-          <article className="small-film-card catalog__films-card">
-            <div className="small-film-card__image">
-              <img src="img/macbeth.jpg" alt="Macbeth" width="280" height="175" />
-            </div>
-            <h3 className="small-film-card__title">
-              <Link className="small-film-card__link" to="film-page.html">Macbeth</Link>
-            </h3>
-          </article>
-
-          <article className="small-film-card catalog__films-card">
-            <div className="small-film-card__image">
-              <img src="img/aviator.jpg" alt="Aviator" width="280" height="175" />
-            </div>
-            <h3 className="small-film-card__title">
-              <Link className="small-film-card__link" to="film-page.html">Aviator</Link>
-            </h3>
-          </article>
-
-
-          <article className="small-film-card catalog__films-card">
-            <div className="small-film-card__image">
-              <img src="img/we-need-to-talk-about-kevin.jpg" alt="We need to talk about Kevin" width="280" height="175" />
-            </div>
-            <h3 className="small-film-card__title">
-              <Link className="small-film-card__link" to="film-page.html">We need to talk about Kevin</Link>
-            </h3>
-          </article>
-
-          <article className="small-film-card catalog__films-card">
-            <div className="small-film-card__image">
-              <img src="img/what-we-do-in-the-shadows.jpg" alt="What We Do in the Shadows" width="280" height="175" />
-            </div>
-            <h3 className="small-film-card__title">
-              <Link className="small-film-card__link" to="film-page.html">What We Do in the Shadows</Link>
-            </h3>
-          </article>
-
-          <article className="small-film-card catalog__films-card">
-            <div className="small-film-card__image">
-              <img src="img/revenant.jpg" alt="Revenant" width="280" height="175" />
-            </div>
-            <h3 className="small-film-card__title">
-              <Link className="small-film-card__link" to="film-page.html">Revenant</Link>
-            </h3>
-          </article>
-
-          <article className="small-film-card catalog__films-card">
-            <div className="small-film-card__image">
-              <img src="img/johnny-english.jpg" alt="Johnny English" width="280" height="175" />
-            </div>
-            <h3 className="small-film-card__title">
-              <Link className="small-film-card__link" to="film-page.html">Johnny English</Link>
-            </h3>
-          </article>
-
-
-          <article className="small-film-card catalog__films-card">
-            <div className="small-film-card__image">
-              <img src="img/shutter-island.jpg" alt="Shutter Island" width="280" height="175" />
-            </div>
-            <h3 className="small-film-card__title">
-              <Link className="small-film-card__link" to="film-page.html">Shutter Island</Link>
-            </h3>
-          </article>
+          <FilmList films={films}></FilmList>
         </div>
       </section>
 
@@ -114,5 +38,10 @@ function MyList() {
     </div>
   );
 }
+
+
+MyList.propTypes = {
+  films: PropTypes.arrayOf(filmProp).isRequired,
+};
 
 export default MyList;

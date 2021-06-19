@@ -24,7 +24,7 @@ function App(props) {
           <SignIn />
         </Route>
         <Route exact path={AppRoute.MY_LIST}>
-          <MyList />
+          <MyList films={films}/>
         </Route>
         <Route path={AppRoute.FILM} exact component={Film} />
         <Route exact path={AppRoute.REVIEW}>
