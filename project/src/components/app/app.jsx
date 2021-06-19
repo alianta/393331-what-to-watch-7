@@ -26,9 +26,10 @@ function App(props) {
         <Route exact path={AppRoute.MY_LIST}>
           <MyList />
         </Route>
-        <Route exact path={AppRoute.FILMS}>
+        {/* <Route exact path={AppRoute.FILMS}>
           <Film />
-        </Route>
+        </Route> */}
+        <Route path={AppRoute.FILMS} exact component={Film} />
         <Route exact path={AppRoute.REVIEW}>
           <AddReview />
         </Route>
