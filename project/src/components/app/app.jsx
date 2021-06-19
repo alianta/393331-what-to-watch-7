@@ -30,9 +30,7 @@ function App(props) {
         <Route exact path={AppRoute.REVIEW}>
           <AddReview />
         </Route>
-        <Route exact path={AppRoute.PLAYER}>
-          <Player />
-        </Route>
+        <Route path={AppRoute.PLAYER} exact component={Player} />
         <Route>
           <NotFoundScreen />
         </Route>

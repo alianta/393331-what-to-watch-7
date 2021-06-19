@@ -1,9 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import films from '../../mocks/films';
 
-function Player () {
+function Player (props) {
+  const filmId = parseInt(props.match.params.id,10);
+  const filmData = films.find((film) => (film.id === filmId));
+
   return (
     <div className="player">
-      <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
+      <video src="#" className="player__video" poster={filmData.bigImage}></video>
 
       <button type="button" className="player__exit">Exit</button>
 
@@ -13,7 +18,7 @@ function Player () {
             <progress className="player__progress" value="30" max="100"></progress>
             <div className="player__toggler" style={{left: '30%'}}>Toggler</div>
           </div>
-          <div className="player__time-value">1:30:29</div>
+          <div className="player__time-value">{filmData.time}</div>
         </div>
 
         <div className="player__controls-row">
@@ -23,7 +28,7 @@ function Player () {
             </svg>
             <span>Play</span>
           </button>
-          <div className="player__name">Transpotting</div>
+          <div className="player__name">{filmData.title}</div>
 
           <button type="button" className="player__full-screen">
             <svg viewBox="0 0 27 27" width="27" height="27">
@@ -36,5 +41,13 @@ function Player () {
     </div>
   );
 }
+
+Player.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }),
+  }),
+};
 
 export default Player;
