@@ -1,16 +1,14 @@
 import React from 'react';
 import FilmCard from '../film-card/film-card';
-import PropTypes from 'prop-types';
 import Footer from '../footer/footer';
 import Logo from '../logo/logo';
 import { Link } from 'react-router-dom';
-
-const FILM_CARD_COUNT = 20;
-let FILM_CARD_START_ID = 1;
-
+import PropTypes from 'prop-types';
+import filmProp from '../film/filmProp';
 
 function MainPage(props) {
-  const {filmName, filmGenre, filmYear} = props;
+  const {films} = props;
+  const filmOfDay = films.find((film) => (film.isFilmOfDay === true));
 
   return (
     <div>
@@ -48,7 +46,7 @@ function MainPage(props) {
 
       <section className="film-card">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={filmOfDay.bigImage} alt="The Grand Budapest Hotel" />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -71,14 +69,14 @@ function MainPage(props) {
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={filmOfDay.poster} alt={filmOfDay.title} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{filmName}</h2>
+              <h2 className="film-card__title">{filmOfDay.title}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{filmGenre}</span>
-                <span className="film-card__year">{filmYear}</span>
+                <span className="film-card__genre">{filmOfDay.genre}</span>
+                <span className="film-card__year">{filmOfDay.year}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -138,7 +136,7 @@ function MainPage(props) {
           </ul>
 
           <div className="catalog__films-list">
-            {Array.from({length: FILM_CARD_COUNT}).map(() => <FilmCard key={FILM_CARD_START_ID++}/>)}
+            {films.map((film) => (<FilmCard key={film.id} filmName={film.title} previewImage={film.poster}/>))}
           </div>
 
           <div className="catalog__more">
@@ -153,9 +151,7 @@ function MainPage(props) {
 }
 
 MainPage.propTypes = {
-  filmName: PropTypes.string.isRequired,
-  filmGenre: PropTypes.string.isRequired,
-  filmYear: PropTypes.string.isRequired,
+  films: PropTypes.arrayOf(filmProp).isRequired,
 };
 
 export default MainPage;
