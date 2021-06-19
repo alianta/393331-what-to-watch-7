@@ -1,5 +1,5 @@
 import React from 'react';
-import FilmCard from '../film-card/film-card';
+import FilmList from '../film-list/film-list';
 import Footer from '../footer/footer';
 import Logo from '../logo/logo';
 import { Link } from 'react-router-dom';
@@ -134,11 +134,7 @@ function MainPage(props) {
               <Link to="/#" className="catalog__genres-link">Thrillers</Link>
             </li>
           </ul>
-
-          <div className="catalog__films-list">
-            {films.map((film) => (<FilmCard key={film.id} filmName={film.title} previewImage={film.poster}/>))}
-          </div>
-
+          <FilmList films={films}></FilmList>
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
           </div>

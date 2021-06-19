@@ -4,7 +4,7 @@ import Footer from '../footer/footer';
 import Logo from '../logo/logo';
 import PropTypes from 'prop-types';
 import films from '../../mocks/films';
-import FilmCard from '../film-card/film-card';
+import FilmList from '../film-list/film-list';
 
 function Film(props) {
   const filmId = parseInt(props.match.params.id,10);
@@ -142,9 +142,7 @@ function Film(props) {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          <div className="catalog__films-list">
-            {films.map((film) => (<FilmCard key={film.id} filmName={film.title} previewImage={film.poster}/>))}
-          </div>
+          <FilmList films={films}></FilmList>
         </section>
 
         <Footer />
