@@ -1,13 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../logo/logo';
+import PropTypes from 'prop-types';
+import films from '../../mocks/films';
 
-function AddReview () {
+function AddReview (props) {
+  const filmId = parseInt(props.match.params.id,10);
+  const filmData = films.find((film) => (film.id === filmId));
+
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={filmData.bigImage} alt={filmData.title} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -18,7 +23,7 @@ function AddReview () {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to="film-page.html" className="breadcrumbs__link">The Grand Budapest Hotel</Link>
+                <Link to={''.concat('/film/',filmId)} className="breadcrumbs__link">{filmData.title}</Link>
               </li>
               <li className="breadcrumbs__item">
                 <Link to="/#" className="breadcrumbs__link">Add review</Link>
@@ -39,7 +44,7 @@ function AddReview () {
         </header>
 
         <div className="film-card__poster film-card__poster--small">
-          <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+          <img src={filmData.poster} alt={''.concat(filmData.title, 'poster')} width="218" height="327" />
         </div>
       </div>
 
@@ -92,5 +97,13 @@ function AddReview () {
     </section>
   );
 }
+
+AddReview.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }),
+  }),
+};
 
 export default AddReview;

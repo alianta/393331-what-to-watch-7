@@ -27,9 +27,7 @@ function App(props) {
           <MyList films={films}/>
         </Route>
         <Route path={AppRoute.FILM} exact component={Film} />
-        <Route exact path={AppRoute.REVIEW}>
-          <AddReview />
-        </Route>
+        <Route path={AppRoute.REVIEW} exact component={AddReview}/>
         <Route path={AppRoute.PLAYER} exact component={Player} />
         <Route>
           <NotFoundScreen />

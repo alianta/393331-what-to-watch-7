@@ -94,7 +94,7 @@ function Film(props) {
                     )}
                   <span>My list</span>
                 </button>
-                <Link to="add-review.html" className="btn film-card__button">Add review</Link>
+                <Link to={''.concat(filmId,'/review')} className="btn film-card__button">Add review</Link>
               </div>
             </div>
           </div>
