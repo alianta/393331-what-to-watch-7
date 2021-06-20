@@ -11,10 +11,8 @@ function FilmList(props) {
     <div className="catalog__films-list">
       {films.map((film) => (
         <FilmCard key = {film.id}
-          filmId = {film.id}
-          filmName = {film.title}
-          previewImage = {film.poster}
           activeFilmCard = {activeFilmCard}
+          film = {film}
           onMouseEnter = {(target) => {
             setActiveFilmCard(film.id);}}
         />
