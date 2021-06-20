@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import films from '../../mocks/films';
+import filmProp from '../film/filmProp';
 
 function Player (props) {
-  const filmId = parseInt(props.match.params.id,10);
-  const filmData = films.find((film) => (film.id === filmId));
+  const filmData = props.location.state;
 
   return (
     <div className="player">
@@ -43,10 +42,8 @@ function Player (props) {
 }
 
 Player.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-    }),
+  location: PropTypes.shape({
+    state: filmProp,
   }),
 };
 

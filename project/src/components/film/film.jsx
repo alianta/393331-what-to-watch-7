@@ -5,10 +5,12 @@ import Logo from '../logo/logo';
 import PropTypes from 'prop-types';
 import films from '../../mocks/films';
 import FilmList from '../film-list/film-list';
+import {useHistory} from 'react-router-dom';
 
 function Film(props) {
   const filmId = parseInt(props.match.params.id,10);
   const filmData = films.find((film) => (film.id === filmId));
+  const history = useHistory();
 
   return (
     <React.Fragment>
@@ -74,7 +76,7 @@ function Film(props) {
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
+                <button className="btn btn--play film-card__button" type="button" onClick={() => history.push(`/player/${filmData.id}`,filmData)}>
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
