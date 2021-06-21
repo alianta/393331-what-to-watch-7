@@ -4,7 +4,7 @@ import Logo from '../logo/logo';
 import PropTypes from 'prop-types';
 import films from '../../mocks/films';
 import AddReviewForm from '../add-review-form/add-review-form';
-
+import { generatePath } from 'react-router';
 
 function AddReview (props) {
   const filmId = parseInt(props.match.params.id,10);
@@ -25,7 +25,7 @@ function AddReview (props) {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to={''.concat('/film/',filmId)} className="breadcrumbs__link">{filmData.title}</Link>
+                <Link to={generatePath('/film/:id/', {id: filmId})} className="breadcrumbs__link">{filmData.title}</Link>
               </li>
               <li className="breadcrumbs__item">
                 <Link to="/#" className="breadcrumbs__link">Add review</Link>

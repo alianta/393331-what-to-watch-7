@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import films from '../../mocks/films';
 import FilmList from '../film-list/film-list';
 import {useHistory} from 'react-router-dom';
+import { generatePath } from 'react-router';
 
 function Film(props) {
   const filmId = parseInt(props.match.params.id,10);
@@ -96,7 +97,7 @@ function Film(props) {
                     )}
                   <span>My list</span>
                 </button>
-                <Link to={''.concat(filmId,'/review')} className="btn film-card__button">Add review</Link>
+                <Link to={generatePath('/film/:id/review', {id: filmId})} className="btn film-card__button">Add review</Link>
               </div>
             </div>
           </div>
