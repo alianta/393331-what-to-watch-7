@@ -50,8 +50,8 @@ function AddReviewForm (props) {
           name="review-text"
           id="review-text"
           placeholder="Review text"
-          onChange={(target) => {
-            setReview(target.value);}}
+          onChange={(element) => {
+            setReview(element.target.value);}}
         >
         </textarea>
         <div className="add-review__submit">
