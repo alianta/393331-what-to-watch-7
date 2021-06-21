@@ -9,8 +9,6 @@ function AddReviewForm (props) {
   const [review, setReview] = useState('');
   const [rating, setRating] = useState(0);
 
-  let ratingStarId = 0;
-
   return (
     <form
       className="add-review__form"
@@ -22,23 +20,22 @@ function AddReviewForm (props) {
       <div className="rating">
         <div className="rating__stars">
           {
-            Array.from({length: RATING_STAR_COUNT}).map(() => {
-              const keyValue = `${film.id}-${ratingStarId}`;
-              ratingStarId++;
+            Array.from({length: RATING_STAR_COUNT}).map((value, id) => {
+              const keyValue = `${film.id}-${id}`;
+              const currentId = RATING_STAR_COUNT-id;
               return (
                 <React.Fragment key={keyValue}>
                   <input
                     className="rating__input"
-                    id={`star-${ratingStarId}`}
+                    id={`star-${currentId}`}
                     type="radio"
                     name="rating"
-                    value={`${ratingStarId}`}
-                    checked={rating >= ratingStarId}
+                    value={`${currentId}`}
                     onChange={({target}) => {
-                      setRating(ratingStarId);
+                      setRating(target.value);
                     }}
                   />
-                  <label className="rating__label" htmlFor={`star-${ratingStarId}`}>Rating ${ratingStarId}</label>
+                  <label className="rating__label" htmlFor={`star-${currentId}`}>Rating ${currentId}</label>
                 </React.Fragment>
               );
             })
