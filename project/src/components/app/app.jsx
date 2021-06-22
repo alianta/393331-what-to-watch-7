@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import MainPage from '../main-page/main-page';
@@ -9,30 +8,27 @@ import Film from '../film/film';
 import AddReview from '../add-review/add-review';
 import Player from '../player/player';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
+import PropTypes from 'prop-types';
+import filmProp from '../film/filmProp';
 
 function App(props) {
-  const {filmName, filmGenre, filmYear} = props;
+  const {films} = props;
+
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.ROOT}>
-          <MainPage filmName={filmName} filmGenre={filmGenre} filmYear={filmYear}/>
+          <MainPage films={films}/>
         </Route>
         <Route exact path={AppRoute.LOGIN}>
           <SignIn />
         </Route>
         <Route exact path={AppRoute.MY_LIST}>
-          <MyList />
+          <MyList films={films}/>
         </Route>
-        <Route exact path={AppRoute.FILMS}>
-          <Film />
-        </Route>
-        <Route exact path={AppRoute.REVIEW}>
-          <AddReview />
-        </Route>
-        <Route exact path={AppRoute.PLAYER}>
-          <Player />
-        </Route>
+        <Route path={AppRoute.FILM} exact component={Film} />
+        <Route path={AppRoute.REVIEW} exact component={AddReview}/>
+        <Route path={AppRoute.PLAYER} exact component={Player} />
         <Route>
           <NotFoundScreen />
         </Route>
@@ -42,9 +38,7 @@ function App(props) {
 }
 
 App.propTypes = {
-  filmName: PropTypes.string.isRequired,
-  filmGenre: PropTypes.string.isRequired,
-  filmYear: PropTypes.string.isRequired,
+  films: PropTypes.arrayOf(filmProp).isRequired,
 };
 
 export default App;
