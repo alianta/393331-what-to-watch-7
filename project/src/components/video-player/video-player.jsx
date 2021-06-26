@@ -5,7 +5,11 @@ function VideoPlayer (props) {
   const {videoFile, poster} = props;
   const videoRef = useRef();
 
-  useEffect(() => {setTimeout(() => {videoRef.current.play();},1000);});
+  useEffect(() => {
+    setTimeout(() => {
+      videoRef.current?.play();
+    },1000);
+  });
 
   return (
     <video src={videoFile} ref={videoRef} className="player__video" poster={poster} muted></video>
