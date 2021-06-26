@@ -5,6 +5,7 @@ import Logo from '../logo/logo';
 import PropTypes from 'prop-types';
 import films from '../../mocks/films';
 import FilmList from '../film-list/film-list';
+import Tabs from '../tabs/tabs';
 import {useHistory} from 'react-router-dom';
 import { generatePath } from 'react-router';
 
@@ -109,35 +110,7 @@ function Film(props) {
               <img src={filmData.poster} alt={filmData.title} width="218" height="327" />
             </div>
 
-            <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <Link to="/#" className="film-nav__link">Overview</Link>
-                  </li>
-                  <li className="film-nav__item">
-                    <Link to="/#" className="film-nav__link">Details</Link>
-                  </li>
-                  <li className="film-nav__item">
-                    <Link to="/#" className="film-nav__link">Reviews</Link>
-                  </li>
-                </ul>
-              </nav>
-
-              <div className="film-rating">
-                <div className="film-rating__score">{filmData.ratingScore}</div>
-                <p className="film-rating__meta">
-                  <span className="film-rating__level">{filmData.ratingDescription}</span>
-                  <span className="film-rating__count">{filmData.ratingCount} ratings</span>
-                </p>
-              </div>
-
-              <div className="film-card__text">
-                {filmData.description}
-                <p className="film-card__director"><strong>Director: {filmData.director}</strong></p>
-                <p className="film-card__starring"><strong>Starring: {filmData.starring.map((actor)=> ''.concat(actor, ', '))} and other</strong></p>
-              </div>
-            </div>
+            <Tabs film={filmData}/>
           </div>
         </div>
       </section>
