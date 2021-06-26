@@ -9,6 +9,8 @@ import Tabs from '../tabs/tabs';
 import {useHistory} from 'react-router-dom';
 import { generatePath } from 'react-router';
 
+const SIMILAR_FILM_COUNT = 4;
+
 function Film(props) {
   const filmId = parseInt(props.match.params.id,10);
   const filmData = films.find((film) => (film.id === filmId));
@@ -118,7 +120,7 @@ function Film(props) {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          <FilmList films={films}></FilmList>
+          <FilmList films={films.filter((film) => filmData.genre===film.genre).slice(0,SIMILAR_FILM_COUNT)}></FilmList>
         </section>
 
         <Footer />
