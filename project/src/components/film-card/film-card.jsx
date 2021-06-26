@@ -1,16 +1,21 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import filmProp from '../film/filmProp';
 import { generatePath } from 'react-router';
-import PropTypes from 'prop-types';
+import VideoPlayer from '../video-player/video-player';
 
 function FilmCard(props) {
-  const {film, onMouseEnter} = props;
+  const {film} = props;
+  const [isPlaying, setIsPlaying] = useState(false);
 
   return (
-    <article className="small-film-card catalog__films-card" onMouseEnter={onMouseEnter}>
+    <article
+      className="small-film-card catalog__films-card"
+      onMouseEnter={()=>setIsPlaying(true)}
+      onMouseLeave={()=>setIsPlaying(false)}
+    >
       <div className="small-film-card__image">
-        <img src={film.poster} alt={film.title} width="280" height="175" />
+        {!isPlaying ? <img src={film.poster} alt={film.title} width="280" height="175" /> : <VideoPlayer poster={film.poster} videoFile={film.previewVideo} />}
       </div>
       <h3 className="small-film-card__title">
         <Link className="small-film-card__link" to={generatePath('/film/:id/', {id: film.id})}>{film.title}</Link>
@@ -21,7 +26,6 @@ function FilmCard(props) {
 
 FilmCard.propTypes = {
   film: filmProp,
-  onMouseEnter: PropTypes.func.isRequired,
 };
 
 export default FilmCard;
