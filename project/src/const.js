@@ -6,3 +6,11 @@ export const AppRoute = {
   REVIEW: '/film/:id?/review',
   PLAYER: '/player/:id?',
 };
+
+export const TabNames ={
+  OVERVIEW: 'Overview',
+  DETAILS: 'Details',
+  REVIEWS: 'Reviews',
+};
+
+export const SIMILAR_FILM_COUNT = 4;

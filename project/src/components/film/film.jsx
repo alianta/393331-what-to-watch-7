@@ -8,13 +8,7 @@ import FilmList from '../film-list/film-list';
 import Tabs from '../tabs/tabs';
 import {useHistory} from 'react-router-dom';
 import { generatePath } from 'react-router';
-
-const SIMILAR_FILM_COUNT = 4;
-const TabNames ={
-  OVERVIEW: 'Overview',
-  DETAILS: 'Details',
-  REVIEWS: 'Reviews',
-};
+import { TabNames, SIMILAR_FILM_COUNT } from '../../const';
 
 
 function Film(props) {

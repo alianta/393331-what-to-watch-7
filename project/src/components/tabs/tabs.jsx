@@ -2,14 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import filmProp from '../film/filmProp';
 import PropTypes from 'prop-types';
-
-const TabNames ={
-  OVERVIEW: 'Overview',
-  DETAILS: 'Details',
-  REVIEWS: 'Reviews',
-};
+import Review from '../review/review';
+import reviews from '../../mocks/reviews';
+import { TabNames } from '../../const';
 
 function FilmInfoData(film, tabName) {
+  const filmReviews = reviews.filter((review)=>review.filmId===film.id);
+  const filmReviewsLeft = filmReviews.slice(0,filmReviews.length/2+1);
+  const filmReviewsRigth = filmReviews.slice(filmReviews.length/2+1, filmReviews.length);
   switch (tabName) {
     case TabNames.DETAILS:
       return (
@@ -51,7 +51,24 @@ function FilmInfoData(film, tabName) {
         </div>
       );
     case TabNames.REVIEWS:
-      return 'REVIEWS';
+      return (
+        <div className="film-card__reviews film-card__row">
+          <div className="film-card__reviews-col">
+            {filmReviewsLeft.map((review, id) => {
+              const keyIndex = film.id + id + review.date;
+              return (
+                <Review key={keyIndex} review={review}/>
+              );})}
+          </div>
+          <div className="film-card__reviews-col">
+            {filmReviewsRigth.map((review, id) => {
+              const keyIndex = film.id + id + review.date;
+              return (
+                <Review key={keyIndex} review={review}/>
+              );})}
+          </div>
+        </div>
+      );
     default:
       return (
         <React.Fragment>

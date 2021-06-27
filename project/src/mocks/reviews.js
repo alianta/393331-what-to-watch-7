@@ -43,7 +43,7 @@ const reviews = [
     id: 4,
     filmId: 1,
     text: 'It is certainly a magical and childlike way of storytelling, even if the content is a little more adult.',
-    author: 'Paula Fleri-Soler',
+    author: 'Paula',
     date: generateDate(),
     ratingScore: 7.6,
   },
