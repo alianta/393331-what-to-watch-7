@@ -28,15 +28,13 @@ function Tabs(props) {
     <div className="film-card__desc">
       <nav className="film-nav film-card__nav">
         <ul className="film-nav__list">
-          <li className={(activeTab===TabNames.OVERVIEW)?'film-nav__item film-nav__item--active':'film-nav__item'} onClick={() => {changeActiveTab(TabNames.OVERVIEW);}}>
-            <Link to="#" className="film-nav__link" >Overview</Link>
-          </li>
-          <li className={(activeTab===TabNames.DETAILS)?'film-nav__item film-nav__item--active':'film-nav__item'} onClick={() => {changeActiveTab(TabNames.DETAILS);}}>
-            <Link to="#" className="film-nav__link">Details</Link>
-          </li>
-          <li className={(activeTab===TabNames.REVIEWS)?'film-nav__item film-nav__item--active':'film-nav__item'} onClick={() => {changeActiveTab(TabNames.REVIEWS);}}>
-            <Link to="#" className="film-nav__link">Reviews</Link>
-          </li>
+          {Object.values(TabNames).map((tabName, id) => {
+            const keyIndex = id + tabName;
+            return (
+              <li key={keyIndex} className={(activeTab===tabName)?'film-nav__item film-nav__item--active':'film-nav__item'} onClick={() => {changeActiveTab(tabName);}}>
+                <Link to="#" className="film-nav__link" >{tabName}</Link>
+              </li>
+            );})}
         </ul>
       </nav>
       {FilmInfoData(film, activeTab)}
