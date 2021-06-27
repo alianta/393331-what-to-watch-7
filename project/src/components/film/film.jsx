@@ -1,17 +1,21 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../footer/footer';
 import Logo from '../logo/logo';
 import PropTypes from 'prop-types';
 import films from '../../mocks/films';
 import FilmList from '../film-list/film-list';
+import Tabs from '../tabs/tabs';
 import {useHistory} from 'react-router-dom';
 import { generatePath } from 'react-router';
+import { TabNames, SIMILAR_FILM_COUNT } from '../../const';
+
 
 function Film(props) {
   const filmId = parseInt(props.match.params.id,10);
   const filmData = films.find((film) => (film.id === filmId));
   const history = useHistory();
+  const [activeTab, setActiveTab] = useState(TabNames.OVERVIEW);
 
   return (
     <React.Fragment>
@@ -109,35 +113,7 @@ function Film(props) {
               <img src={filmData.poster} alt={filmData.title} width="218" height="327" />
             </div>
 
-            <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <Link to="/#" className="film-nav__link">Overview</Link>
-                  </li>
-                  <li className="film-nav__item">
-                    <Link to="/#" className="film-nav__link">Details</Link>
-                  </li>
-                  <li className="film-nav__item">
-                    <Link to="/#" className="film-nav__link">Reviews</Link>
-                  </li>
-                </ul>
-              </nav>
-
-              <div className="film-rating">
-                <div className="film-rating__score">{filmData.ratingScore}</div>
-                <p className="film-rating__meta">
-                  <span className="film-rating__level">{filmData.ratingDescription}</span>
-                  <span className="film-rating__count">{filmData.ratingCount} ratings</span>
-                </p>
-              </div>
-
-              <div className="film-card__text">
-                {filmData.description}
-                <p className="film-card__director"><strong>Director: {filmData.director}</strong></p>
-                <p className="film-card__starring"><strong>Starring: {filmData.starring.map((actor)=> ''.concat(actor, ', '))} and other</strong></p>
-              </div>
-            </div>
+            <Tabs film={filmData} activeTab={activeTab} changeActiveTab={(value)=>setActiveTab(value)}/>
           </div>
         </div>
       </section>
@@ -145,7 +121,7 @@ function Film(props) {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          <FilmList films={films}></FilmList>
+          <FilmList films={films.filter((film) => filmData.genre===film.genre).slice(0,SIMILAR_FILM_COUNT)}></FilmList>
         </section>
 
         <Footer />
