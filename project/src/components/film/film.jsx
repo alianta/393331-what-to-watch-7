@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../footer/footer';
 import Logo from '../logo/logo';
@@ -10,11 +10,18 @@ import {useHistory} from 'react-router-dom';
 import { generatePath } from 'react-router';
 
 const SIMILAR_FILM_COUNT = 4;
+const TabNames ={
+  OVERVIEW: 'Overview',
+  DETAILS: 'Details',
+  REVIEWS: 'Reviews',
+};
+
 
 function Film(props) {
   const filmId = parseInt(props.match.params.id,10);
   const filmData = films.find((film) => (film.id === filmId));
   const history = useHistory();
+  const [activeTab, setActiveTab] = useState(TabNames.OVERVIEW);
 
   return (
     <React.Fragment>
@@ -112,7 +119,7 @@ function Film(props) {
               <img src={filmData.poster} alt={filmData.title} width="218" height="327" />
             </div>
 
-            <Tabs film={filmData}/>
+            <Tabs film={filmData} activeTab={activeTab} changeActiveTab={(value)=>setActiveTab(value)}/>
           </div>
         </div>
       </section>
