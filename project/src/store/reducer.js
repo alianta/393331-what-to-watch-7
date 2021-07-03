@@ -1,14 +1,9 @@
 import {ActionType} from './action';
-import {FIRST_GAME_STEP} from '../const';
 import films from '../mocks/films';
 
 const initialState = {
-  mistakes: 
-  {
-    genre: 'comedy',
-    films: films.filter((film) => film.genre===genre)
-  },
-  step: FIRST_GAME_STEP,
+  genre: 'comedy',
+  films: films.filter((film) => film.genre===this.genre),
 };
 
 const reducer = (state = initialState, action) => {
