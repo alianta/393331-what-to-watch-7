@@ -1,9 +1,11 @@
 import {ActionType} from './action';
 import films from '../mocks/films';
+import { DEFAULT_GENRE } from '../const';
+import { getFilmsFromGenre } from '../utils';
 
 const initialState = {
-  genre: 'comedy',
-  films: films.filter((film) => film.genre===this.genre),
+  genre: DEFAULT_GENRE,
+  films: getFilmsFromGenre(films, DEFAULT_GENRE),
 };
 
 const reducer = (state = initialState, action) => {
