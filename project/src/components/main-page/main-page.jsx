@@ -9,6 +9,7 @@ import filmProp from '../film/filmProp';
 import {useHistory} from 'react-router-dom';
 import GenreList from '../genre-list/genre-list';
 import { getGenreList, getFilmsFromGenre } from '../../utils';
+import FilmList from '../film-list/film-list';
 
 function MainPage(props) {
   const {films, filmOfDay, genre, genreList, onGenreChange} = props;
@@ -103,7 +104,14 @@ function MainPage(props) {
       </section>
 
       <div className="page-content">
-        <GenreList films={films} genreList={genreList} currentGenre={genre} onGenreChange={onGenreChange}/>
+        <section className="catalog">
+          <h2 className="catalog__title visually-hidden">Catalog</h2>
+          <GenreList genreList={genreList} currentGenre={genre} onGenreChange={onGenreChange}/>
+          <FilmList films={films}></FilmList>
+          <div className="catalog__more">
+            <button className="catalog__button" type="button">Show more</button>
+          </div>
+        </section>
         <Footer />
       </div>
     </div>
@@ -112,7 +120,7 @@ function MainPage(props) {
 
 MainPage.propTypes = {
   films: PropTypes.arrayOf(filmProp).isRequired,
-  filmOfDay: PropTypes.instanceOf(filmProp).isRequired,
+  filmOfDay: filmProp,
   genre: PropTypes.string.isRequired,
   onGenreChange: PropTypes.func.isRequired,
   genreList: PropTypes.array.isRequired,
