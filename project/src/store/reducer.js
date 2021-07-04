@@ -13,17 +13,16 @@ const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_GENRE:
       return {
         ...state,
-        genre: state.genre + action.payload,
+        genre: action.payload,
       };
     case ActionType.GET_FILMS_BY_GENRE:
       return {
         ...state,
-        films: state.films + action.payload,
+        films: action.payload,
       };
     default:
       return state;
   }
 };
-
 
 export {reducer};

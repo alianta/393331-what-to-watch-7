@@ -1,14 +1,17 @@
+import { getFilmsFromGenre } from '../utils';
+
 export const ActionType = {
   CHANGE_GENRE: 'changeGenre',
   GET_FILMS_BY_GENRE: 'getFilmsByGenre',
 };
 
 export const ActionCreator = {
-  changeGenre: () => ({
+  changeGenre: (genre) => ({
     type: ActionType.CHANGE_GENRE,
-    payload: 1,
+    payload: genre,
   }),
-  getFilmsByGenre: () => ({
+  getFilmsByGenre: (films, genre) => ({
     type: ActionType.GET_FILMS_BY_GENRE,
+    payload: getFilmsFromGenre(films,genre),
   }),
 };

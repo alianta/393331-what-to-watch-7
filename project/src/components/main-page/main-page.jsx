@@ -1,5 +1,6 @@
 import React from 'react';
-
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../store/action';
 import Footer from '../footer/footer';
 import Logo from '../logo/logo';
 import { Link } from 'react-router-dom';
@@ -9,7 +10,7 @@ import {useHistory} from 'react-router-dom';
 import GenreList from '../genre-list/genre-list';
 
 function MainPage(props) {
-  const {films} = props;
+  const {films, genre, onGenreChange} = props;
   const filmOfDay = films.find((film) => (film.isFilmOfDay === true));
   const history = useHistory();
 
@@ -102,7 +103,7 @@ function MainPage(props) {
       </section>
 
       <div className="page-content">
-        <GenreList films={films}/>
+        <GenreList films={films} currentGenre={genre} onGenreChange={onGenreChange}/>
         <Footer />
       </div>
     </div>
@@ -111,6 +112,19 @@ function MainPage(props) {
 
 MainPage.propTypes = {
   films: PropTypes.arrayOf(filmProp).isRequired,
+  genre: PropTypes.string.isRequired,
+  onGenreChange: PropTypes.func.isRequired,
 };
 
-export default MainPage;
+const mapStateToProps = (state) => ({
+  genre: state.genre,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onGenreChange(genre) {
+    dispatch(ActionCreator.changeGenre(genre));
+  },
+});
+
+export {MainPage};
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
