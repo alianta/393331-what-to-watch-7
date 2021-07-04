@@ -1,15 +1,18 @@
 import React from 'react';
-import FilmList from '../film-list/film-list';
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../store/action';
 import Footer from '../footer/footer';
 import Logo from '../logo/logo';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import filmProp from '../film/filmProp';
 import {useHistory} from 'react-router-dom';
+import GenreList from '../genre-list/genre-list';
+import { getGenreList, getFilmsFromGenre } from '../../utils';
+import FilmList from '../film-list/film-list';
 
 function MainPage(props) {
-  const {films} = props;
-  const filmOfDay = films.find((film) => (film.isFilmOfDay === true));
+  const {films, filmOfDay, genre, genreList, onGenreChange} = props;
   const history = useHistory();
 
   return (
@@ -103,45 +106,12 @@ function MainPage(props) {
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-
-          <ul className="catalog__genres-list">
-            <li className="catalog__genres-item catalog__genres-item--active">
-              <Link to="/#" className="catalog__genres-link">All genres</Link>
-            </li>
-            <li className="catalog__genres-item">
-              <Link to="/#" className="catalog__genres-link">Comedies</Link>
-            </li>
-            <li className="catalog__genres-item">
-              <Link to="/#" className="catalog__genres-link">Crime</Link>
-            </li>
-            <li className="catalog__genres-item">
-              <Link to="/#" className="catalog__genres-link">Documentary</Link>
-            </li>
-            <li className="catalog__genres-item">
-              <Link to="/#" className="catalog__genres-link">Dramas</Link>
-            </li>
-            <li className="catalog__genres-item">
-              <Link to="/#" className="catalog__genres-link">Horror</Link>
-            </li>
-            <li className="catalog__genres-item">
-              <Link to="/#" className="catalog__genres-link">Kids & Family</Link>
-            </li>
-            <li className="catalog__genres-item">
-              <Link to="/#" className="catalog__genres-link">Romance</Link>
-            </li>
-            <li className="catalog__genres-item">
-              <Link to="/#" className="catalog__genres-link">Sci-Fi</Link>
-            </li>
-            <li className="catalog__genres-item">
-              <Link to="/#" className="catalog__genres-link">Thrillers</Link>
-            </li>
-          </ul>
+          <GenreList genreList={genreList} currentGenre={genre} onGenreChange={onGenreChange}/>
           <FilmList films={films}></FilmList>
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
           </div>
         </section>
-
         <Footer />
       </div>
     </div>
@@ -150,6 +120,24 @@ function MainPage(props) {
 
 MainPage.propTypes = {
   films: PropTypes.arrayOf(filmProp).isRequired,
+  filmOfDay: filmProp,
+  genre: PropTypes.string.isRequired,
+  onGenreChange: PropTypes.func.isRequired,
+  genreList: PropTypes.array.isRequired,
 };
 
-export default MainPage;
+const mapStateToProps = (state) => ({
+  genre: state.genre,
+  films: getFilmsFromGenre(state.films,state.genre),
+  filmOfDay: state.films.find((film) => (film.isFilmOfDay === true)),
+  genreList: getGenreList(state.films),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onGenreChange(genre) {
+    dispatch(ActionCreator.changeGenre(genre));
+  },
+});
+
+export {MainPage};
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
