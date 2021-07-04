@@ -1,14 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getGenreList, getFilmsFromGenre} from '../../utils';
 import FilmList from '../film-list/film-list';
-import PropTypes from 'prop-types';
+import PropTypes, { string } from 'prop-types';
 import filmProp from '../film/filmProp';
 
 function GenreList(props) {
-  const {films, currentGenre, onGenreChange} = props;
-  const genreList = getGenreList(films);
-  const filmsFromGenre = getFilmsFromGenre(films, currentGenre);
+  const {films, genreList, currentGenre, onGenreChange} = props;
   const onClickHandle=(evt)=>{
     if(evt.target.tagName==='A'){
       onGenreChange(evt.target.textContent);
@@ -25,7 +22,7 @@ function GenreList(props) {
           </li>
         ))}
       </ul>
-      <FilmList films={filmsFromGenre}></FilmList>
+      <FilmList films={films}></FilmList>
       <div className="catalog__more">
         <button className="catalog__button" type="button">Show more</button>
       </div>
@@ -37,6 +34,7 @@ GenreList.propTypes = {
   films: PropTypes.arrayOf(filmProp).isRequired,
   currentGenre: PropTypes.string.isRequired,
   onGenreChange: PropTypes.func.isRequired,
+  genreList: PropTypes.arrayOf(string).isRequired,
 };
 
 export default GenreList;

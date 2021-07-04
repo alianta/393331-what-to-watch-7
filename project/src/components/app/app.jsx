@@ -18,7 +18,7 @@ function App(props) {
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.ROOT}>
-          <MainPage films={films}/>
+          <MainPage/>
         </Route>
         <Route exact path={AppRoute.LOGIN}>
           <SignIn />

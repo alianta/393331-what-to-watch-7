@@ -8,10 +8,10 @@ import PropTypes from 'prop-types';
 import filmProp from '../film/filmProp';
 import {useHistory} from 'react-router-dom';
 import GenreList from '../genre-list/genre-list';
+import { getGenreList, getFilmsFromGenre } from '../../utils';
 
 function MainPage(props) {
-  const {films, genre, onGenreChange} = props;
-  const filmOfDay = films.find((film) => (film.isFilmOfDay === true));
+  const {films, filmOfDay, genre, genreList, onGenreChange} = props;
   const history = useHistory();
 
   return (
@@ -103,7 +103,7 @@ function MainPage(props) {
       </section>
 
       <div className="page-content">
-        <GenreList films={films} currentGenre={genre} onGenreChange={onGenreChange}/>
+        <GenreList films={films} genreList={genreList} currentGenre={genre} onGenreChange={onGenreChange}/>
         <Footer />
       </div>
     </div>
@@ -112,12 +112,17 @@ function MainPage(props) {
 
 MainPage.propTypes = {
   films: PropTypes.arrayOf(filmProp).isRequired,
+  filmOfDay: PropTypes.instanceOf(filmProp).isRequired,
   genre: PropTypes.string.isRequired,
   onGenreChange: PropTypes.func.isRequired,
+  genreList: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   genre: state.genre,
+  films: getFilmsFromGenre(state.films,state.genre),
+  filmOfDay: state.films.find((film) => (film.isFilmOfDay === true)),
+  genreList: getGenreList(state.films),
 });
 
 const mapDispatchToProps = (dispatch) => ({
