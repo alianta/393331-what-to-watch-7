@@ -151,6 +151,25 @@ const films = [
     isFavorite: true,
     isFilmOfDay: false,
   },
+  {
+    id: 9,
+    title: 'Pulp fiction fantasy',
+    genre: 'Fantasy',
+    year: 2012,
+    poster: 'img/pulp-fiction.jpg',
+    bigImage: 'http://picsum.photos/248/152?r=3',
+    video: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
+    previewVideo: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm',
+    ratingScore: 3.5,
+    ratingDescription: 'Normal',
+    ratingCount: 3300,
+    description: 'In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave\'s friend and protege.cGustave prides himself on providing first-class service to the hotel\'s guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave\'s lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.',
+    director: 'Willem Dafoe',
+    starring: ['Bill Murray', 'Edward Norton', 'Jude Law', 'Willem Dafoe'],
+    time: 250,
+    isFavorite: true,
+    isFilmOfDay: false,
+  },
 ];
 
 export default films;

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import FilmCard from '../film-card/film-card';
 import PropTypes from 'prop-types';
 import filmProp from '../film/filmProp';
+import { FILMS_LIST_MAX_COUNT } from '../../const';
 
 function FilmList(props) {
   const {films} = props;
@@ -9,7 +10,7 @@ function FilmList(props) {
 
   return (
     <div className="catalog__films-list">
-      {films.map((film) => (
+      {films.slice(0,FILMS_LIST_MAX_COUNT).map((film) => (
         <FilmCard key = {film.id}
           activeFilmCard = {activeFilmCard}
           film = {film}
