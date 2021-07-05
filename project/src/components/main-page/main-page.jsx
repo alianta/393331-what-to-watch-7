@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
 import Footer from '../footer/footer';
@@ -10,10 +10,19 @@ import {useHistory} from 'react-router-dom';
 import GenreList from '../genre-list/genre-list';
 import { getGenreList, getFilmsFromGenre } from '../../utils';
 import FilmList from '../film-list/film-list';
+import ShowMoreButton from '../show-more-button/show-more-button';
+import { FILMS_LIST_MAX_COUNT } from '../../const';
 
 function MainPage(props) {
   const {films, filmOfDay, genre, genreList, onGenreChange} = props;
   const history = useHistory();
+  const [showFilmCount, setShowFilmCount] = useState(FILMS_LIST_MAX_COUNT);
+  const addShowFilms = ()=> {
+    setShowFilmCount(showFilmCount+FILMS_LIST_MAX_COUNT);
+  };
+  const resetShowFilms = ()=> {
+    setShowFilmCount(FILMS_LIST_MAX_COUNT);
+  };
 
   return (
     <div>
@@ -106,11 +115,9 @@ function MainPage(props) {
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-          <GenreList genreList={genreList} currentGenre={genre} onGenreChange={onGenreChange}/>
-          <FilmList films={films}></FilmList>
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          <GenreList genreList={genreList} currentGenre={genre} onGenreChange={onGenreChange} resetShowFilms={resetShowFilms}/>
+          <FilmList films={films.slice(0,showFilmCount)}></FilmList>
+          <ShowMoreButton allFilmLCount={films.length} showFilmCount={showFilmCount} addShowFilms={addShowFilms}/>
         </section>
         <Footer />
       </div>

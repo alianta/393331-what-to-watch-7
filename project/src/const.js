@@ -15,3 +15,4 @@ export const TabNames ={
 
 export const SIMILAR_FILM_COUNT = 4;
 export const DEFAULT_GENRE = 'All genres';
+export const FILMS_LIST_MAX_COUNT = 8;
