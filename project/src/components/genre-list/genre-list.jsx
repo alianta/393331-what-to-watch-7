@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import PropTypes, { string } from 'prop-types';
 
 function GenreList(props) {
-  const {genreList, currentGenre, onGenreChange} = props;
+  const {genreList, currentGenre, onGenreChange, resetShowFilms} = props;
   const onClickHandle=(evt)=>{
     if(evt.target.tagName==='A'){
+      resetShowFilms();
       onGenreChange(evt.target.textContent);
     }
   };
@@ -24,6 +25,7 @@ GenreList.propTypes = {
   currentGenre: PropTypes.string.isRequired,
   onGenreChange: PropTypes.func.isRequired,
   genreList: PropTypes.arrayOf(string).isRequired,
+  resetShowFilms: PropTypes.func.isRequired,
 };
 
 export default GenreList;

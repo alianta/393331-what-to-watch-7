@@ -20,6 +20,9 @@ function MainPage(props) {
   const addShowFilms = ()=> {
     setShowFilmCount(showFilmCount+FILMS_LIST_MAX_COUNT);
   };
+  const resetShowFilms = ()=> {
+    setShowFilmCount(FILMS_LIST_MAX_COUNT);
+  };
 
   return (
     <div>
@@ -112,7 +115,7 @@ function MainPage(props) {
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-          <GenreList genreList={genreList} currentGenre={genre} onGenreChange={onGenreChange}/>
+          <GenreList genreList={genreList} currentGenre={genre} onGenreChange={onGenreChange} resetShowFilms={resetShowFilms}/>
           <FilmList films={films.slice(0,showFilmCount)}></FilmList>
           <ShowMoreButton allFilmLCount={films.length} showFilmCount={showFilmCount} addShowFilms={addShowFilms}/>
         </section>
