@@ -1,9 +1,6 @@
-export const adaptFilmToClient = (film) => ({
-  /* posterImage: film.poster_image,
-  previewImage: film.preview_image,
-  backgroundImage: film.background_image,
-  backgroundColor: film.background_color,*/
+import {getRatingDescription} from '../utils';
 
+export const adaptFilmToClient = (film) => ({
   id: film.id,
   title: film.name,
   genre: film.genre,
@@ -14,7 +11,7 @@ export const adaptFilmToClient = (film) => ({
   video: film.video_link,
   previewVideo: film.preview_video_link,
   ratingScore: film.rating,
-  ratingDescription: 'Very good',
+  ratingDescription: getRatingDescription(film.rating),
   ratingCount: film.scores_count,
   description: film.description,
   director: film.director,
