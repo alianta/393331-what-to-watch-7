@@ -18,5 +18,4 @@ export const adaptFilmToClient = (film) => ({
   starring: film.starring,
   time: film.run_time,
   isFavorite: film.is_favorite,
-  isFilmOfDay: true,
 });
