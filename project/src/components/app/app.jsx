@@ -10,9 +10,18 @@ import Player from '../player/player';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import PropTypes from 'prop-types';
 import filmProp from '../film/filmProp';
+import LoadingScreen from '../loading-screen/loading-screen';
+import {connect} from 'react-redux';
+import {isCheckedAuth} from '../../utils';
 
 function App(props) {
-  const {films} = props;
+  const {films, isDataLoaded, authorizationStatus} = props;
+
+  if (isCheckedAuth(authorizationStatus)||!isDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   return (
     <BrowserRouter>
@@ -39,6 +48,15 @@ function App(props) {
 
 App.propTypes = {
   films: PropTypes.arrayOf(filmProp).isRequired,
+  isDataLoaded: PropTypes.bool.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  authorizationStatus: state.authorizationStatus,
+  isDataLoaded: state.isDataLoaded,
+  films: state.films,
+});
+
+export {App};
+export default connect(mapStateToProps, null)(App);

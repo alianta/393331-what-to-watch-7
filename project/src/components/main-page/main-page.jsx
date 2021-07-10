@@ -136,7 +136,7 @@ MainPage.propTypes = {
 const mapStateToProps = (state) => ({
   genre: state.genre,
   films: getFilmsFromGenre(state.films,state.genre),
-  filmOfDay: state.films.find((film) => (film.isFilmOfDay === true)),
+  filmOfDay: state.promoFilm,
   genreList: getGenreList(state.films),
 });
 

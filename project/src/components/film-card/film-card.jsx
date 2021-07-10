@@ -15,7 +15,7 @@ function FilmCard(props) {
       onMouseLeave={()=>setIsPlaying(false)}
     >
       <div className="small-film-card__image">
-        {!isPlaying ? <img src={film.poster} alt={film.title} width="280" height="175" /> : <VideoPlayer poster={film.poster} videoFile={film.previewVideo} />}
+        {!isPlaying ? <img src={film.previewImage} alt={film.title} width="280" height="175" /> : <VideoPlayer poster={film.previewImage} videoFile={film.previewVideo} />}
       </div>
       <h3 className="small-film-card__title">
         <Link className="small-film-card__link" to={generatePath('/film/:id/', {id: film.id})}>{film.title}</Link>
