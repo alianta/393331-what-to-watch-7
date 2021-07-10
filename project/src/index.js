@@ -9,7 +9,7 @@ import thunk from 'redux-thunk';
 import {createAPI} from './services/api';
 import {ActionCreator} from './store/action';
 import {AuthorizationStatus} from './const';
-import {checkAuth, fetchFlms} from './store/api-actions';
+import {checkAuth, fetchFlms, fetchPromoFilm} from './store/api-actions';
 
 const api = createAPI(
   () => store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH)),
@@ -24,6 +24,7 @@ const store = createStore(
 
 store.dispatch(checkAuth());
 store.dispatch(fetchFlms());
+store.dispatch(fetchPromoFilm());
 
 ReactDOM.render(
   <Provider store={store}>

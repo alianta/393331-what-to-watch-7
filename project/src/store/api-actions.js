@@ -6,6 +6,11 @@ export const fetchFlms = () => (dispatch, _getState, api) => (
     .then(({data}) => dispatch(ActionCreator.loadFilms(data)))
 );
 
+export const fetchPromoFilm = () => (dispatch, _getState, api) => (
+  api.get(APIRoute.PROMO)
+    .then(({data}) => dispatch(ActionCreator.loadPromoFilm(data)))
+);
+
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoute.LOGIN)
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))

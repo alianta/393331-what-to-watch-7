@@ -6,6 +6,7 @@ import {AuthorizationStatus} from '../const';
 const initialState = {
   genre: DEFAULT_GENRE,
   films: [],
+  promoFilm: {},
   authorizationStatus: AuthorizationStatus.UNKNOWN,
 };
 
@@ -20,6 +21,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         films: action.payload.map((film) => adaptFilmToClient(film)),
+        isDataLoaded: true,
+      };
+    case ActionType.LOAD_PROMO_FILM:
+      return {
+        ...state,
+        promoFilm: adaptFilmToClient(action.payload),
         isDataLoaded: true,
       };
     case ActionType.REQUIRED_AUTHORIZATION:
