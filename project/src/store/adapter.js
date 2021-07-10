@@ -1,0 +1,25 @@
+export const adaptFilmToClient = (film) => ({
+  /* posterImage: film.poster_image,
+  previewImage: film.preview_image,
+  backgroundImage: film.background_image,
+  backgroundColor: film.background_color,*/
+
+  id: film.id,
+  title: film.name,
+  genre: film.genre,
+  year: film.released,
+  poster: film.poster_image,
+  bigImage: film.background_image,
+  previewImage: film.preview_image,
+  video: film.video_link,
+  previewVideo: film.preview_video_link,
+  ratingScore: film.rating,
+  ratingDescription: 'Very good',
+  ratingCount: film.scores_count,
+  description: film.description,
+  director: film.director,
+  starring: film.starring,
+  time: film.run_time,
+  isFavorite: film.is_favorite,
+  isFilmOfDay: true,
+});
