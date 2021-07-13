@@ -13,6 +13,7 @@ import filmProp from '../film/filmProp';
 import LoadingScreen from '../loading-screen/loading-screen';
 import {connect} from 'react-redux';
 import {isCheckedAuth} from '../../utils';
+import PrivateRoute from '../private-route/private-route';
 
 function App(props) {
   const {films, isDataLoaded, authorizationStatus} = props;
@@ -32,9 +33,12 @@ function App(props) {
         <Route exact path={AppRoute.LOGIN}>
           <SignIn />
         </Route>
-        <Route exact path={AppRoute.MY_LIST}>
-          <MyList films={films}/>
-        </Route>
+        <PrivateRoute
+          exact
+          path={AppRoute.MY_LIST}
+          render={() => <MyList films={films}/>}
+        >
+        </PrivateRoute>
         <Route path={AppRoute.FILM} exact component={Film} />
         <Route path={AppRoute.REVIEW} exact component={AddReview}/>
         <Route path={AppRoute.PLAYER} exact component={Player} />
