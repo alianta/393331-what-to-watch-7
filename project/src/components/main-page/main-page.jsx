@@ -11,10 +11,10 @@ import GenreList from '../genre-list/genre-list';
 import { getGenreList, getFilmsFromGenre } from '../../utils';
 import FilmList from '../film-list/film-list';
 import ShowMoreButton from '../show-more-button/show-more-button';
-import { FILMS_LIST_MAX_COUNT } from '../../const';
+import { FILMS_LIST_MAX_COUNT, AppRoute, AuthorizationStatus } from '../../const';
 
 function MainPage(props) {
-  const {films, filmOfDay, genre, genreList, onGenreChange} = props;
+  const {films, filmOfDay, genre, genreList, onGenreChange, authorizationStatus, avatar} = props;
   const history = useHistory();
   const [showFilmCount, setShowFilmCount] = useState(FILMS_LIST_MAX_COUNT);
   const addShowFilms = ()=> {
@@ -69,13 +69,17 @@ function MainPage(props) {
           <Logo />
 
           <ul className="user-block">
+            {(authorizationStatus===AuthorizationStatus.AUTH)?
+              <li className="user-block__item">
+                <div className="user-block__avatar">
+                  <img src={avatar} alt="User avatar" width="63" height="63" onClick={() => history.push(AppRoute.MY_LIST)}/>
+                </div>
+              </li>:
+              ''}
             <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <Link className="user-block__link" to="/#">Sign out</Link>
+              {(authorizationStatus===AuthorizationStatus.AUTH)?
+                <Link className="user-block__link" to={AppRoute.LOGIN}>Sign out</Link>:
+                <Link className="user-block__link" to={AppRoute.LOGIN}>Sign in</Link>}
             </li>
           </ul>
         </header>
@@ -131,6 +135,8 @@ MainPage.propTypes = {
   genre: PropTypes.string.isRequired,
   onGenreChange: PropTypes.func.isRequired,
   genreList: PropTypes.array.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
+  avatar: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -138,6 +144,8 @@ const mapStateToProps = (state) => ({
   films: getFilmsFromGenre(state.films,state.genre),
   filmOfDay: state.promoFilm,
   genreList: getGenreList(state.films),
+  authorizationStatus: state.authorizationStatus,
+  avatar: state.authorizationInfo.avatar_url,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -81,8 +81,6 @@ SignIn.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   onSubmit(authData) {
-    /* eslint-disable no-console */
-    console.log('onSubmit:',authData);
     dispatch(login(authData));
   },
 });
