@@ -40,7 +40,11 @@ function App(props) {
         >
         </PrivateRoute>
         <Route path={AppRoute.FILM} exact component={Film} />
-        <Route path={AppRoute.REVIEW} exact component={AddReview}/>
+        <PrivateRoute
+          exact
+          path={AppRoute.REVIEW}
+          render={(componentProps) => <AddReview {...componentProps}/>}
+        />
         <Route path={AppRoute.PLAYER} exact component={Player} />
         <Route>
           <NotFoundScreen />
