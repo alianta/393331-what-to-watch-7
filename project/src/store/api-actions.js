@@ -13,6 +13,7 @@ export const fetchPromoFilm = () => (dispatch, _getState, api) => (
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoute.LOGIN)
+    .then(({data}) => dispatch(ActionCreator.loadAuthorizationInfo(data)))
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
     .catch(() => {})
 );

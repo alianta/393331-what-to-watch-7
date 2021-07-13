@@ -8,6 +8,7 @@ const initialState = {
   films: [],
   promoFilm: {},
   authorizationStatus: AuthorizationStatus.UNKNOWN,
+  authorizationInfo: {},
 };
 
 const reducer = (state = initialState, action) => {
@@ -38,6 +39,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         authorizationStatus: AuthorizationStatus.NO_AUTH,
+      };
+    case ActionType.LOAD_AUTHORIZATION_INFO:
+      return {
+        ...state,
+        authorizationInfo: action.payload,
       };
     default:
       return state;
