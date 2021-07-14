@@ -1,5 +1,5 @@
 import {ActionCreator} from './action';
-import {AuthorizationStatus, APIRoute} from '../const';
+import {AuthorizationStatus, AppRoute, APIRoute} from '../const';
 
 export const fetchFlms = () => (dispatch, _getState, api) => (
   api.get(APIRoute.FILMS)
@@ -13,14 +13,19 @@ export const fetchPromoFilm = () => (dispatch, _getState, api) => (
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoute.LOGIN)
+    .then(({data}) => dispatch(ActionCreator.loadAuthorizationInfo(data)))
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
     .catch(() => {})
 );
 
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
   api.post(APIRoute.LOGIN, {email, password})
-    .then(({data}) => localStorage.setItem('token', data.token))
+    .then(({data}) => {
+      dispatch(ActionCreator.loadAuthorizationInfo(data));
+      localStorage.setItem('token', data.token);
+    })
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
+    .then(() => dispatch(ActionCreator.redirectToRoute(AppRoute.ROOT)))
 );
 
 export const logout = () => (dispatch, _getState, api) => (
