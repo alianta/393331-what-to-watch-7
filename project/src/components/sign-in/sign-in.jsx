@@ -19,7 +19,6 @@ function SignIn({onSubmit}) {
       login: loginRef.current.value,
       password: passwordRef.current.value,
     });
-    history.push(AppRoute.ROOT);
   };
 
   return (

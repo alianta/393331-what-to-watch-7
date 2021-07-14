@@ -1,5 +1,5 @@
 import React from 'react';
-import {Switch, Route, BrowserRouter} from 'react-router-dom';
+import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import MainPage from '../main-page/main-page';
 import SignIn from '../sign-in/sign-in';
@@ -14,6 +14,7 @@ import LoadingScreen from '../loading-screen/loading-screen';
 import {connect} from 'react-redux';
 import {isCheckedAuth} from '../../utils';
 import PrivateRoute from '../private-route/private-route';
+import browserHistory from '../../browserHistory';
 
 function App(props) {
   const {films, isDataLoaded, authorizationStatus} = props;
@@ -25,7 +26,7 @@ function App(props) {
   }
 
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact path={AppRoute.ROOT}>
           <MainPage/>
