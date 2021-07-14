@@ -12,9 +12,10 @@ import { getGenreList, getFilmsFromGenre } from '../../utils';
 import FilmList from '../film-list/film-list';
 import ShowMoreButton from '../show-more-button/show-more-button';
 import { FILMS_LIST_MAX_COUNT, AppRoute, AuthorizationStatus } from '../../const';
+import {logout} from '../../store/api-actions';
 
 function MainPage(props) {
-  const {films, filmOfDay, genre, genreList, onGenreChange, authorizationStatus, avatar} = props;
+  const {films, filmOfDay, genre, genreList, onGenreChange, authorizationStatus, avatar, signOut} = props;
   const history = useHistory();
   const [showFilmCount, setShowFilmCount] = useState(FILMS_LIST_MAX_COUNT);
   const addShowFilms = ()=> {
@@ -78,7 +79,16 @@ function MainPage(props) {
               ''}
             <li className="user-block__item">
               {(authorizationStatus===AuthorizationStatus.AUTH)?
-                <Link className="user-block__link" to={AppRoute.LOGIN}>Sign out</Link>:
+                <Link
+                  className="user-block__link"
+                  onClick={(evt) => {
+                    evt.preventDefault();
+                    signOut();
+                  }}
+                  to='/'
+                >
+                  Sign out
+                </Link>:
                 <Link className="user-block__link" to={AppRoute.LOGIN}>Sign in</Link>}
             </li>
           </ul>
@@ -137,6 +147,7 @@ MainPage.propTypes = {
   genreList: PropTypes.array.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
   avatar: PropTypes.string.isRequired,
+  signOut: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -151,6 +162,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onGenreChange(genre) {
     dispatch(ActionCreator.changeGenre(genre));
+  },
+  signOut() {
+    dispatch(logout());
   },
 });
 
