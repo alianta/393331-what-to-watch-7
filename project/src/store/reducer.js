@@ -1,14 +1,16 @@
 import {ActionType} from './action';
 import { DEFAULT_GENRE } from '../const';
 import {adaptFilmToClient} from './adapter';
-import {AuthorizationStatus} from '../const';
+import {AuthorizationStatus, PROMO_FILM_ID} from '../const';
 
 const initialState = {
   genre: DEFAULT_GENRE,
   films: [],
   promoFilm: {},
+  currentFilm: {},
   authorizationStatus: AuthorizationStatus.UNKNOWN,
   authorizationInfo: {},
+  isDataLoaded: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -27,7 +29,17 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_PROMO_FILM:
       return {
         ...state,
-        promoFilm: adaptFilmToClient(action.payload),
+        promoFilm: adaptFilmToClient(
+          {
+            ...action.payload,
+            id: PROMO_FILM_ID,
+          }),
+        isDataLoaded: true,
+      };
+    case ActionType.LOAD_FILM_INFO:
+      return {
+        ...state,
+        currentFilm: adaptFilmToClient(action.payload),
         isDataLoaded: true,
       };
     case ActionType.REQUIRED_AUTHORIZATION:

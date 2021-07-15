@@ -16,5 +16,4 @@ export default PropTypes.shape({
   starring: PropTypes.arrayOf(PropTypes.string).isRequired,
   time: PropTypes.number.isRequired,
   isFavorite: PropTypes.bool.isRequired,
-  isFilmOfDay: PropTypes.bool.isRequired,
 });

@@ -156,7 +156,7 @@ const mapStateToProps = (state) => ({
   filmOfDay: state.promoFilm,
   genreList: getGenreList(state.films),
   authorizationStatus: state.authorizationStatus,
-  avatar: state.authorizationInfo.avatar_url,
+  avatar: state.authorizationInfo.avatar_url??'',
 });
 
 const mapDispatchToProps = (dispatch) => ({

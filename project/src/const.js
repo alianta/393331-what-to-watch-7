@@ -21,6 +21,7 @@ export const AuthorizationStatus = {
 
 export const APIRoute = {
   FILMS: '/films',
+  FILM_INFO: '/films/:id',
   PROMO: '/promo',
   LOGIN: '/login',
   LOGOUT: '/logout',
@@ -39,3 +40,4 @@ export const NORMAL_RATING = 'Normal';
 export const GOOD_RATING = 'Good';
 export const VERY_GOOD_RATING = 'Very good';
 export const AWESOME_RATING = 'Awesome';
+export const PROMO_FILM_ID = -1;
