@@ -8,15 +8,23 @@ function AddReviewForm (props) {
   const {onReview, film} = props;
   const [review, setReview] = useState('');
   const [rating, setRating] = useState(0);
+  const [errorMeesge, setErrorMeesge] = useState('');
 
   return (
     <form
       className="add-review__form"
       onSubmit={(evt) => {
         evt.preventDefault();
-        onReview(rating, review);
+        if(rating===0){
+          setErrorMeesge('Choose rating please!');
+        }else if(review===''){
+          setErrorMeesge('Write comment Please!');
+        }else {
+          onReview(rating, review);
+        }
       }}
     >
+      {(errorMeesge!=='')?<h3>{errorMeesge}</h3>:''}
       <div className="rating">
         <div className="rating__stars">
           {
