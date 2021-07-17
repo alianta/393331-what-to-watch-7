@@ -3,6 +3,7 @@ export const ActionType = {
   REQUIRED_AUTHORIZATION: 'requiredAuthorization',
   LOGOUT: 'logout',
   LOAD_FILMS: 'loadFilms',
+  LOAD_FILM_INFO: 'loadFilmInfo',
   LOAD_PROMO_FILM: 'loadPromoFilm',
   LOAD_AUTHORIZATION_INFO: 'loadAuthorizationInfo',
   REDIRECT_TO_ROUTE: 'redirectToRoute',
@@ -16,6 +17,10 @@ export const ActionCreator = {
   loadFilms: (films) => ({
     type: ActionType.LOAD_FILMS,
     payload: films,
+  }),
+  loadFilmInfo: (film) => ({
+    type: ActionType.LOAD_FILM_INFO,
+    payload: film,
   }),
   loadAuthorizationInfo: (authorizationInfo) => ({
     type: ActionType.LOAD_AUTHORIZATION_INFO,

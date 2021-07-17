@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../footer/footer';
 import Logo from '../logo/logo';
@@ -9,14 +9,26 @@ import Tabs from '../tabs/tabs';
 import {useHistory} from 'react-router-dom';
 import { generatePath } from 'react-router';
 import { TabNames, SIMILAR_FILM_COUNT } from '../../const';
+import {fetchFlmInfo} from '../../store/api-actions';
+import {connect} from 'react-redux';
+import filmProp from './filmProp';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 
 function Film(props) {
   const filmId = parseInt(props.match.params.id,10);
-  const filmData = films.find((film) => (film.id === filmId));
+  const {getFilmInfo, filmData, isFilmDataLoaded} = props;
+  useEffect(() => {
+    getFilmInfo(filmId);
+  }, [filmId]);
   const history = useHistory();
   const [activeTab, setActiveTab] = useState(TabNames.OVERVIEW);
 
+  if (!isFilmDataLoaded){
+    return (
+      <LoadingScreen/>
+    );
+  }
   return (
     <React.Fragment>
       <div className="visually-hidden">
@@ -136,6 +148,21 @@ Film.propTypes = {
       id: PropTypes.string.isRequired,
     }),
   }),
+  getFilmInfo: PropTypes.func.isRequired,
+  filmData: filmProp,
+  isFilmDataLoaded: PropTypes.bool.isRequired,
 };
 
-export default Film;
+const mapStateToProps = (state) => ({
+  filmData: state.currentFilm,
+  isFilmDataLoaded: state.isFilmDataLoaded,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getFilmInfo(id) {
+    dispatch(fetchFlmInfo(id));
+  },
+});
+
+export {Film};
+export default connect(mapStateToProps, mapDispatchToProps)(Film);

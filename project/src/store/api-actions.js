@@ -1,9 +1,14 @@
 import {ActionCreator} from './action';
 import {AuthorizationStatus, AppRoute, APIRoute} from '../const';
+import { generatePath } from 'react-router';
 
 export const fetchFlms = () => (dispatch, _getState, api) => (
   api.get(APIRoute.FILMS)
     .then(({data}) => dispatch(ActionCreator.loadFilms(data)))
+);
+export const fetchFlmInfo = (id) => (dispatch, _getState, api) => (
+  api.get(generatePath(APIRoute.FILM_INFO, {id: id}))
+    .then(({data}) => dispatch(ActionCreator.loadFilmInfo(data)))
 );
 
 export const fetchPromoFilm = () => (dispatch, _getState, api) => (

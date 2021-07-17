@@ -11,6 +11,7 @@ const initialState = {
   authorizationStatus: AuthorizationStatus.UNKNOWN,
   authorizationInfo: {},
   isDataLoaded: false,
+  isFilmDataLoaded: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -41,6 +42,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         currentFilm: adaptFilmToClient(action.payload),
         isDataLoaded: true,
+        isFilmDataLoaded: true,
       };
     case ActionType.REQUIRED_AUTHORIZATION:
       return {
