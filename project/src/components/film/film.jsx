@@ -24,7 +24,7 @@ function Film(props) {
   const history = useHistory();
   const [activeTab, setActiveTab] = useState(TabNames.OVERVIEW);
 
-  if (!isFilmDataLoaded && !isSimilarFilmsLoaded){
+  if (!isFilmDataLoaded || !isSimilarFilmsLoaded){
     return (
       <LoadingScreen/>
     );

@@ -17,9 +17,9 @@ import PrivateRoute from '../private-route/private-route';
 import browserHistory from '../../browserHistory';
 
 function App(props) {
-  const {films, isDataLoaded, authorizationStatus} = props;
+  const {films, isDataLoaded, isFilmOfDayLoaded, authorizationStatus} = props;
 
-  if (isCheckedAuth(authorizationStatus)||!isDataLoaded) {
+  if (isCheckedAuth(authorizationStatus)||!isDataLoaded ||!isFilmOfDayLoaded) {
     return (
       <LoadingScreen />
     );
@@ -58,12 +58,14 @@ function App(props) {
 App.propTypes = {
   films: PropTypes.arrayOf(filmProp).isRequired,
   isDataLoaded: PropTypes.bool.isRequired,
+  isFilmOfDayLoaded: PropTypes.bool.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   authorizationStatus: state.authorizationStatus,
   isDataLoaded: state.isDataLoaded,
+  isFilmOfDayLoaded: state.isFilmOfDayLoaded,
   films: state.films,
 });
 

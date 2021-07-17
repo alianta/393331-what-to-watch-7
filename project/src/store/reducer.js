@@ -14,6 +14,7 @@ const initialState = {
   isDataLoaded: false,
   isFilmDataLoaded: false,
   isSimilarFilmsLoaded: false,
+  isFilmOfDayLoaded: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -43,7 +44,7 @@ const reducer = (state = initialState, action) => {
             ...action.payload,
             id: PROMO_FILM_ID,
           }),
-        isDataLoaded: true,
+        isFilmOfDayLoaded: true,
       };
     case ActionType.LOAD_FILM_INFO:
       return {
