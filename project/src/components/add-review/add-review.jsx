@@ -7,13 +7,14 @@ import { generatePath } from 'react-router';
 import UserBlock from '../user-block/user-block';
 import {connect} from 'react-redux';
 import filmProp from '../film/filmProp';
+import {addComment} from '../../store/api-actions';
 
 function AddReview (props) {
   const filmId = parseInt(props.match.params.id,10);
-  const {filmData} = props;
+  const {filmData, onSubmit} = props;
 
   return (
-    <section className="film-card film-card--full" style={{'background-color':filmData.background}}>
+    <section className="film-card film-card--full" style={{'backgroundColor':filmData.background}}>
       <div className="film-card__header">
         <div className="film-card__bg">
           <img src={filmData.bigImage} alt={filmData.title} />
@@ -44,7 +45,15 @@ function AddReview (props) {
       </div>
 
       <div className="add-review">
-        <AddReviewForm film={filmData} onReview={()=>{}}></AddReviewForm>
+        <AddReviewForm film={filmData} onReview={(rating, review)=>{
+          onSubmit({
+            rating: +rating,
+            comment: review,
+            filmId: filmId,
+          });
+        }}
+        >
+        </AddReviewForm>
       </div>
     </section>
   );
@@ -57,11 +66,18 @@ AddReview.propTypes = {
     }),
   }),
   filmData: filmProp,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   filmData: state.currentFilm,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  onSubmit(comment) {
+    dispatch(addComment(comment));
+  },
+});
+
 export {AddReview};
-export default connect(mapStateToProps, null)(AddReview);
+export default connect(mapStateToProps, mapDispatchToProps)(AddReview);

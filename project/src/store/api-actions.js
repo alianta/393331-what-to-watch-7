@@ -45,6 +45,13 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
     .then(() => dispatch(ActionCreator.redirectToRoute(AppRoute.ROOT)))
 );
 
+export const addComment = ({rating, comment, filmId}) => (dispatch, _getState, api) => (
+  api.post(generatePath(APIRoute.ADD_COMMENT,{filmId:filmId}), {rating, comment})
+    .then(({data}) => dispatch(ActionCreator.loadFilmComments(data)))
+    .then(() => dispatch(ActionCreator.redirectToRoute(generatePath(AppRoute.FILM,{id:filmId}))))
+    .catch(()=>{})
+);
+
 export const logout = () => (dispatch, _getState, api) => (
   api.delete(APIRoute.LOGOUT)
     .then(() => localStorage.removeItem('token'))

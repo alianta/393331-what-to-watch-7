@@ -28,6 +28,7 @@ export const APIRoute = {
   PROMO: '/promo',
   LOGIN: '/login',
   LOGOUT: '/logout',
+  ADD_COMMENT: '/comments/:filmId',
 };
 
 export const SIMILAR_FILM_COUNT = 4;
