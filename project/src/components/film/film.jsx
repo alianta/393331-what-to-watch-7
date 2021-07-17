@@ -13,6 +13,7 @@ import {fetchFlmInfo} from '../../store/api-actions';
 import {connect} from 'react-redux';
 import filmProp from './filmProp';
 import LoadingScreen from '../loading-screen/loading-screen';
+import UserBlock from '../user-block/user-block';
 
 
 function Film(props) {
@@ -72,16 +73,7 @@ function Film(props) {
 
           <header className="page-header film-card__head">
             <Logo />
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-                </div>
-              </li>
-              <li className="user-block__item">
-                <Link to ="/#" className="user-block__link">Sign out</Link>
-              </li>
-            </ul>
+            <UserBlock/>
           </header>
 
           <div className="film-card__wrap">

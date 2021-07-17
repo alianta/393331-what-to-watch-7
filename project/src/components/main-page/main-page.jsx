@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
 import Footer from '../footer/footer';
 import Logo from '../logo/logo';
-import { Link } from 'react-router-dom';
+
 import PropTypes from 'prop-types';
 import filmProp from '../film/filmProp';
 import {useHistory} from 'react-router-dom';
@@ -11,11 +11,11 @@ import GenreList from '../genre-list/genre-list';
 import { getGenreList, getFilmsFromGenre } from '../../utils';
 import FilmList from '../film-list/film-list';
 import ShowMoreButton from '../show-more-button/show-more-button';
-import { FILMS_LIST_MAX_COUNT, AppRoute, AuthorizationStatus } from '../../const';
-import {logout} from '../../store/api-actions';
+import { FILMS_LIST_MAX_COUNT} from '../../const';
+import UserBlock from '../user-block/user-block';
 
 function MainPage(props) {
-  const {films, filmOfDay, genre, genreList, onGenreChange, authorizationStatus, avatar, signOut} = props;
+  const {films, filmOfDay, genre, genreList, onGenreChange} = props;
   const history = useHistory();
   const [showFilmCount, setShowFilmCount] = useState(FILMS_LIST_MAX_COUNT);
   const addShowFilms = ()=> {
@@ -68,30 +68,7 @@ function MainPage(props) {
 
         <header className="page-header film-card__head">
           <Logo />
-
-          <ul className="user-block">
-            {(authorizationStatus===AuthorizationStatus.AUTH)?
-              <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img src={avatar} alt="User avatar" width="63" height="63" onClick={() => history.push(AppRoute.MY_LIST)}/>
-                </div>
-              </li>:
-              ''}
-            <li className="user-block__item">
-              {(authorizationStatus===AuthorizationStatus.AUTH)?
-                <Link
-                  className="user-block__link"
-                  onClick={(evt) => {
-                    evt.preventDefault();
-                    signOut();
-                  }}
-                  to='/'
-                >
-                  Sign out
-                </Link>:
-                <Link className="user-block__link" to={AppRoute.LOGIN}>Sign in</Link>}
-            </li>
-          </ul>
+          <UserBlock/>
         </header>
 
         <div className="film-card__wrap">
@@ -145,9 +122,6 @@ MainPage.propTypes = {
   genre: PropTypes.string.isRequired,
   onGenreChange: PropTypes.func.isRequired,
   genreList: PropTypes.array.isRequired,
-  authorizationStatus: PropTypes.string.isRequired,
-  avatar: PropTypes.string.isRequired,
-  signOut: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -155,16 +129,11 @@ const mapStateToProps = (state) => ({
   films: getFilmsFromGenre(state.films,state.genre),
   filmOfDay: state.promoFilm,
   genreList: getGenreList(state.films),
-  authorizationStatus: state.authorizationStatus,
-  avatar: state.authorizationInfo.avatar_url??'',
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onGenreChange(genre) {
     dispatch(ActionCreator.changeGenre(genre));
-  },
-  signOut() {
-    dispatch(logout());
   },
 });
 
