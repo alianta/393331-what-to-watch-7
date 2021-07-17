@@ -5,6 +5,7 @@ export const AppRoute = {
   FILM: '/film/:id?',
   REVIEW: '/film/:id?/review',
   PLAYER: '/player/:id?',
+  NOT_FOUND: '/not-found',
 };
 
 export const TabNames ={

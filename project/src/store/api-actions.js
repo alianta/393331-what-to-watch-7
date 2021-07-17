@@ -10,6 +10,7 @@ export const fetchFlms = () => (dispatch, _getState, api) => (
 export const fetchFlmInfo = (id) => (dispatch, _getState, api) => (
   api.get(generatePath(APIRoute.FILM_INFO, {id: id}))
     .then(({data}) => dispatch(ActionCreator.loadFilmInfo(data)))
+    .catch(()=>dispatch(ActionCreator.redirectToRoute(AppRoute.NOT_FOUND)))
 );
 
 export const fetchSimilarFilms = (id) => (dispatch, _getState, api) => (

@@ -47,6 +47,7 @@ function App(props) {
           render={(componentProps) => <AddReview {...componentProps}/>}
         />
         <Route path={AppRoute.PLAYER} exact component={Player} />
+        <Route path={AppRoute.NOT_FOUND} exact component={NotFoundScreen}/>
         <Route>
           <NotFoundScreen />
         </Route>
