@@ -1,8 +1,12 @@
+import dayjs from 'dayjs';
+import duration from 'dayjs/plugin/duration';
 import React from 'react';
 import filmProp from '../film/filmProp';
+dayjs.extend(duration);
 
 function Details(props) {
   const {film} = props;
+  const filmTime = dayjs.duration(film.time, 'minutes');
 
   return (
     <div className="film-card__text film-card__row">
@@ -29,7 +33,7 @@ function Details(props) {
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Run Time</strong>
-          <span className="film-card__details-value">{film.time}</span>
+          <span className="film-card__details-value">{filmTime.hours()}h {filmTime.minutes()}m</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Genre</strong>
