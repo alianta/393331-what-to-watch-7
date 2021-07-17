@@ -10,6 +10,10 @@ export const fetchFlmInfo = (id) => (dispatch, _getState, api) => (
   api.get(generatePath(APIRoute.FILM_INFO, {id: id}))
     .then(({data}) => dispatch(ActionCreator.loadFilmInfo(data)))
 );
+export const fetchSimilarFilms = (id) => (dispatch, _getState, api) => (
+  api.get(generatePath(APIRoute.SIMILAR_FILMS, {id: id}))
+    .then(({data}) => dispatch(ActionCreator.loadSimilarFilms(data)))
+);
 
 export const fetchPromoFilm = () => (dispatch, _getState, api) => (
   api.get(APIRoute.PROMO)

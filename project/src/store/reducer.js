@@ -6,12 +6,14 @@ import {AuthorizationStatus, PROMO_FILM_ID} from '../const';
 const initialState = {
   genre: DEFAULT_GENRE,
   films: [],
+  similarFilms: [],
   promoFilm: {},
   currentFilm: {},
   authorizationStatus: AuthorizationStatus.UNKNOWN,
   authorizationInfo: {},
   isDataLoaded: false,
   isFilmDataLoaded: false,
+  isSimilarFilmsLoaded: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -26,6 +28,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         films: action.payload.map((film) => adaptFilmToClient(film)),
         isDataLoaded: true,
+      };
+    case ActionType.LOAD_SIMILAR_FILMS:
+      return {
+        ...state,
+        similarFilms: action.payload.map((film) => adaptFilmToClient(film)),
+        isSimilarFilmsLoaded: true,
       };
     case ActionType.LOAD_PROMO_FILM:
       return {

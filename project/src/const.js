@@ -22,6 +22,7 @@ export const AuthorizationStatus = {
 export const APIRoute = {
   FILMS: '/films',
   FILM_INFO: '/films/:id',
+  SIMILAR_FILMS: '/films/:id/similar',
   PROMO: '/promo',
   LOGIN: '/login',
   LOGOUT: '/logout',

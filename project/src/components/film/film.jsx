@@ -3,33 +3,33 @@ import { Link } from 'react-router-dom';
 import Footer from '../footer/footer';
 import Logo from '../logo/logo';
 import PropTypes from 'prop-types';
-import films from '../../mocks/films';
 import FilmList from '../film-list/film-list';
 import Tabs from '../tabs/tabs';
 import {useHistory} from 'react-router-dom';
 import { generatePath } from 'react-router';
 import { TabNames, SIMILAR_FILM_COUNT } from '../../const';
-import {fetchFlmInfo} from '../../store/api-actions';
+import {fetchFlmInfo, fetchSimilarFilms} from '../../store/api-actions';
 import {connect} from 'react-redux';
 import filmProp from './filmProp';
 import LoadingScreen from '../loading-screen/loading-screen';
 import UserBlock from '../user-block/user-block';
 
-
 function Film(props) {
   const filmId = parseInt(props.match.params.id,10);
-  const {getFilmInfo, filmData, isFilmDataLoaded} = props;
+  const {getFilmInfo, filmData, isFilmDataLoaded, isSimilarFilmsLoaded, similarFilms, getSimilarFilms} = props;
   useEffect(() => {
     getFilmInfo(filmId);
+    getSimilarFilms(filmId);
   }, [filmId]);
   const history = useHistory();
   const [activeTab, setActiveTab] = useState(TabNames.OVERVIEW);
 
-  if (!isFilmDataLoaded){
+  if (!isFilmDataLoaded && !isSimilarFilmsLoaded){
     return (
       <LoadingScreen/>
     );
   }
+
   return (
     <React.Fragment>
       <div className="visually-hidden">
@@ -125,7 +125,7 @@ function Film(props) {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          <FilmList films={films.filter((film) => filmData.genre===film.genre).slice(0,SIMILAR_FILM_COUNT)}></FilmList>
+          <FilmList films={similarFilms.filter((film) => filmData.genre===film.genre).slice(0,SIMILAR_FILM_COUNT)}></FilmList>
         </section>
 
         <Footer />
@@ -141,18 +141,26 @@ Film.propTypes = {
     }),
   }),
   getFilmInfo: PropTypes.func.isRequired,
+  getSimilarFilms: PropTypes.func.isRequired,
   filmData: filmProp,
+  similarFilms: PropTypes.arrayOf(filmProp).isRequired,
   isFilmDataLoaded: PropTypes.bool.isRequired,
+  isSimilarFilmsLoaded: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   filmData: state.currentFilm,
   isFilmDataLoaded: state.isFilmDataLoaded,
+  similarFilms: state.similarFilms,
+  isSimilarFilmsLoaded: state.isSimilarFilmsLoaded,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getFilmInfo(id) {
     dispatch(fetchFlmInfo(id));
+  },
+  getSimilarFilms(id) {
+    dispatch(fetchSimilarFilms(id));
   },
 });
 
