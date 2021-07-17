@@ -2,13 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../logo/logo';
 import PropTypes from 'prop-types';
-import films from '../../mocks/films';
 import AddReviewForm from '../add-review-form/add-review-form';
 import { generatePath } from 'react-router';
+import UserBlock from '../user-block/user-block';
+import {connect} from 'react-redux';
+import filmProp from '../film/filmProp';
 
 function AddReview (props) {
   const filmId = parseInt(props.match.params.id,10);
-  const filmData = films.find((film) => (film.id === filmId));
+  const {filmData} = props;
 
   return (
     <section className="film-card film-card--full">
@@ -33,16 +35,7 @@ function AddReview (props) {
             </ul>
           </nav>
 
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <Link to="/#" className="user-block__link">Sign out</Link>
-            </li>
-          </ul>
+          <UserBlock/>
         </header>
 
         <div className="film-card__poster film-card__poster--small">
@@ -63,6 +56,12 @@ AddReview.propTypes = {
       id: PropTypes.string.isRequired,
     }),
   }),
+  filmData: filmProp,
 };
 
-export default AddReview;
+const mapStateToProps = (state) => ({
+  filmData: state.currentFilm,
+});
+
+export {AddReview};
+export default connect(mapStateToProps, null)(AddReview);
