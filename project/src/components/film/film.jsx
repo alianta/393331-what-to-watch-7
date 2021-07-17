@@ -7,7 +7,7 @@ import FilmList from '../film-list/film-list';
 import Tabs from '../tabs/tabs';
 import {useHistory} from 'react-router-dom';
 import { generatePath } from 'react-router';
-import { TabNames, SIMILAR_FILM_COUNT } from '../../const';
+import { TabNames, SIMILAR_FILM_COUNT, AuthorizationStatus} from '../../const';
 import {fetchFlmInfo, fetchSimilarFilms, fetchComments} from '../../store/api-actions';
 import {connect} from 'react-redux';
 import filmProp from './filmProp';
@@ -17,7 +17,7 @@ import reviewProp from '../review/reviewProp';
 
 function Film(props) {
   const filmId = parseInt(props.match.params.id,10);
-  const {getFilmInfo, filmData, isFilmDataLoaded, isSimilarFilmsLoaded, similarFilms, getSimilarFilms, getComments, comments, isCommentsLoaded} = props;
+  const {getFilmInfo, filmData, isFilmDataLoaded, isSimilarFilmsLoaded, similarFilms, getSimilarFilms, getComments, comments, isCommentsLoaded, authorizationStatus} = props;
   useEffect(() => {
     getFilmInfo(filmId);
     getSimilarFilms(filmId);
@@ -107,7 +107,8 @@ function Film(props) {
                     )}
                   <span>My list</span>
                 </button>
-                <Link to={generatePath('/film/:id/review', {id: filmId})} className="btn film-card__button">Add review</Link>
+                {(authorizationStatus===AuthorizationStatus.AUTH)?
+                  <Link to={generatePath('/film/:id/review', {id: filmId})} className="btn film-card__button">Add review</Link>:''}
               </div>
             </div>
           </div>
@@ -151,6 +152,7 @@ Film.propTypes = {
   isSimilarFilmsLoaded: PropTypes.bool.isRequired,
   isCommentsLoaded: PropTypes.bool.isRequired,
   comments: reviewProp,
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -160,6 +162,7 @@ const mapStateToProps = (state) => ({
   isSimilarFilmsLoaded: state.isSimilarFilmsLoaded,
   isCommentsLoaded: state.isCurrentFilmCommentsLoaded,
   comments: state.currentFilmComments,
+  authorizationStatus: state.authorizationStatus,
 });
 
 const mapDispatchToProps = (dispatch) => ({
