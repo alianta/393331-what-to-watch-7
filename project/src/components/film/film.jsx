@@ -65,7 +65,7 @@ function Film(props) {
           </symbol>
         </svg>
       </div>
-      <section className="film-card film-card--full">
+      <section className="film-card film-card--full" style={{'background-color':filmData.background}} >
         <div className="film-card__hero">
           <div className="film-card__bg">
             <img src={filmData.bigImage} alt={filmData.title} />

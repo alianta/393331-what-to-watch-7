@@ -8,7 +8,7 @@ export const adaptFilmToClient = (film) => ({
   poster: film.poster_image,
   bigImage: film.background_image,
   previewImage: film.preview_image,
-  backgroung: film.background_color,
+  background: film.background_color,
   video: film.video_link,
   previewVideo: film.preview_video_link,
   ratingScore: film.rating,
