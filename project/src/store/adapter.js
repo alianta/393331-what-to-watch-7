@@ -20,3 +20,12 @@ export const adaptFilmToClient = (film) => ({
   time: film.run_time,
   isFavorite: film.is_favorite,
 });
+
+export const adaptCommentToClient = (comment) => ({
+  id: comment.id,
+  userId: comment.user.id,
+  text: comment.comment,
+  author: comment.user.name,
+  date: comment.date,
+  ratingScore: comment.rating,
+});

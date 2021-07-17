@@ -23,6 +23,7 @@ export const APIRoute = {
   FILMS: '/films',
   FILM_INFO: '/films/:id',
   SIMILAR_FILMS: '/films/:id/similar',
+  FILM_COMMENTS: '/comments/:id',
   PROMO: '/promo',
   LOGIN: '/login',
   LOGOUT: '/logout',

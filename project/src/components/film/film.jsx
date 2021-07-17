@@ -8,23 +8,25 @@ import Tabs from '../tabs/tabs';
 import {useHistory} from 'react-router-dom';
 import { generatePath } from 'react-router';
 import { TabNames, SIMILAR_FILM_COUNT } from '../../const';
-import {fetchFlmInfo, fetchSimilarFilms} from '../../store/api-actions';
+import {fetchFlmInfo, fetchSimilarFilms, fetchComments} from '../../store/api-actions';
 import {connect} from 'react-redux';
 import filmProp from './filmProp';
 import LoadingScreen from '../loading-screen/loading-screen';
 import UserBlock from '../user-block/user-block';
+import reviewProp from '../review/reviewProp';
 
 function Film(props) {
   const filmId = parseInt(props.match.params.id,10);
-  const {getFilmInfo, filmData, isFilmDataLoaded, isSimilarFilmsLoaded, similarFilms, getSimilarFilms} = props;
+  const {getFilmInfo, filmData, isFilmDataLoaded, isSimilarFilmsLoaded, similarFilms, getSimilarFilms, getComments, comments, isCommentsLoaded} = props;
   useEffect(() => {
     getFilmInfo(filmId);
     getSimilarFilms(filmId);
+    getComments(filmId);
   }, [filmId]);
   const history = useHistory();
   const [activeTab, setActiveTab] = useState(TabNames.OVERVIEW);
 
-  if (!isFilmDataLoaded || !isSimilarFilmsLoaded){
+  if (!isFilmDataLoaded || !isSimilarFilmsLoaded || !isCommentsLoaded){
     return (
       <LoadingScreen/>
     );
@@ -117,7 +119,7 @@ function Film(props) {
               <img src={filmData.poster} alt={filmData.title} width="218" height="327" />
             </div>
 
-            <Tabs film={filmData} activeTab={activeTab} changeActiveTab={(value)=>setActiveTab(value)}/>
+            <Tabs film={filmData} filmReviews={comments} activeTab={activeTab} changeActiveTab={(value)=>setActiveTab(value)}/>
           </div>
         </div>
       </section>
@@ -142,10 +144,13 @@ Film.propTypes = {
   }),
   getFilmInfo: PropTypes.func.isRequired,
   getSimilarFilms: PropTypes.func.isRequired,
+  getComments: PropTypes.func.isRequired,
   filmData: filmProp,
   similarFilms: PropTypes.arrayOf(filmProp).isRequired,
   isFilmDataLoaded: PropTypes.bool.isRequired,
   isSimilarFilmsLoaded: PropTypes.bool.isRequired,
+  isCommentsLoaded: PropTypes.bool.isRequired,
+  comments: reviewProp,
 };
 
 const mapStateToProps = (state) => ({
@@ -153,6 +158,8 @@ const mapStateToProps = (state) => ({
   isFilmDataLoaded: state.isFilmDataLoaded,
   similarFilms: state.similarFilms,
   isSimilarFilmsLoaded: state.isSimilarFilmsLoaded,
+  isCommentsLoaded: state.isCurrentFilmCommentsLoaded,
+  comments: state.currentFilmComments,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -161,6 +168,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   getSimilarFilms(id) {
     dispatch(fetchSimilarFilms(id));
+  },
+  getComments(id) {
+    dispatch(fetchComments(id));
   },
 });
 

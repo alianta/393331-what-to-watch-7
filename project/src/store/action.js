@@ -6,6 +6,7 @@ export const ActionType = {
   LOAD_SIMILAR_FILMS: 'loadSimilarFilms',
   LOAD_FILM_INFO: 'loadFilmInfo',
   LOAD_PROMO_FILM: 'loadPromoFilm',
+  LOAD_FILM_COMMENTS: 'loadFilmComments',
   LOAD_AUTHORIZATION_INFO: 'loadAuthorizationInfo',
   REDIRECT_TO_ROUTE: 'redirectToRoute',
 };
@@ -21,6 +22,10 @@ export const ActionCreator = {
   }),
   loadSimilarFilms: (films) => ({
     type: ActionType.LOAD_SIMILAR_FILMS,
+    payload: films,
+  }),
+  loadFilmComments:(films) => ({
+    type: ActionType.LOAD_FILM_COMMENTS,
     payload: films,
   }),
   loadFilmInfo: (film) => ({

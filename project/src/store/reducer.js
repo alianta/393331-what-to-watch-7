@@ -1,6 +1,6 @@
 import {ActionType} from './action';
 import { DEFAULT_GENRE } from '../const';
-import {adaptFilmToClient} from './adapter';
+import {adaptFilmToClient, adaptCommentToClient} from './adapter';
 import {AuthorizationStatus, PROMO_FILM_ID} from '../const';
 
 const initialState = {
@@ -9,12 +9,14 @@ const initialState = {
   similarFilms: [],
   promoFilm: {},
   currentFilm: {},
+  currentFilmComments: [],
   authorizationStatus: AuthorizationStatus.UNKNOWN,
   authorizationInfo: {},
   isDataLoaded: false,
   isFilmDataLoaded: false,
   isSimilarFilmsLoaded: false,
   isFilmOfDayLoaded: false,
+  isCurrentFilmCommentsLoaded: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -35,6 +37,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         similarFilms: action.payload.map((film) => adaptFilmToClient(film)),
         isSimilarFilmsLoaded: true,
+      };
+    case ActionType.LOAD_FILM_COMMENTS:
+      return {
+        ...state,
+        currentFilmComments: action.payload.map((comment) => adaptCommentToClient(comment)),
+        isCurrentFilmCommentsLoaded: true,
       };
     case ActionType.LOAD_PROMO_FILM:
       return {
