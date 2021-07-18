@@ -47,4 +47,4 @@ export const AWESOME_RATING = 'Awesome';
 export const PROMO_FILM_ID = -1;
 export const COMMENT_MAX_LENGTH = 400;
 export const COMMENT_MIN_LENGTH = 50;
-
+export const GENRE_LIST_MAX_COUNT = 9;
