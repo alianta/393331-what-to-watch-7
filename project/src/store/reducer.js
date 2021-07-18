@@ -1,14 +1,22 @@
 import {ActionType} from './action';
 import { DEFAULT_GENRE } from '../const';
-import {adaptFilmToClient} from './adapter';
-import {AuthorizationStatus} from '../const';
+import {adaptFilmToClient, adaptCommentToClient} from './adapter';
+import {AuthorizationStatus, PROMO_FILM_ID} from '../const';
 
 const initialState = {
   genre: DEFAULT_GENRE,
   films: [],
+  similarFilms: [],
   promoFilm: {},
+  currentFilm: {},
+  currentFilmComments: [],
   authorizationStatus: AuthorizationStatus.UNKNOWN,
   authorizationInfo: {},
+  isDataLoaded: false,
+  isFilmDataLoaded: false,
+  isSimilarFilmsLoaded: false,
+  isFilmOfDayLoaded: false,
+  isCurrentFilmCommentsLoaded: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -24,11 +32,34 @@ const reducer = (state = initialState, action) => {
         films: action.payload.map((film) => adaptFilmToClient(film)),
         isDataLoaded: true,
       };
+    case ActionType.LOAD_SIMILAR_FILMS:
+      return {
+        ...state,
+        similarFilms: action.payload.map((film) => adaptFilmToClient(film)),
+        isSimilarFilmsLoaded: true,
+      };
+    case ActionType.LOAD_FILM_COMMENTS:
+      return {
+        ...state,
+        currentFilmComments: action.payload.map((comment) => adaptCommentToClient(comment)),
+        isCurrentFilmCommentsLoaded: true,
+      };
     case ActionType.LOAD_PROMO_FILM:
       return {
         ...state,
-        promoFilm: adaptFilmToClient(action.payload),
+        promoFilm: adaptFilmToClient(
+          {
+            ...action.payload,
+            id: PROMO_FILM_ID,
+          }),
+        isFilmOfDayLoaded: true,
+      };
+    case ActionType.LOAD_FILM_INFO:
+      return {
+        ...state,
+        currentFilm: adaptFilmToClient(action.payload),
         isDataLoaded: true,
+        isFilmDataLoaded: true,
       };
     case ActionType.REQUIRED_AUTHORIZATION:
       return {

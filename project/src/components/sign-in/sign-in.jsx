@@ -1,4 +1,4 @@
-import React , {useRef} from 'react';
+import React , {useRef, useState} from 'react';
 import Footer from '../footer/footer';
 import Logo from '../logo/logo';
 import {connect} from 'react-redux';
@@ -10,15 +10,29 @@ import {login} from '../../store/api-actions';
 function SignIn({onSubmit}) {
   const loginRef = useRef();
   const passwordRef = useRef();
-
   const history = useHistory();
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = (evt) => {
+    const userPassword = passwordRef.current.value;
+    const userLogin = loginRef.current.value;
+    const emailValidateRegularExpression = /[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]+/;
+
     evt.preventDefault();
-    onSubmit({
-      login: loginRef.current.value,
-      password: passwordRef.current.value,
-    });
+    if(!userLogin){
+      setErrorMessage('Enter email, please!');
+    }else if(!emailValidateRegularExpression.test(userLogin)) {
+      setErrorMessage('Enter valid email, please!');
+    }else if(!userPassword){
+      setErrorMessage('Enter password, please!');
+    }else if(userPassword.match(/ /gi) && userPassword.match(/ /gi).length === userPassword.length){
+      setErrorMessage('Password can\'t contain only spaces');
+    }else {
+      onSubmit({
+        login: userLogin,
+        password: userPassword,
+      });
+    }
   };
 
   return (
@@ -34,6 +48,9 @@ function SignIn({onSubmit}) {
           className="sign-in__form"
           onSubmit={handleSubmit}
         >
+          <div className="sign-in__message">
+            <p>{errorMessage}</p>
+          </div>
           <div className="sign-in__fields">
             <div className="sign-in__field">
               <input

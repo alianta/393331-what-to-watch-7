@@ -1,21 +1,36 @@
-import React, {useState} from 'react';
-import { Link } from 'react-router-dom';
+import React, {useState, useEffect} from 'react';
+import { Link, useParams } from 'react-router-dom';
 import Footer from '../footer/footer';
 import Logo from '../logo/logo';
 import PropTypes from 'prop-types';
-import films from '../../mocks/films';
 import FilmList from '../film-list/film-list';
 import Tabs from '../tabs/tabs';
 import {useHistory} from 'react-router-dom';
 import { generatePath } from 'react-router';
-import { TabNames, SIMILAR_FILM_COUNT } from '../../const';
-
+import { TabNames, SIMILAR_FILM_COUNT, AuthorizationStatus} from '../../const';
+import {fetchFlmInfo, fetchSimilarFilms, fetchComments} from '../../store/api-actions';
+import {connect} from 'react-redux';
+import filmProp from './filmProp';
+import LoadingScreen from '../loading-screen/loading-screen';
+import UserBlock from '../user-block/user-block';
+import reviewProp from '../review/reviewProp';
 
 function Film(props) {
-  const filmId = parseInt(props.match.params.id,10);
-  const filmData = films.find((film) => (film.id === filmId));
+  const {id} = useParams();
+  const {getFilmInfo, filmData, isFilmDataLoaded, isSimilarFilmsLoaded, similarFilms, getSimilarFilms, getComments, comments, isCommentsLoaded, authorizationStatus} = props;
+  useEffect(() => {
+    getFilmInfo(id);
+    getSimilarFilms(id);
+    getComments(id);
+  }, [id]);
   const history = useHistory();
   const [activeTab, setActiveTab] = useState(TabNames.OVERVIEW);
+
+  if (!isFilmDataLoaded || !isSimilarFilmsLoaded || !isCommentsLoaded){
+    return (
+      <LoadingScreen/>
+    );
+  }
 
   return (
     <React.Fragment>
@@ -50,7 +65,7 @@ function Film(props) {
           </symbol>
         </svg>
       </div>
-      <section className="film-card film-card--full">
+      <section className="film-card film-card--full" style={{'backgroundClor':filmData.background}} >
         <div className="film-card__hero">
           <div className="film-card__bg">
             <img src={filmData.bigImage} alt={filmData.title} />
@@ -60,16 +75,7 @@ function Film(props) {
 
           <header className="page-header film-card__head">
             <Logo />
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-                </div>
-              </li>
-              <li className="user-block__item">
-                <Link to ="/#" className="user-block__link">Sign out</Link>
-              </li>
-            </ul>
+            <UserBlock/>
           </header>
 
           <div className="film-card__wrap">
@@ -101,7 +107,8 @@ function Film(props) {
                     )}
                   <span>My list</span>
                 </button>
-                <Link to={generatePath('/film/:id/review', {id: filmId})} className="btn film-card__button">Add review</Link>
+                {(authorizationStatus===AuthorizationStatus.AUTH)?
+                  <Link to={generatePath('/film/:id/review', {id: id})} className="btn film-card__button">Add review</Link>:''}
               </div>
             </div>
           </div>
@@ -113,7 +120,7 @@ function Film(props) {
               <img src={filmData.poster} alt={filmData.title} width="218" height="327" />
             </div>
 
-            <Tabs film={filmData} activeTab={activeTab} changeActiveTab={(value)=>setActiveTab(value)}/>
+            <Tabs film={filmData} filmReviews={comments} activeTab={activeTab} changeActiveTab={(value)=>setActiveTab(value)}/>
           </div>
         </div>
       </section>
@@ -121,7 +128,7 @@ function Film(props) {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          <FilmList films={films.filter((film) => filmData.genre===film.genre).slice(0,SIMILAR_FILM_COUNT)}></FilmList>
+          <FilmList films={similarFilms.filter((film) => filmData.genre===film.genre).slice(0,SIMILAR_FILM_COUNT)}></FilmList>
         </section>
 
         <Footer />
@@ -136,6 +143,39 @@ Film.propTypes = {
       id: PropTypes.string.isRequired,
     }),
   }),
+  getFilmInfo: PropTypes.func.isRequired,
+  getSimilarFilms: PropTypes.func.isRequired,
+  getComments: PropTypes.func.isRequired,
+  filmData: PropTypes.object.isRequired,
+  similarFilms: PropTypes.arrayOf(filmProp).isRequired,
+  isFilmDataLoaded: PropTypes.bool.isRequired,
+  isSimilarFilmsLoaded: PropTypes.bool.isRequired,
+  isCommentsLoaded: PropTypes.bool.isRequired,
+  comments: PropTypes.arrayOf(reviewProp).isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
-export default Film;
+const mapStateToProps = (state) => ({
+  filmData: state.currentFilm,
+  isFilmDataLoaded: state.isFilmDataLoaded,
+  similarFilms: state.similarFilms,
+  isSimilarFilmsLoaded: state.isSimilarFilmsLoaded,
+  isCommentsLoaded: state.isCurrentFilmCommentsLoaded,
+  comments: state.currentFilmComments,
+  authorizationStatus: state.authorizationStatus,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getFilmInfo(id) {
+    dispatch(fetchFlmInfo(id));
+  },
+  getSimilarFilms(id) {
+    dispatch(fetchSimilarFilms(id));
+  },
+  getComments(id) {
+    dispatch(fetchComments(id));
+  },
+});
+
+export {Film};
+export default connect(mapStateToProps, mapDispatchToProps)(Film);

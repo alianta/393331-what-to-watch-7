@@ -1,5 +1,6 @@
 import React from 'react';
 import filmProp from '../film/filmProp';
+import {RATING_SCORE_PRECISION} from '../../const';
 
 function Overview(props) {
   const {film} = props;
@@ -7,7 +8,7 @@ function Overview(props) {
   return (
     <React.Fragment>
       <div className="film-rating">
-        <div className="film-rating__score">{film.ratingScore}</div>
+        <div className="film-rating__score">{film.ratingScore.toFixed(RATING_SCORE_PRECISION)}</div>
         <p className="film-rating__meta">
           <span className="film-rating__level">{film.ratingDescription}</span>
           <span className="film-rating__count">{film.ratingCount} ratings</span>

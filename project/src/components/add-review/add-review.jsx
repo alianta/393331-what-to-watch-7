@@ -1,17 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Logo from '../logo/logo';
 import PropTypes from 'prop-types';
-import films from '../../mocks/films';
 import AddReviewForm from '../add-review-form/add-review-form';
 import { generatePath } from 'react-router';
+import UserBlock from '../user-block/user-block';
+import {connect} from 'react-redux';
+import filmProp from '../film/filmProp';
+import {addComment} from '../../store/api-actions';
 
 function AddReview (props) {
-  const filmId = parseInt(props.match.params.id,10);
-  const filmData = films.find((film) => (film.id === filmId));
+  const {id} = useParams();
+  const {filmData, onSubmit} = props;
 
   return (
-    <section className="film-card film-card--full">
+    <section className="film-card film-card--full" style={{'backgroundColor':filmData.background}}>
       <div className="film-card__header">
         <div className="film-card__bg">
           <img src={filmData.bigImage} alt={filmData.title} />
@@ -25,7 +28,7 @@ function AddReview (props) {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to={generatePath('/film/:id/', {id: filmId})} className="breadcrumbs__link">{filmData.title}</Link>
+                <Link to={generatePath('/film/:id/', {id: id})} className="breadcrumbs__link">{filmData.title}</Link>
               </li>
               <li className="breadcrumbs__item">
                 <Link to="/#" className="breadcrumbs__link">Add review</Link>
@@ -33,16 +36,7 @@ function AddReview (props) {
             </ul>
           </nav>
 
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <Link to="/#" className="user-block__link">Sign out</Link>
-            </li>
-          </ul>
+          <UserBlock/>
         </header>
 
         <div className="film-card__poster film-card__poster--small">
@@ -51,7 +45,15 @@ function AddReview (props) {
       </div>
 
       <div className="add-review">
-        <AddReviewForm film={filmData} onReview={()=>{}}></AddReviewForm>
+        <AddReviewForm film={filmData} onReview={(rating, review)=>{
+          onSubmit({
+            rating: +rating,
+            comment: review,
+            filmId: id,
+          });
+        }}
+        >
+        </AddReviewForm>
       </div>
     </section>
   );
@@ -63,6 +65,19 @@ AddReview.propTypes = {
       id: PropTypes.string.isRequired,
     }),
   }),
+  filmData: filmProp,
+  onSubmit: PropTypes.func.isRequired,
 };
 
-export default AddReview;
+const mapStateToProps = (state) => ({
+  filmData: state.currentFilm,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onSubmit(comment) {
+    dispatch(addComment(comment));
+  },
+});
+
+export {AddReview};
+export default connect(mapStateToProps, mapDispatchToProps)(AddReview);

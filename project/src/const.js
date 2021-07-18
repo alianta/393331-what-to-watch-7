@@ -5,6 +5,7 @@ export const AppRoute = {
   FILM: '/film/:id?',
   REVIEW: '/film/:id?/review',
   PLAYER: '/player/:id?',
+  NOT_FOUND: '/not-found',
 };
 
 export const TabNames ={
@@ -21,9 +22,13 @@ export const AuthorizationStatus = {
 
 export const APIRoute = {
   FILMS: '/films',
+  FILM_INFO: '/films/:id',
+  SIMILAR_FILMS: '/films/:id/similar',
+  FILM_COMMENTS: '/comments/:id',
   PROMO: '/promo',
   LOGIN: '/login',
   LOGOUT: '/logout',
+  ADD_COMMENT: '/comments/:filmId',
 };
 
 export const SIMILAR_FILM_COUNT = 4;
@@ -39,3 +44,8 @@ export const NORMAL_RATING = 'Normal';
 export const GOOD_RATING = 'Good';
 export const VERY_GOOD_RATING = 'Very good';
 export const AWESOME_RATING = 'Awesome';
+export const PROMO_FILM_ID = -1;
+export const COMMENT_MAX_LENGTH = 400;
+export const COMMENT_MIN_LENGTH = 50;
+export const GENRE_LIST_MAX_COUNT = 9;
+export const RATING_SCORE_PRECISION = 1;

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import filmProp from '../film/filmProp';
 import { generatePath } from 'react-router';
 import VideoPlayer from '../video-player/video-player';
@@ -7,12 +7,14 @@ import VideoPlayer from '../video-player/video-player';
 function FilmCard(props) {
   const {film} = props;
   const [isPlaying, setIsPlaying] = useState(false);
+  const history = useHistory();
 
   return (
     <article
       className="small-film-card catalog__films-card"
       onMouseEnter={()=>setIsPlaying(true)}
       onMouseLeave={()=>setIsPlaying(false)}
+      onClick={()=>history.push(generatePath('/film/:id/', {id: film.id}))}
     >
       <div className="small-film-card__image">
         {!isPlaying ? <img src={film.previewImage} alt={film.title} width="280" height="175" /> : <VideoPlayer poster={film.previewImage} videoFile={film.previewVideo} />}
