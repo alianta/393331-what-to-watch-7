@@ -1,30 +1,33 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import filmProp from '../film/filmProp';
+import {COMMENT_MIN_LENGTH, COMMENT_MAX_LENGTH} from '../../const';
 
 const RATING_STAR_COUNT = 10;
+function getSubmitButtonStatus (ratingCount, reviewLength){
+  if(ratingCount>0 && reviewLength>=COMMENT_MIN_LENGTH && reviewLength <= COMMENT_MAX_LENGTH) {
+    return false;
+  } else {
+    return true;
+  }
+}
 
 function AddReviewForm (props) {
   const {onReview, film} = props;
   const [review, setReview] = useState('');
   const [rating, setRating] = useState(0);
-  const [errorMeesge, setErrorMeesge] = useState('');
+  const [isSubmitButtonDisabled, setSubmitButtonDisabled] = useState(true);
 
   return (
     <form
       className="add-review__form"
       onSubmit={(evt) => {
         evt.preventDefault();
-        if(rating===0){
-          setErrorMeesge('Choose rating please!');
-        }else if(review===''){
-          setErrorMeesge('Write comment Please!');
-        }else {
+        if(!isSubmitButtonDisabled){
           onReview(rating, review);
         }
       }}
     >
-      {(errorMeesge!=='')?<h3>{errorMeesge}</h3>:''}
       <div className="rating">
         <div className="rating__stars">
           {
@@ -41,6 +44,7 @@ function AddReviewForm (props) {
                     value={`${currentId}`}
                     onChange={({target}) => {
                       setRating(target.value);
+                      setSubmitButtonDisabled(getSubmitButtonStatus(target.value, review.length));
                     }}
                   />
                   <label className="rating__label" htmlFor={`star-${currentId}`}>Rating ${currentId}</label>
@@ -59,11 +63,13 @@ function AddReviewForm (props) {
           id="review-text"
           placeholder="Review text"
           onChange={(element) => {
-            setReview(element.target.value);}}
+            setReview(element.target.value);
+            setSubmitButtonDisabled(getSubmitButtonStatus(rating, element.target.value.length));
+          }}
         >
         </textarea>
         <div className="add-review__submit">
-          <button className="add-review__btn" type="submit">Post</button>
+          <button className="add-review__btn" type="submit" disabled={isSubmitButtonDisabled}>Post</button>
         </div>
       </div>
     </form>

@@ -45,3 +45,6 @@ export const GOOD_RATING = 'Good';
 export const VERY_GOOD_RATING = 'Very good';
 export const AWESOME_RATING = 'Awesome';
 export const PROMO_FILM_ID = -1;
+export const COMMENT_MAX_LENGTH = 400;
+export const COMMENT_MIN_LENGTH = 50;
+
