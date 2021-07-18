@@ -45,7 +45,7 @@ Tabs.propTypes = {
   film: filmProp,
   activeTab: PropTypes.string.isRequired,
   changeActiveTab: PropTypes.func.isRequired,
-  filmReviews: reviewProp,
+  filmReviews: PropTypes.arrayOf(reviewProp).isRequired,
 };
 
 export default Tabs;

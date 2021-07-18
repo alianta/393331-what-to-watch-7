@@ -146,12 +146,12 @@ Film.propTypes = {
   getFilmInfo: PropTypes.func.isRequired,
   getSimilarFilms: PropTypes.func.isRequired,
   getComments: PropTypes.func.isRequired,
-  filmData: filmProp,
+  filmData: PropTypes.object.isRequired,
   similarFilms: PropTypes.arrayOf(filmProp).isRequired,
   isFilmDataLoaded: PropTypes.bool.isRequired,
   isSimilarFilmsLoaded: PropTypes.bool.isRequired,
   isCommentsLoaded: PropTypes.bool.isRequired,
-  comments: reviewProp,
+  comments: PropTypes.arrayOf(reviewProp).isRequired,
   authorizationStatus: PropTypes.string.isRequired,
 };
 
