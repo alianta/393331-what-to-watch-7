@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Logo from '../logo/logo';
 import PropTypes from 'prop-types';
 import AddReviewForm from '../add-review-form/add-review-form';
@@ -10,7 +10,7 @@ import filmProp from '../film/filmProp';
 import {addComment} from '../../store/api-actions';
 
 function AddReview (props) {
-  const filmId = parseInt(props.match.params.id,10);
+  const {id} = useParams();
   const {filmData, onSubmit} = props;
 
   return (
@@ -28,7 +28,7 @@ function AddReview (props) {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to={generatePath('/film/:id/', {id: filmId})} className="breadcrumbs__link">{filmData.title}</Link>
+                <Link to={generatePath('/film/:id/', {id: id})} className="breadcrumbs__link">{filmData.title}</Link>
               </li>
               <li className="breadcrumbs__item">
                 <Link to="/#" className="breadcrumbs__link">Add review</Link>
@@ -49,7 +49,7 @@ function AddReview (props) {
           onSubmit({
             rating: +rating,
             comment: review,
-            filmId: filmId,
+            filmId: id,
           });
         }}
         >

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Footer from '../footer/footer';
 import Logo from '../logo/logo';
 import PropTypes from 'prop-types';
@@ -16,13 +16,13 @@ import UserBlock from '../user-block/user-block';
 import reviewProp from '../review/reviewProp';
 
 function Film(props) {
-  const filmId = parseInt(props.match.params.id,10);
+  const {id} = useParams();
   const {getFilmInfo, filmData, isFilmDataLoaded, isSimilarFilmsLoaded, similarFilms, getSimilarFilms, getComments, comments, isCommentsLoaded, authorizationStatus} = props;
   useEffect(() => {
-    getFilmInfo(filmId);
-    getSimilarFilms(filmId);
-    getComments(filmId);
-  }, [filmId]);
+    getFilmInfo(id);
+    getSimilarFilms(id);
+    getComments(id);
+  }, [id]);
   const history = useHistory();
   const [activeTab, setActiveTab] = useState(TabNames.OVERVIEW);
 
@@ -108,7 +108,7 @@ function Film(props) {
                   <span>My list</span>
                 </button>
                 {(authorizationStatus===AuthorizationStatus.AUTH)?
-                  <Link to={generatePath('/film/:id/review', {id: filmId})} className="btn film-card__button">Add review</Link>:''}
+                  <Link to={generatePath('/film/:id/review', {id: id})} className="btn film-card__button">Add review</Link>:''}
               </div>
             </div>
           </div>
