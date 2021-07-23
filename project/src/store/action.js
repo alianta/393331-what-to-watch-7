@@ -1,3 +1,5 @@
+import {createAction} from '@reduxjs/toolkit';
+
 export const ActionType = {
   CHANGE_GENRE: 'changeGenre',
   REQUIRED_AUTHORIZATION: 'requiredAuthorization',
@@ -10,51 +12,41 @@ export const ActionType = {
   LOAD_AUTHORIZATION_INFO: 'loadAuthorizationInfo',
   REDIRECT_TO_ROUTE: 'redirectToRoute',
 };
-export const changeGenre = (genre) => ({
-  type: ActionType.CHANGE_GENRE,
+
+export const changeGenre = createAction((genre) => ({
   payload: genre,
-});
+}));
 
-export const loadFilms = (films) => ({
-  type: ActionType.LOAD_FILMS,
+export const loadFilms =  createAction(ActionType.LOAD_FILMS, (films) => ({
   payload: films,
-});
+}));
 
-export const loadSimilarFilms = (films) => ({
-  type: ActionType.LOAD_SIMILAR_FILMS,
+export const loadSimilarFilms = createAction(ActionType.LOAD_SIMILAR_FILMS, (films) => ({
   payload: films,
-});
+}));
 
-export const loadFilmComments = (films) => ({
-  type: ActionType.LOAD_FILM_COMMENTS,
+export const loadFilmComments = createAction(ActionType.LOAD_FILM_COMMENTS, (films) => ({
   payload: films,
-});
+}));
 
-export const loadFilmInfo = (film) => ({
-  type: ActionType.LOAD_FILM_INFO,
+export const loadFilmInfo = createAction(ActionType.LOAD_FILM_INFO, (film) => ({
   payload: film,
-});
+}));
 
-export const loadAuthorizationInfo = (authorizationInfo) => ({
-  type: ActionType.LOAD_AUTHORIZATION_INFO,
+export const loadAuthorizationInfo = createAction(ActionType.LOAD_AUTHORIZATION_INFO, (authorizationInfo) => ({
   payload: authorizationInfo,
-});
+}));
 
-export const loadPromoFilm = (film) => ({
-  type: ActionType.LOAD_PROMO_FILM,
+export const loadPromoFilm = createAction(ActionType.LOAD_PROMO_FILM, (film) => ({
   payload: film,
-});
+}));
 
-export const requireAuthorization = (status) => ({
-  type: ActionType.REQUIRED_AUTHORIZATION,
+export const requireAuthorization = createAction(ActionType.REQUIRED_AUTHORIZATION, (status)=> ({
   payload: status,
-});
+}));
 
-export const logout = () => ({
-  type: ActionType.LOGOUT,
-});
+export const logout = createAction(ActionType.LOGOUT);
 
-export const redirectToRoute = (url) => ({
-  type: ActionType.REDIRECT_TO_ROUTE,
+export const redirectToRoute = createAction(ActionType.REDIRECT_TO_ROUTE, (url) => ({
   payload: url,
-});
+}));
