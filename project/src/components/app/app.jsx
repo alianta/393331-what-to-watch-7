@@ -63,11 +63,11 @@ App.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  authorizationStatus: state.authorizationStatus,
-  isDataLoaded: state.isDataLoaded,
-  isFilmOfDayLoaded: state.isFilmOfDayLoaded,
-  films: state.films,
+const mapStateToProps = ({USER, FILM}) => ({
+  authorizationStatus: USER.authorizationStatus,
+  isDataLoaded: FILM.isDataLoaded,
+  isFilmOfDayLoaded: FILM.isFilmOfDayLoaded,
+  films: FILM.films,
 });
 
 export {App};

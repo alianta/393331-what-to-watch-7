@@ -1,7 +1,6 @@
-import {ActionType} from './action';
-import { DEFAULT_GENRE } from '../const';
-import {adaptFilmToClient, adaptCommentToClient} from './adapter';
-import {AuthorizationStatus, PROMO_FILM_ID} from '../const';
+import {ActionType} from '../action';
+import { DEFAULT_GENRE, PROMO_FILM_ID } from '../../const';
+import {adaptFilmToClient} from '../adapter';
 
 const initialState = {
   genre: DEFAULT_GENRE,
@@ -9,17 +8,13 @@ const initialState = {
   similarFilms: [],
   promoFilm: {},
   currentFilm: {},
-  currentFilmComments: [],
-  authorizationStatus: AuthorizationStatus.UNKNOWN,
-  authorizationInfo: {},
   isDataLoaded: false,
   isFilmDataLoaded: false,
   isSimilarFilmsLoaded: false,
   isFilmOfDayLoaded: false,
-  isCurrentFilmCommentsLoaded: false,
 };
 
-const reducer = (state = initialState, action) => {
+const filmData = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.CHANGE_GENRE:
       return {
@@ -38,12 +33,6 @@ const reducer = (state = initialState, action) => {
         similarFilms: action.payload.map((film) => adaptFilmToClient(film)),
         isSimilarFilmsLoaded: true,
       };
-    case ActionType.LOAD_FILM_COMMENTS:
-      return {
-        ...state,
-        currentFilmComments: action.payload.map((comment) => adaptCommentToClient(comment)),
-        isCurrentFilmCommentsLoaded: true,
-      };
     case ActionType.LOAD_PROMO_FILM:
       return {
         ...state,
@@ -61,24 +50,9 @@ const reducer = (state = initialState, action) => {
         isDataLoaded: true,
         isFilmDataLoaded: true,
       };
-    case ActionType.REQUIRED_AUTHORIZATION:
-      return {
-        ...state,
-        authorizationStatus: action.payload,
-      };
-    case ActionType.LOGOUT:
-      return {
-        ...state,
-        authorizationStatus: AuthorizationStatus.NO_AUTH,
-      };
-    case ActionType.LOAD_AUTHORIZATION_INFO:
-      return {
-        ...state,
-        authorizationInfo: action.payload,
-      };
     default:
       return state;
   }
 };
 
-export {reducer};
+export {filmData};

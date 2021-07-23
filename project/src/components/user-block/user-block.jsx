@@ -43,9 +43,9 @@ UserBlock.propTypes = {
   signOut: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  authorizationStatus: state.authorizationStatus,
-  avatar: state.authorizationInfo.avatar_url??'',
+const mapStateToProps = ({USER}) => ({
+  authorizationStatus: USER.authorizationStatus,
+  avatar: USER.authorizationInfo.avatar_url??'',
 });
 
 const mapDispatchToProps = (dispatch) => ({

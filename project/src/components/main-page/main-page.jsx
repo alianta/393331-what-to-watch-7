@@ -124,11 +124,11 @@ MainPage.propTypes = {
   genreList: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  genre: state.genre,
-  films: getFilmsFromGenre(state.films,state.genre),
-  filmOfDay: state.promoFilm,
-  genreList: getGenreList(state.films),
+const mapStateToProps = ({FILM}) => ({
+  genre: FILM.genre,
+  films: getFilmsFromGenre(FILM.films,FILM.genre),
+  filmOfDay: FILM.promoFilm,
+  genreList: getGenreList(FILM.films),
 });
 
 const mapDispatchToProps = (dispatch) => ({

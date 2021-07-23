@@ -155,14 +155,14 @@ Film.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  filmData: state.currentFilm,
-  isFilmDataLoaded: state.isFilmDataLoaded,
-  similarFilms: state.similarFilms,
-  isSimilarFilmsLoaded: state.isSimilarFilmsLoaded,
-  isCommentsLoaded: state.isCurrentFilmCommentsLoaded,
-  comments: state.currentFilmComments,
-  authorizationStatus: state.authorizationStatus,
+const mapStateToProps = ({FILM, USER, REVIEW}) => ({
+  filmData: FILM.currentFilm,
+  isFilmDataLoaded: FILM.isFilmDataLoaded,
+  similarFilms: FILM.similarFilms,
+  isSimilarFilmsLoaded: FILM.isSimilarFilmsLoaded,
+  isCommentsLoaded: REVIEW.isCurrentFilmCommentsLoaded,
+  comments: REVIEW.currentFilmComments,
+  authorizationStatus: USER.authorizationStatus,
 });
 
 const mapDispatchToProps = (dispatch) => ({
