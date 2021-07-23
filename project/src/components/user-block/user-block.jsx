@@ -5,6 +5,7 @@ import {AppRoute, AuthorizationStatus} from '../../const';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {logout} from '../../store/api-actions';
+import {getAuthorizationStatus, getAvatar} from '../../store/user/selectors';
 
 function UserBlock (props) {
   const history = useHistory();
@@ -43,9 +44,9 @@ UserBlock.propTypes = {
   signOut: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({USER}) => ({
-  authorizationStatus: USER.authorizationStatus,
-  avatar: USER.authorizationInfo.avatar_url??'',
+const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state),
+  avatar: getAvatar(state).avatar_url??'',
 });
 
 const mapDispatchToProps = (dispatch) => ({

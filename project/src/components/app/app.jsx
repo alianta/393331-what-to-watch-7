@@ -15,6 +15,8 @@ import {connect} from 'react-redux';
 import {isCheckedAuth} from '../../utils';
 import PrivateRoute from '../private-route/private-route';
 import browserHistory from '../../browserHistory';
+import {getAuthorizationStatus} from '../../store/user/selectors';
+import {getLoadedDataStatus, getFilmOfDayLoadedStatus, getFilms} from '../../store/film-data/selectors';
 
 function App(props) {
   const {films, isDataLoaded, isFilmOfDayLoaded, authorizationStatus} = props;
@@ -63,11 +65,11 @@ App.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = ({USER, FILM}) => ({
-  authorizationStatus: USER.authorizationStatus,
-  isDataLoaded: FILM.isDataLoaded,
-  isFilmOfDayLoaded: FILM.isFilmOfDayLoaded,
-  films: FILM.films,
+const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state),
+  isDataLoaded: getLoadedDataStatus(state),
+  isFilmOfDayLoaded: getFilmOfDayLoadedStatus(state),
+  films: getFilms(state),
 });
 
 export {App};

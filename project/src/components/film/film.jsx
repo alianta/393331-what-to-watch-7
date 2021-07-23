@@ -14,6 +14,9 @@ import filmProp from './filmProp';
 import LoadingScreen from '../loading-screen/loading-screen';
 import UserBlock from '../user-block/user-block';
 import reviewProp from '../review/reviewProp';
+import {getAuthorizationStatus} from '../../store/user/selectors';
+import {getCurrentFilm, getFilmLoadedStatus, getSimilarFilms as getSimilarFilmsData, getSimilarFilmLoadedStatus} from '../../store/film-data/selectors';
+import {getCommentsLoadedStatus, getComments as getCommentsData} from '../../store/review-data/selectors';
 
 function Film(props) {
   const {id} = useParams();
@@ -155,14 +158,14 @@ Film.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = ({FILM, USER, REVIEW}) => ({
-  filmData: FILM.currentFilm,
-  isFilmDataLoaded: FILM.isFilmDataLoaded,
-  similarFilms: FILM.similarFilms,
-  isSimilarFilmsLoaded: FILM.isSimilarFilmsLoaded,
-  isCommentsLoaded: REVIEW.isCurrentFilmCommentsLoaded,
-  comments: REVIEW.currentFilmComments,
-  authorizationStatus: USER.authorizationStatus,
+const mapStateToProps = (state) => ({
+  filmData: getCurrentFilm(state),
+  isFilmDataLoaded: getFilmLoadedStatus(state),
+  similarFilms: getSimilarFilmsData(state),
+  isSimilarFilmsLoaded: getSimilarFilmLoadedStatus(state),
+  isCommentsLoaded: getCommentsLoadedStatus(state),
+  comments: getCommentsData(state),
+  authorizationStatus:getAuthorizationStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
