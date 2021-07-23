@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../store/action';
+import {changeGenre} from '../../store/action';
 import Footer from '../footer/footer';
 import Logo from '../logo/logo';
 
@@ -133,7 +133,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onGenreChange(genre) {
-    dispatch(ActionCreator.changeGenre(genre));
+    dispatch(changeGenre(genre));
   },
 });
 

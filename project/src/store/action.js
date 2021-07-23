@@ -10,45 +10,51 @@ export const ActionType = {
   LOAD_AUTHORIZATION_INFO: 'loadAuthorizationInfo',
   REDIRECT_TO_ROUTE: 'redirectToRoute',
 };
+export const changeGenre = (genre) => ({
+  type: ActionType.CHANGE_GENRE,
+  payload: genre,
+});
 
-export const ActionCreator = {
-  changeGenre: (genre) => ({
-    type: ActionType.CHANGE_GENRE,
-    payload: genre,
-  }),
-  loadFilms: (films) => ({
-    type: ActionType.LOAD_FILMS,
-    payload: films,
-  }),
-  loadSimilarFilms: (films) => ({
-    type: ActionType.LOAD_SIMILAR_FILMS,
-    payload: films,
-  }),
-  loadFilmComments:(films) => ({
-    type: ActionType.LOAD_FILM_COMMENTS,
-    payload: films,
-  }),
-  loadFilmInfo: (film) => ({
-    type: ActionType.LOAD_FILM_INFO,
-    payload: film,
-  }),
-  loadAuthorizationInfo: (authorizationInfo) => ({
-    type: ActionType.LOAD_AUTHORIZATION_INFO,
-    payload: authorizationInfo,
-  }),
-  loadPromoFilm: (film) => ({
-    type: ActionType.LOAD_PROMO_FILM,
-    payload: film,
-  }),
-  requireAuthorization: (status) => ({
-    type: ActionType.REQUIRED_AUTHORIZATION,
-    payload: status,
-  }),
-  logout: () => ({
-    type: ActionType.LOGOUT,
-  }),
-  redirectToRoute: (url) => ({
-    type: ActionType.REDIRECT_TO_ROUTE,
-    payload: url,
-  }),
-};
+export const loadFilms = (films) => ({
+  type: ActionType.LOAD_FILMS,
+  payload: films,
+});
+
+export const loadSimilarFilms = (films) => ({
+  type: ActionType.LOAD_SIMILAR_FILMS,
+  payload: films,
+});
+
+export const loadFilmComments = (films) => ({
+  type: ActionType.LOAD_FILM_COMMENTS,
+  payload: films,
+});
+
+export const loadFilmInfo = (film) => ({
+  type: ActionType.LOAD_FILM_INFO,
+  payload: film,
+});
+
+export const loadAuthorizationInfo = (authorizationInfo) => ({
+  type: ActionType.LOAD_AUTHORIZATION_INFO,
+  payload: authorizationInfo,
+});
+
+export const loadPromoFilm = (film) => ({
+  type: ActionType.LOAD_PROMO_FILM,
+  payload: film,
+});
+
+export const requireAuthorization = (status) => ({
+  type: ActionType.REQUIRED_AUTHORIZATION,
+  payload: status,
+});
+
+export const logout = () => ({
+  type: ActionType.LOGOUT,
+});
+
+export const redirectToRoute = (url) => ({
+  type: ActionType.REDIRECT_TO_ROUTE,
+  payload: url,
+});
