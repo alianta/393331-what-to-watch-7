@@ -1,21 +1,29 @@
 import React, {useState} from 'react';
-import {connect} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {changeGenre} from '../../store/action';
 import Footer from '../footer/footer';
 import Logo from '../logo/logo';
-
-import PropTypes from 'prop-types';
-import filmProp from '../film/filmProp';
 import {useHistory} from 'react-router-dom';
 import GenreList from '../genre-list/genre-list';
-import { getGenreList, getFilmsFromGenre } from '../../utils';
+import {getGenreList, getFilmsFromGenre } from '../../utils';
 import FilmList from '../film-list/film-list';
 import ShowMoreButton from '../show-more-button/show-more-button';
 import { FILMS_LIST_MAX_COUNT} from '../../const';
 import UserBlock from '../user-block/user-block';
+import {getFilms, getPromoFilm, getGenre} from '../../store/film-data/selectors';
 
 function MainPage(props) {
-  const {films, filmOfDay, genre, genreList, onGenreChange} = props;
+  const allFilms = useSelector(getFilms);
+  const genre = useSelector(getGenre);
+  const films = getFilmsFromGenre(allFilms,genre);
+  const filmOfDay = useSelector(getPromoFilm);
+  const genreList = getGenreList(allFilms);
+
+  const dispatch = useDispatch();
+  const onGenreChange= (newGenre) => {
+    dispatch(changeGenre(newGenre));
+  };
+
   const history = useHistory();
   const [showFilmCount, setShowFilmCount] = useState(FILMS_LIST_MAX_COUNT);
   const addShowFilms = ()=> {
@@ -116,26 +124,4 @@ function MainPage(props) {
   );
 }
 
-MainPage.propTypes = {
-  films: PropTypes.arrayOf(filmProp).isRequired,
-  filmOfDay: filmProp,
-  genre: PropTypes.string.isRequired,
-  onGenreChange: PropTypes.func.isRequired,
-  genreList: PropTypes.array.isRequired,
-};
-
-const mapStateToProps = ({FILM}) => ({
-  genre: FILM.genre,
-  films: getFilmsFromGenre(FILM.films,FILM.genre),
-  filmOfDay: FILM.promoFilm,
-  genreList: getGenreList(FILM.films),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onGenreChange(genre) {
-    dispatch(changeGenre(genre));
-  },
-});
-
-export {MainPage};
-export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
+export default MainPage;

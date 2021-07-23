@@ -8,18 +8,19 @@ import Film from '../film/film';
 import AddReview from '../add-review/add-review';
 import Player from '../player/player';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
-import PropTypes from 'prop-types';
-import filmProp from '../film/filmProp';
 import LoadingScreen from '../loading-screen/loading-screen';
-import {connect} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {isCheckedAuth} from '../../utils';
 import PrivateRoute from '../private-route/private-route';
 import browserHistory from '../../browserHistory';
 import {getAuthorizationStatus} from '../../store/user/selectors';
 import {getLoadedDataStatus, getFilmOfDayLoadedStatus, getFilms} from '../../store/film-data/selectors';
 
-function App(props) {
-  const {films, isDataLoaded, isFilmOfDayLoaded, authorizationStatus} = props;
+function App() {
+  const authorizationStatus = useSelector(getAuthorizationStatus);
+  const isDataLoaded = useSelector(getLoadedDataStatus);
+  const isFilmOfDayLoaded = useSelector(getFilmOfDayLoadedStatus);
+  const films = useSelector(getFilms);
 
   if (isCheckedAuth(authorizationStatus)||!isDataLoaded ||!isFilmOfDayLoaded) {
     return (
@@ -58,19 +59,4 @@ function App(props) {
   );
 }
 
-App.propTypes = {
-  films: PropTypes.arrayOf(filmProp).isRequired,
-  isDataLoaded: PropTypes.bool.isRequired,
-  isFilmOfDayLoaded: PropTypes.bool.isRequired,
-  authorizationStatus: PropTypes.string.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  authorizationStatus: getAuthorizationStatus(state),
-  isDataLoaded: getLoadedDataStatus(state),
-  isFilmOfDayLoaded: getFilmOfDayLoadedStatus(state),
-  films: getFilms(state),
-});
-
-export {App};
-export default connect(mapStateToProps, null)(App);
+export default App;

@@ -5,5 +5,7 @@ export const getFilmLoadedStatus = (state) => state[NameSpace.FILM].isFilmDataLo
 export const getSimilarFilmLoadedStatus = (state) => state[NameSpace.FILM].isSimilarFilmsLoaded;
 export const getFilmOfDayLoadedStatus = (state) => state[NameSpace.FILM].isFilmOfDayLoaded;
 export const getCurrentFilm = (state) => state[NameSpace.FILM].currentFilm;
+export const getPromoFilm = (state) => state[NameSpace.FILM].promoFilm;
 export const getFilms = (state) => state[NameSpace.FILM].films;
 export const getSimilarFilms = (state) => state[NameSpace.FILM].similarFilms;
+export const getGenre = (state) => state[NameSpace.FILM].genre;
