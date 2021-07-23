@@ -1,6 +1,7 @@
-import {ActionType} from '../action';
 import { DEFAULT_GENRE, PROMO_FILM_ID } from '../../const';
 import {adaptFilmToClient} from '../adapter';
+import {createReducer} from '@reduxjs/toolkit';
+import {loadFilmInfo, loadPromoFilm, loadSimilarFilms, loadFilms, changeGenre} from '../action';
 
 const initialState = {
   genre: DEFAULT_GENRE,
@@ -14,45 +15,32 @@ const initialState = {
   isFilmOfDayLoaded: false,
 };
 
-const filmData = (state = initialState, action) => {
-  switch (action.type) {
-    case ActionType.CHANGE_GENRE:
-      return {
-        ...state,
-        genre: action.payload,
-      };
-    case ActionType.LOAD_FILMS:
-      return {
-        ...state,
-        films: action.payload.map((film) => adaptFilmToClient(film)),
-        isDataLoaded: true,
-      };
-    case ActionType.LOAD_SIMILAR_FILMS:
-      return {
-        ...state,
-        similarFilms: action.payload.map((film) => adaptFilmToClient(film)),
-        isSimilarFilmsLoaded: true,
-      };
-    case ActionType.LOAD_PROMO_FILM:
-      return {
-        ...state,
-        promoFilm: adaptFilmToClient(
-          {
-            ...action.payload,
-            id: PROMO_FILM_ID,
-          }),
-        isFilmOfDayLoaded: true,
-      };
-    case ActionType.LOAD_FILM_INFO:
-      return {
-        ...state,
-        currentFilm: adaptFilmToClient(action.payload),
-        isDataLoaded: true,
-        isFilmDataLoaded: true,
-      };
-    default:
-      return state;
-  }
-};
+const filmData = createReducer(initialState, (builder) => {
+  builder
+    .addCase(loadFilmInfo, (state, action) => {
+      state.currentFilm = adaptFilmToClient(action.payload);
+      state.isDataLoaded = true;
+      state.isFilmDataLoaded = true;
+    })
+    .addCase(loadPromoFilm, (state, action) => {
+      state.promoFilm = adaptFilmToClient(
+        {
+          ...action.payload,
+          id: PROMO_FILM_ID,
+        });
+      state.isFilmOfDayLoaded = true;
+    })
+    .addCase(loadSimilarFilms, (state, action) => {
+      state.similarFilms = action.payload.map((film) => adaptFilmToClient(film));
+      state.isSimilarFilmsLoaded = true;
+    })
+    .addCase(loadFilms, (state, action) => {
+      state.films =  action.payload.map((film) => adaptFilmToClient(film));
+      state.isDataLoaded =  true;
+    })
+    .addCase(changeGenre, (state, action) => {
+      state.genre =  action.payload;
+    });
+});
 
 export {filmData};
