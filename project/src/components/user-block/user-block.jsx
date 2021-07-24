@@ -17,7 +17,7 @@ function UserBlock (props) {
 
   return (
     <ul className="user-block">
-      {(authorizationStatus===AuthorizationStatus.AUTH)?
+      {(authorizationStatus === AuthorizationStatus.AUTH)?
         <li className="user-block__item">
           <div className="user-block__avatar">
             <img src={avatar} alt="User avatar" width="63" height="63" onClick={() => history.push(AppRoute.MY_LIST)}/>
@@ -25,7 +25,7 @@ function UserBlock (props) {
         </li>:
         ''}
       <li className="user-block__item">
-        {(authorizationStatus===AuthorizationStatus.AUTH)?
+        {(authorizationStatus === AuthorizationStatus.AUTH)?
           <Link
             className="user-block__link"
             onClick={(evt) => {

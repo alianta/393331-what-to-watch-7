@@ -126,7 +126,7 @@ function Film() {
                     )}
                   <span>My list</span>
                 </button>
-                {(authorizationStatus===AuthorizationStatus.AUTH)?
+                {(authorizationStatus === AuthorizationStatus.AUTH)?
                   <Link to={generatePath('/film/:id/review', {id: id})} className="btn film-card__button">Add review</Link>:''}
               </div>
             </div>

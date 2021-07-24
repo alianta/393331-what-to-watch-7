@@ -22,7 +22,7 @@ function App() {
   const isFilmOfDayLoaded = useSelector(getFilmOfDayLoadedStatus);
   const films = useSelector(getFilms);
 
-  if (isCheckedAuth(authorizationStatus)||!isDataLoaded ||!isFilmOfDayLoaded) {
+  if (isCheckedAuth(authorizationStatus) || !isDataLoaded || !isFilmOfDayLoaded) {
     return (
       <LoadingScreen />
     );

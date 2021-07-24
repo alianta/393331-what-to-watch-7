@@ -29,9 +29,10 @@ store.dispatch(fetchFlms());
 store.dispatch(fetchPromoFilm());
 
 ReactDOM.render(
-  <Provider store={store}>
+  <Provider store = {store}>
     <React.StrictMode>
       <App/>
     </React.StrictMode>
   </Provider>,
-  document.getElementById('root'));
+  document.getElementById('root'),
+);

@@ -20,16 +20,16 @@ function MainPage(props) {
   const genreList = useSelector(getGenreList);
 
   const dispatch = useDispatch();
-  const onGenreChange= (newGenre) => {
+  const onGenreChange = (newGenre) => {
     dispatch(changeGenre(newGenre));
   };
 
   const history = useHistory();
   const [showFilmCount, setShowFilmCount] = useState(FILMS_LIST_MAX_COUNT);
-  const addShowFilms = ()=> {
+  const addShowFilms = () => {
     setShowFilmCount(showFilmCount+FILMS_LIST_MAX_COUNT);
   };
-  const resetShowFilms = ()=> {
+  const resetShowFilms = () => {
     setShowFilmCount(FILMS_LIST_MAX_COUNT);
   };
 

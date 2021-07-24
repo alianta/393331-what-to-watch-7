@@ -5,7 +5,7 @@ import {COMMENT_MIN_LENGTH, COMMENT_MAX_LENGTH} from '../../const';
 
 const RATING_STAR_COUNT = 10;
 function getSubmitButtonStatus (ratingCount, reviewLength){
-  if(ratingCount>0 && reviewLength>=COMMENT_MIN_LENGTH && reviewLength <= COMMENT_MAX_LENGTH) {
+  if(ratingCount > 0 && reviewLength >= COMMENT_MIN_LENGTH && reviewLength <= COMMENT_MAX_LENGTH) {
     return false;
   } else {
     return true;

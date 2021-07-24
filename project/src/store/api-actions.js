@@ -10,7 +10,7 @@ export const fetchFlms = () => (dispatch, _getState, api) => (
 export const fetchFlmInfo = (id) => (dispatch, _getState, api) => (
   api.get(generatePath(APIRoute.FILM_INFO, {id: id}))
     .then(({data}) => dispatch(loadFilmInfo(data)))
-    .catch(()=>dispatch(redirectToRoute(AppRoute.NOT_FOUND)))
+    .catch(() => dispatch(redirectToRoute(AppRoute.NOT_FOUND)))
 );
 
 export const fetchSimilarFilms = (id) => (dispatch, _getState, api) => (
@@ -48,7 +48,7 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
 export const addComment = ({rating, comment, filmId}) => (dispatch, _getState, api) => (
   api.post(generatePath(APIRoute.ADD_COMMENT,{filmId:filmId}), {rating, comment})
     .then(({data}) => dispatch(loadFilmComments(data)))
-    .then(() => dispatch(redirectToRoute(generatePath(AppRoute.FILM,{id:filmId}))))
+    .then(() => dispatch(redirectToRoute(generatePath(AppRoute.FILM, {id:filmId}))))
     .catch(()=>{})
 );
 
