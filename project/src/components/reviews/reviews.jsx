@@ -5,8 +5,8 @@ import reviewProp from '../review/reviewProp';
 
 function Reviews(props) {
   const {filmReviews} = props;
-  const filmReviewsLeft = filmReviews.slice(0,filmReviews.length/2+1);
-  const filmReviewsRigth = filmReviews.slice(filmReviews.length/2+1, filmReviews.length);
+  const filmReviewsLeft = filmReviews.slice(0, filmReviews.length/2 + 1);
+  const filmReviewsRigth = filmReviews.slice(filmReviews.length/2 + 1, filmReviews.length);
 
   return (
     <div className="film-card__reviews film-card__row">

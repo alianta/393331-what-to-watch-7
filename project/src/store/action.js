@@ -1,3 +1,5 @@
+import {createAction} from '@reduxjs/toolkit';
+
 export const ActionType = {
   CHANGE_GENRE: 'changeGenre',
   REQUIRED_AUTHORIZATION: 'requiredAuthorization',
@@ -11,44 +13,13 @@ export const ActionType = {
   REDIRECT_TO_ROUTE: 'redirectToRoute',
 };
 
-export const ActionCreator = {
-  changeGenre: (genre) => ({
-    type: ActionType.CHANGE_GENRE,
-    payload: genre,
-  }),
-  loadFilms: (films) => ({
-    type: ActionType.LOAD_FILMS,
-    payload: films,
-  }),
-  loadSimilarFilms: (films) => ({
-    type: ActionType.LOAD_SIMILAR_FILMS,
-    payload: films,
-  }),
-  loadFilmComments:(films) => ({
-    type: ActionType.LOAD_FILM_COMMENTS,
-    payload: films,
-  }),
-  loadFilmInfo: (film) => ({
-    type: ActionType.LOAD_FILM_INFO,
-    payload: film,
-  }),
-  loadAuthorizationInfo: (authorizationInfo) => ({
-    type: ActionType.LOAD_AUTHORIZATION_INFO,
-    payload: authorizationInfo,
-  }),
-  loadPromoFilm: (film) => ({
-    type: ActionType.LOAD_PROMO_FILM,
-    payload: film,
-  }),
-  requireAuthorization: (status) => ({
-    type: ActionType.REQUIRED_AUTHORIZATION,
-    payload: status,
-  }),
-  logout: () => ({
-    type: ActionType.LOGOUT,
-  }),
-  redirectToRoute: (url) => ({
-    type: ActionType.REDIRECT_TO_ROUTE,
-    payload: url,
-  }),
-};
+export const changeGenre = createAction(ActionType.CHANGE_GENRE);
+export const loadFilms =  createAction(ActionType.LOAD_FILMS);
+export const loadSimilarFilms = createAction(ActionType.LOAD_SIMILAR_FILMS);
+export const loadFilmComments = createAction(ActionType.LOAD_FILM_COMMENTS);
+export const loadFilmInfo = createAction(ActionType.LOAD_FILM_INFO);
+export const loadAuthorizationInfo = createAction(ActionType.LOAD_AUTHORIZATION_INFO);
+export const loadPromoFilm = createAction(ActionType.LOAD_PROMO_FILM);
+export const requireAuthorization = createAction(ActionType.REQUIRED_AUTHORIZATION);
+export const logout = createAction(ActionType.LOGOUT);
+export const redirectToRoute = createAction(ActionType.REDIRECT_TO_ROUTE);

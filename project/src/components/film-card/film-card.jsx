@@ -12,9 +12,9 @@ function FilmCard(props) {
   return (
     <article
       className="small-film-card catalog__films-card"
-      onMouseEnter={()=>setIsPlaying(true)}
-      onMouseLeave={()=>setIsPlaying(false)}
-      onClick={()=>history.push(generatePath('/film/:id/', {id: film.id}))}
+      onMouseEnter={() => setIsPlaying(true)}
+      onMouseLeave={() => setIsPlaying(false)}
+      onClick={() => history.push(generatePath('/film/:id/', {id: film.id}))}
     >
       <div className="small-film-card__image">
         {!isPlaying ? <img src={film.previewImage} alt={film.title} width="280" height="175" /> : <VideoPlayer poster={film.previewImage} videoFile={film.previewVideo} />}

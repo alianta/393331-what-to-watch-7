@@ -9,15 +9,34 @@ import {useHistory} from 'react-router-dom';
 import { generatePath } from 'react-router';
 import { TabNames, SIMILAR_FILM_COUNT, AuthorizationStatus} from '../../const';
 import {fetchFlmInfo, fetchSimilarFilms, fetchComments} from '../../store/api-actions';
-import {connect} from 'react-redux';
-import filmProp from './filmProp';
+import {useSelector, useDispatch} from 'react-redux';
 import LoadingScreen from '../loading-screen/loading-screen';
 import UserBlock from '../user-block/user-block';
-import reviewProp from '../review/reviewProp';
+import {getAuthorizationStatus} from '../../store/user/selectors';
+import {getCurrentFilm, getFilmLoadedStatus, getSimilarFilms as getSimilarFilmsData, getSimilarFilmLoadedStatus} from '../../store/film-data/selectors';
+import {getCommentsLoadedStatus, getComments as getCommentsData} from '../../store/review-data/selectors';
 
-function Film(props) {
+function Film() {
   const {id} = useParams();
-  const {getFilmInfo, filmData, isFilmDataLoaded, isSimilarFilmsLoaded, similarFilms, getSimilarFilms, getComments, comments, isCommentsLoaded, authorizationStatus} = props;
+  const filmData = useSelector(getCurrentFilm);
+  const isFilmDataLoaded = useSelector(getFilmLoadedStatus);
+  const similarFilms = useSelector(getSimilarFilmsData);
+  const isSimilarFilmsLoaded = useSelector(getSimilarFilmLoadedStatus);
+  const isCommentsLoaded = useSelector(getCommentsLoadedStatus);
+  const comments = useSelector(getCommentsData);
+  const authorizationStatus = useSelector(getAuthorizationStatus);
+
+  const dispatch = useDispatch();
+  const getFilmInfo = (filmId) => {
+    dispatch(fetchFlmInfo(filmId));
+  };
+  const getSimilarFilms = (filmId) => {
+    dispatch(fetchSimilarFilms(filmId));
+  };
+  const getComments = (filmId) => {
+    dispatch(fetchComments(filmId));
+  };
+
   useEffect(() => {
     getFilmInfo(id);
     getSimilarFilms(id);
@@ -107,7 +126,7 @@ function Film(props) {
                     )}
                   <span>My list</span>
                 </button>
-                {(authorizationStatus===AuthorizationStatus.AUTH)?
+                {(authorizationStatus === AuthorizationStatus.AUTH)?
                   <Link to={generatePath('/film/:id/review', {id: id})} className="btn film-card__button">Add review</Link>:''}
               </div>
             </div>
@@ -143,39 +162,6 @@ Film.propTypes = {
       id: PropTypes.string.isRequired,
     }),
   }),
-  getFilmInfo: PropTypes.func.isRequired,
-  getSimilarFilms: PropTypes.func.isRequired,
-  getComments: PropTypes.func.isRequired,
-  filmData: PropTypes.object.isRequired,
-  similarFilms: PropTypes.arrayOf(filmProp).isRequired,
-  isFilmDataLoaded: PropTypes.bool.isRequired,
-  isSimilarFilmsLoaded: PropTypes.bool.isRequired,
-  isCommentsLoaded: PropTypes.bool.isRequired,
-  comments: PropTypes.arrayOf(reviewProp).isRequired,
-  authorizationStatus: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  filmData: state.currentFilm,
-  isFilmDataLoaded: state.isFilmDataLoaded,
-  similarFilms: state.similarFilms,
-  isSimilarFilmsLoaded: state.isSimilarFilmsLoaded,
-  isCommentsLoaded: state.isCurrentFilmCommentsLoaded,
-  comments: state.currentFilmComments,
-  authorizationStatus: state.authorizationStatus,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  getFilmInfo(id) {
-    dispatch(fetchFlmInfo(id));
-  },
-  getSimilarFilms(id) {
-    dispatch(fetchSimilarFilms(id));
-  },
-  getComments(id) {
-    dispatch(fetchComments(id));
-  },
-});
-
-export {Film};
-export default connect(mapStateToProps, mapDispatchToProps)(Film);
+export default Film;

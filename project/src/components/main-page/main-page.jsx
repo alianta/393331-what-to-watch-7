@@ -1,27 +1,33 @@
 import React, {useState} from 'react';
-import {connect} from 'react-redux';
-import {ActionCreator} from '../../store/action';
+import {useSelector, useDispatch} from 'react-redux';
+import {changeGenre} from '../../store/action';
 import Footer from '../footer/footer';
 import Logo from '../logo/logo';
-
-import PropTypes from 'prop-types';
-import filmProp from '../film/filmProp';
 import {useHistory} from 'react-router-dom';
 import GenreList from '../genre-list/genre-list';
-import { getGenreList, getFilmsFromGenre } from '../../utils';
 import FilmList from '../film-list/film-list';
 import ShowMoreButton from '../show-more-button/show-more-button';
 import { FILMS_LIST_MAX_COUNT} from '../../const';
 import UserBlock from '../user-block/user-block';
+import {getPromoFilm, getGenre, getGenreList, getFilmsFromGenre} from '../../store/film-data/selectors';
 
 function MainPage(props) {
-  const {films, filmOfDay, genre, genreList, onGenreChange} = props;
+  const genre = useSelector(getGenre);
+  const genreList = useSelector(getGenreList);
+  const films = useSelector(getFilmsFromGenre);
+  const filmOfDay = useSelector(getPromoFilm);
+
+  const dispatch = useDispatch();
+  const onGenreChange = (newGenre) => {
+    dispatch(changeGenre(newGenre));
+  };
+
   const history = useHistory();
   const [showFilmCount, setShowFilmCount] = useState(FILMS_LIST_MAX_COUNT);
-  const addShowFilms = ()=> {
+  const addShowFilms = () => {
     setShowFilmCount(showFilmCount+FILMS_LIST_MAX_COUNT);
   };
-  const resetShowFilms = ()=> {
+  const resetShowFilms = () => {
     setShowFilmCount(FILMS_LIST_MAX_COUNT);
   };
 
@@ -116,26 +122,4 @@ function MainPage(props) {
   );
 }
 
-MainPage.propTypes = {
-  films: PropTypes.arrayOf(filmProp).isRequired,
-  filmOfDay: filmProp,
-  genre: PropTypes.string.isRequired,
-  onGenreChange: PropTypes.func.isRequired,
-  genreList: PropTypes.array.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  genre: state.genre,
-  films: getFilmsFromGenre(state.films,state.genre),
-  filmOfDay: state.promoFilm,
-  genreList: getGenreList(state.films),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onGenreChange(genre) {
-    dispatch(ActionCreator.changeGenre(genre));
-  },
-});
-
-export {MainPage};
-export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
+export default MainPage;

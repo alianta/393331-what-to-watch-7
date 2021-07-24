@@ -5,13 +5,17 @@ import PropTypes from 'prop-types';
 import AddReviewForm from '../add-review-form/add-review-form';
 import { generatePath } from 'react-router';
 import UserBlock from '../user-block/user-block';
-import {connect} from 'react-redux';
-import filmProp from '../film/filmProp';
+import {useSelector, useDispatch} from 'react-redux';
 import {addComment} from '../../store/api-actions';
+import {getCurrentFilm} from '../../store/film-data/selectors';
 
 function AddReview (props) {
   const {id} = useParams();
-  const {filmData, onSubmit} = props;
+  const filmData = useSelector(getCurrentFilm);
+  const dispatch = useDispatch();
+  const onSubmit = (comment) => {
+    dispatch(addComment(comment));
+  };
 
   return (
     <section className="film-card film-card--full" style={{'backgroundColor':filmData.background}}>
@@ -65,19 +69,6 @@ AddReview.propTypes = {
       id: PropTypes.string.isRequired,
     }),
   }),
-  filmData: filmProp,
-  onSubmit: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  filmData: state.currentFilm,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onSubmit(comment) {
-    dispatch(addComment(comment));
-  },
-});
-
-export {AddReview};
-export default connect(mapStateToProps, mapDispatchToProps)(AddReview);
+export default AddReview;

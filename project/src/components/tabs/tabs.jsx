@@ -29,7 +29,7 @@ function Tabs(props) {
           {Object.values(TabNames).map((tabName, id) => {
             const keyIndex = id + tabName;
             return (
-              <li key={keyIndex} className={(activeTab===tabName)?'film-nav__item film-nav__item--active':'film-nav__item'} onClick={() => {changeActiveTab(tabName);}}>
+              <li key={keyIndex} className={(activeTab === tabName)?'film-nav__item film-nav__item--active':'film-nav__item'} onClick={() => {changeActiveTab(tabName);}}>
                 <Link to="#" className="film-nav__link" >{tabName}</Link>
               </li>
             );})}

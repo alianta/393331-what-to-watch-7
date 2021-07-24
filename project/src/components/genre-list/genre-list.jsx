@@ -4,17 +4,17 @@ import PropTypes, { string } from 'prop-types';
 
 function GenreList(props) {
   const {genreList, currentGenre, onGenreChange, resetShowFilms} = props;
-  const onClickHandle=(evt)=>{
-    if(evt.target.tagName==='A'){
+  const onClickHandle = (evt) => {
+    if(evt.target.tagName === 'A'){
       resetShowFilms();
       onGenreChange(evt.target.textContent);
     }
   };
   return (
-    <ul className="catalog__genres-list" onClick={onClickHandle}>
+    <ul className="catalog__genres-list" onClick = {onClickHandle}>
       {genreList.map((genre,id) => (
-        <li key = {genre} className={(genre===currentGenre)?'catalog__genres-item catalog__genres-item--active':'catalog__genres-item'}>
-          <Link to="/#" className="catalog__genres-link">{genre}</Link>
+        <li key = {genre} className={(genre === currentGenre)?'catalog__genres-item catalog__genres-item--active':'catalog__genres-item'}>
+          <Link to ="/#" className="catalog__genres-link">{genre}</Link>
         </li>
       ))}
     </ul>
