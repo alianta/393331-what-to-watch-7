@@ -5,19 +5,17 @@ import Footer from '../footer/footer';
 import Logo from '../logo/logo';
 import {useHistory} from 'react-router-dom';
 import GenreList from '../genre-list/genre-list';
-import {getFilmsFromGenre } from '../../utils';
 import FilmList from '../film-list/film-list';
 import ShowMoreButton from '../show-more-button/show-more-button';
 import { FILMS_LIST_MAX_COUNT} from '../../const';
 import UserBlock from '../user-block/user-block';
-import {getFilms, getPromoFilm, getGenre, getGenreList} from '../../store/film-data/selectors';
+import {getPromoFilm, getGenre, getGenreList, getFilmsFromGenre} from '../../store/film-data/selectors';
 
 function MainPage(props) {
-  const allFilms = useSelector(getFilms);
   const genre = useSelector(getGenre);
-  const films = getFilmsFromGenre(allFilms,genre);
-  const filmOfDay = useSelector(getPromoFilm);
   const genreList = useSelector(getGenreList);
+  const films = useSelector(getFilmsFromGenre);
+  const filmOfDay = useSelector(getPromoFilm);
 
   const dispatch = useDispatch();
   const onGenreChange = (newGenre) => {
