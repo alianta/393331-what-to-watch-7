@@ -4,12 +4,12 @@ export function getFilmsFromGenre(films, genre) {
   return (genre===DEFAULT_GENRE)? films: films.filter((film)=> film.genre===genre);
 }
 
-export function getGenreList(films) {
+export const getGenreList = (films) => {
   const  genreList = new Set();
   genreList.add(DEFAULT_GENRE);
   films.map((film)=>genreList.add(film.genre));
   return Array.from(genreList).slice(0,GENRE_LIST_MAX_COUNT+1);
-}
+};
 
 export function getRatingDescription (rating) {
   if(rating < MAX_BAD_RATING_SCORE) {
