@@ -13,40 +13,13 @@ export const ActionType = {
   REDIRECT_TO_ROUTE: 'redirectToRoute',
 };
 
-export const changeGenre = createAction((genre) => ({
-  payload: genre,
-}));
-
-export const loadFilms =  createAction(ActionType.LOAD_FILMS, (films) => ({
-  payload: films,
-}));
-
-export const loadSimilarFilms = createAction(ActionType.LOAD_SIMILAR_FILMS, (films) => ({
-  payload: films,
-}));
-
-export const loadFilmComments = createAction(ActionType.LOAD_FILM_COMMENTS, (films) => ({
-  payload: films,
-}));
-
-export const loadFilmInfo = createAction(ActionType.LOAD_FILM_INFO, (film) => ({
-  payload: film,
-}));
-
-export const loadAuthorizationInfo = createAction(ActionType.LOAD_AUTHORIZATION_INFO, (authorizationInfo) => ({
-  payload: authorizationInfo,
-}));
-
-export const loadPromoFilm = createAction(ActionType.LOAD_PROMO_FILM, (film) => ({
-  payload: film,
-}));
-
-export const requireAuthorization = createAction(ActionType.REQUIRED_AUTHORIZATION, (status)=> ({
-  payload: status,
-}));
-
+export const changeGenre = createAction(ActionType.CHANGE_GENRE);
+export const loadFilms =  createAction(ActionType.LOAD_FILMS);
+export const loadSimilarFilms = createAction(ActionType.LOAD_SIMILAR_FILMS);
+export const loadFilmComments = createAction(ActionType.LOAD_FILM_COMMENTS);
+export const loadFilmInfo = createAction(ActionType.LOAD_FILM_INFO);
+export const loadAuthorizationInfo = createAction(ActionType.LOAD_AUTHORIZATION_INFO);
+export const loadPromoFilm = createAction(ActionType.LOAD_PROMO_FILM);
+export const requireAuthorization = createAction(ActionType.REQUIRED_AUTHORIZATION);
 export const logout = createAction(ActionType.LOGOUT);
-
-export const redirectToRoute = createAction(ActionType.REDIRECT_TO_ROUTE, (url) => ({
-  payload: url,
-}));
+export const redirectToRoute = createAction(ActionType.REDIRECT_TO_ROUTE);
