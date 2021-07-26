@@ -1,4 +1,4 @@
-import {loadFilms, loadFilmInfo, loadSimilarFilms, redirectToRoute, loadPromoFilm, loadFilmComments, loadAuthorizationInfo, requireAuthorization, logout as logoutAction, changeFilmInfo} from './action';
+import {loadFilms, loadFilmInfo, loadSimilarFilms, redirectToRoute, loadPromoFilm, loadFilmComments, loadAuthorizationInfo, requireAuthorization, logout as logoutAction, changeFilmInfo, loadFavoriteFilms} from './action';
 import {AuthorizationStatus, AppRoute, APIRoute, HttpCode} from '../const';
 import { generatePath } from 'react-router';
 
@@ -66,4 +66,9 @@ export const changeFilmFavoriteStatus = (filmId, favoriteStatus) => (dispatch, _
         dispatch(redirectToRoute(AppRoute.LOGIN));
       }
     })
+);
+
+export const fetchFavoriteFilms = () => (dispatch, _getState, api) => (
+  api.get(APIRoute.FAVORITE)
+    .then(({data}) => dispatch(loadFavoriteFilms(data)))
 );
