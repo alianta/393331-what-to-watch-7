@@ -29,6 +29,7 @@ export const APIRoute = {
   LOGIN: '/login',
   LOGOUT: '/logout',
   ADD_COMMENT: '/comments/:filmId',
+  CHANGE_FILM_FAVORITE_STAUS: '/favorite/:filmId/:status',
 };
 
 export const SIMILAR_FILM_COUNT = 4;

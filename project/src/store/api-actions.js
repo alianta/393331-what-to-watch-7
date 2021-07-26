@@ -1,4 +1,4 @@
-import {loadFilms, loadFilmInfo, loadSimilarFilms, redirectToRoute, loadPromoFilm, loadFilmComments, loadAuthorizationInfo, requireAuthorization, logout as logoutAction} from './action';
+import {loadFilms, loadFilmInfo, loadSimilarFilms, redirectToRoute, loadPromoFilm, loadFilmComments, loadAuthorizationInfo, requireAuthorization, logout as logoutAction, changeFilmInfo} from './action';
 import {AuthorizationStatus, AppRoute, APIRoute} from '../const';
 import { generatePath } from 'react-router';
 
@@ -56,4 +56,10 @@ export const logout = () => (dispatch, _getState, api) => (
   api.delete(APIRoute.LOGOUT)
     .then(() => localStorage.removeItem('token'))
     .then(() => dispatch(logoutAction()))
+);
+
+export const changeFilmFavoriteStatus = (filmId, favoriteStatus) => (dispatch, _getState, api) => (
+  api.post(generatePath(APIRoute.CHANGE_FILM_FAVORITE_STAUS,{filmId:filmId, status: favoriteStatus}))
+    .then(({data}) => dispatch(changeFilmInfo(data)))
+    .catch(()=>{})
 );

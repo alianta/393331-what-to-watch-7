@@ -1,7 +1,7 @@
 import { DEFAULT_GENRE, PROMO_FILM_ID } from '../../const';
 import {adaptFilmToClient} from '../adapter';
 import {createReducer} from '@reduxjs/toolkit';
-import {loadFilmInfo, loadPromoFilm, loadSimilarFilms, loadFilms, changeGenre} from '../action';
+import {loadFilmInfo, loadPromoFilm, loadSimilarFilms, loadFilms, changeGenre, changeFilmInfo} from '../action';
 
 const initialState = {
   genre: DEFAULT_GENRE,
@@ -35,11 +35,20 @@ const filmData = createReducer(initialState, (builder) => {
       state.isSimilarFilmsLoaded = true;
     })
     .addCase(loadFilms, (state, action) => {
-      state.films =  action.payload.map((film) => adaptFilmToClient(film));
+      state.films = action.payload.map((film) => adaptFilmToClient(film));
       state.isDataLoaded =  true;
     })
     .addCase(changeGenre, (state, action) => {
       state.genre =  action.payload;
+    })
+    .addCase(changeFilmInfo, (state, action) => {
+      const index = state.films.findIndex((film) => film.id === action.payload.id);
+      state.films = [
+        ...state.films.slice(0, index),
+        adaptFilmToClient(action.payload),
+        ...state.films.slice(index + 1),
+      ];
+      state.currentFilm = adaptFilmToClient(action.payload);
     });
 });
 
