@@ -43,12 +43,17 @@ const filmData = createReducer(initialState, (builder) => {
     })
     .addCase(changeFilmInfo, (state, action) => {
       const index = state.films.findIndex((film) => film.id === action.payload.id);
+      const newFilmInfo = adaptFilmToClient(action.payload);
       state.films = [
         ...state.films.slice(0, index),
-        adaptFilmToClient(action.payload),
+        newFilmInfo,
         ...state.films.slice(index + 1),
       ];
-      state.currentFilm = adaptFilmToClient(action.payload);
+      if(state.currentFilm.id === newFilmInfo.id) {
+        state.currentFilm = newFilmInfo;
+      } else {
+        state.promoFilm = newFilmInfo;
+      }
     });
 });
 
