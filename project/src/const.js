@@ -52,3 +52,7 @@ export const GENRE_LIST_MAX_COUNT = 9;
 export const RATING_SCORE_PRECISION = 1;
 export const VIDEO_CAN_START_PLAYING_STATE = 3;
 
+
+export const HttpCode = {
+  UNAUTHORIZED: 401,
+};
