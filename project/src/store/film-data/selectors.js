@@ -1,6 +1,6 @@
 import {NameSpace} from '../root-reducer';
 import {createSelector} from 'reselect';
-import {getGenreList as createGenreLst, getFilmsFromGenre as createFilmFromGenreList} from '../../utils';
+import {getGenreList as createGenreLst, getFilmsFromGenre as createFilmFromGenreList, getFilmId} from '../../utils';
 
 export const getLoadedDataStatus = (state) => state[NameSpace.FILM].isDataLoaded;
 export const getFilmLoadedStatus = (state) => state[NameSpace.FILM].isFilmDataLoaded;
@@ -19,4 +19,9 @@ export const getFilmsFromGenre = createSelector(
   getFilms,
   getGenre,
   createFilmFromGenreList,
+);
+export const getPromoFilmId = createSelector(
+  getFilms,
+  getPromoFilm,
+  getFilmId,
 );

@@ -42,3 +42,8 @@ export const formatVideoTime = (timeCount) => {
     return hours.toString().concat(':',minutes,':',Math.floor(seconds));
   }
 };
+
+export const getFilmId = (filmList, currentFilm) => {
+  const currentFilmIdIndex = filmList.findIndex((film) => film.title === currentFilm.title && film.year === currentFilm.year);
+  return filmList[currentFilmIdIndex].id;
+};

@@ -9,7 +9,7 @@ import FilmList from '../film-list/film-list';
 import ShowMoreButton from '../show-more-button/show-more-button';
 import { FILMS_LIST_MAX_COUNT} from '../../const';
 import UserBlock from '../user-block/user-block';
-import {getPromoFilm, getGenre, getGenreList, getFilmsFromGenre} from '../../store/film-data/selectors';
+import {getPromoFilm, getGenre, getGenreList, getFilmsFromGenre, getPromoFilmId} from '../../store/film-data/selectors';
 import {changeFilmFavoriteStatus} from '../../store/api-actions';
 
 function MainPage(props) {
@@ -17,8 +17,7 @@ function MainPage(props) {
   const genreList = useSelector(getGenreList);
   const films = useSelector(getFilmsFromGenre);
   const filmOfDay = useSelector(getPromoFilm);
-  const currentFilmIdIndex = films.findIndex((film) => film.title === filmOfDay.title && film.year === filmOfDay.year);
-  const currentFilmId = films[currentFilmIdIndex].id;
+  const currentFilmId = useSelector(getPromoFilmId);
 
   const dispatch = useDispatch();
   const onGenreChange = (newGenre) => {
