@@ -8,7 +8,6 @@ import {VIDEO_CAN_START_PLAYING_STATE} from '../../const';
 
 function Player (props) {
   const filmData = props.location.state;
-  const previousPageUrl = (filmData.id === -1)? '/' :`/film/${filmData.id}`;
   const history = useHistory();
   const [isPlaying, setIsPlaying] = useState(true);
   const [isVideoLoading , setIsVideoLoading ] = useState(true);
@@ -52,7 +51,7 @@ function Player (props) {
         onTimeUpdate={videoTimeUpdate}
       >
       </video>
-      <button type="button" className="player__exit" onClick={() => history.push(previousPageUrl)}>Exit</button>
+      <button type="button" className="player__exit" onClick={history.goBack}>Exit</button>
       {isVideoLoading?<VideoLoadingSpinner/>:''}
       <div className="player__controls">
         <div className="player__controls-row">
