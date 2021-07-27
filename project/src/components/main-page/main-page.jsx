@@ -9,17 +9,23 @@ import FilmList from '../film-list/film-list';
 import ShowMoreButton from '../show-more-button/show-more-button';
 import { FILMS_LIST_MAX_COUNT} from '../../const';
 import UserBlock from '../user-block/user-block';
-import {getPromoFilm, getGenre, getGenreList, getFilmsFromGenre} from '../../store/film-data/selectors';
+import {getPromoFilm, getGenre, getGenreList, getFilmsFromGenre, getPromoFilmId} from '../../store/film-data/selectors';
+import {changeFilmFavoriteStatus} from '../../store/api-actions';
 
 function MainPage(props) {
   const genre = useSelector(getGenre);
   const genreList = useSelector(getGenreList);
   const films = useSelector(getFilmsFromGenre);
   const filmOfDay = useSelector(getPromoFilm);
+  const currentFilmId = useSelector(getPromoFilmId);
 
   const dispatch = useDispatch();
   const onGenreChange = (newGenre) => {
     dispatch(changeGenre(newGenre));
+  };
+
+  const onFavoriteClick = () => {
+    dispatch(changeFilmFavoriteStatus(currentFilmId, filmOfDay.isFavorite? 0:1));
   };
 
   const history = useHistory();
@@ -97,10 +103,18 @@ function MainPage(props) {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
+                <button className="btn btn--list film-card__button" type="button" onClick={onFavoriteClick}>
+                  {filmOfDay.isFavorite
+                    ? (
+                      <svg viewBox="0 0 18 14" width="18" height="14">
+                        <use xlinkHref="#in-list"></use>
+                      </svg>
+                    )
+                    : (
+                      <svg viewBox="0 0 19 20" width="19" height="20">
+                        <use xlinkHref="#add"></use>
+                      </svg>
+                    )}
                   <span>My list</span>
                 </button>
               </div>

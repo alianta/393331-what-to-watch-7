@@ -25,3 +25,25 @@ export function getRatingDescription (rating) {
 
 export const isCheckedAuth = (authorizationStatus) =>
   authorizationStatus === AuthorizationStatus.UNKNOWN;
+
+export const formatVideoTime = (timeCount) => {
+  let seconds = timeCount % 60;
+  let minutes = Math.floor(timeCount / 60 % 60);
+  const hours = Math.floor(timeCount / 60 / 60);
+  if (seconds < 10){
+    seconds = '0'.concat(seconds);
+  }
+  if(hours !==0 && minutes < 10) {
+    minutes = '0'.concat(minutes);
+  }
+  if(hours === 0){
+    return minutes.toString().concat(':',Math.floor(seconds));
+  }else {
+    return hours.toString().concat(':',minutes,':',Math.floor(seconds));
+  }
+};
+
+export const getFilmId = (filmList, currentFilm) => {
+  const currentFilmIdIndex = filmList.findIndex((film) => film.title === currentFilm.title && film.year === currentFilm.year);
+  return filmList[currentFilmIdIndex].id;
+};

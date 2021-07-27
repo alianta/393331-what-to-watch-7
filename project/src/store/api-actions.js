@@ -1,5 +1,5 @@
-import {loadFilms, loadFilmInfo, loadSimilarFilms, redirectToRoute, loadPromoFilm, loadFilmComments, loadAuthorizationInfo, requireAuthorization, logout as logoutAction} from './action';
-import {AuthorizationStatus, AppRoute, APIRoute} from '../const';
+import {loadFilms, loadFilmInfo, loadSimilarFilms, redirectToRoute, loadPromoFilm, loadFilmComments, loadAuthorizationInfo, requireAuthorization, logout as logoutAction, changeFilmInfo, loadFavoriteFilms} from './action';
+import {AuthorizationStatus, AppRoute, APIRoute, HttpCode} from '../const';
 import { generatePath } from 'react-router';
 
 export const fetchFlms = () => (dispatch, _getState, api) => (
@@ -49,11 +49,26 @@ export const addComment = ({rating, comment, filmId}) => (dispatch, _getState, a
   api.post(generatePath(APIRoute.ADD_COMMENT,{filmId:filmId}), {rating, comment})
     .then(({data}) => dispatch(loadFilmComments(data)))
     .then(() => dispatch(redirectToRoute(generatePath(AppRoute.FILM, {id:filmId}))))
-    .catch(()=>{})
+    .catch(() => {})
 );
 
 export const logout = () => (dispatch, _getState, api) => (
   api.delete(APIRoute.LOGOUT)
     .then(() => localStorage.removeItem('token'))
     .then(() => dispatch(logoutAction()))
+);
+
+export const changeFilmFavoriteStatus = (filmId, favoriteStatus) => (dispatch, _getState, api) => (
+  api.post(generatePath(APIRoute.CHANGE_FILM_FAVORITE_STAUS,{filmId:filmId, status: favoriteStatus}))
+    .then(({data}) => dispatch(changeFilmInfo(data)))
+    .catch((error) => {
+      if(error.response.status === HttpCode.UNAUTHORIZED) {
+        dispatch(redirectToRoute(AppRoute.LOGIN));
+      }
+    })
+);
+
+export const fetchFavoriteFilms = () => (dispatch, _getState, api) => (
+  api.get(APIRoute.FAVORITE)
+    .then(({data}) => dispatch(loadFavoriteFilms(data)))
 );

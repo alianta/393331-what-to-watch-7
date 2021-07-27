@@ -8,7 +8,7 @@ import Tabs from '../tabs/tabs';
 import {useHistory} from 'react-router-dom';
 import { generatePath } from 'react-router';
 import { TabNames, SIMILAR_FILM_COUNT, AuthorizationStatus} from '../../const';
-import {fetchFlmInfo, fetchSimilarFilms, fetchComments} from '../../store/api-actions';
+import {fetchFlmInfo, fetchSimilarFilms, fetchComments, changeFilmFavoriteStatus} from '../../store/api-actions';
 import {useSelector, useDispatch} from 'react-redux';
 import LoadingScreen from '../loading-screen/loading-screen';
 import UserBlock from '../user-block/user-block';
@@ -26,6 +26,9 @@ function Film() {
   const comments = useSelector(getCommentsData);
   const authorizationStatus = useSelector(getAuthorizationStatus);
 
+  const onFavoriteClick = () => {
+    dispatch(changeFilmFavoriteStatus(id, filmData.isFavorite? 0:1));
+  };
   const dispatch = useDispatch();
   const getFilmInfo = (filmId) => {
     dispatch(fetchFlmInfo(filmId));
@@ -112,7 +115,7 @@ function Film() {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button">
+                <button className="btn btn--list film-card__button" type="button" onClick={onFavoriteClick}>
                   {filmData.isFavorite
                     ? (
                       <svg viewBox="0 0 18 14" width="18" height="14">

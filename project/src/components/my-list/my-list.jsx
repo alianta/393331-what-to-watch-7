@@ -1,13 +1,18 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../footer/footer';
 import Logo from '../logo/logo';
 import FilmList from '../film-list/film-list';
-import PropTypes from 'prop-types';
-import filmProp from '../film/filmProp';
+import {useSelector, useDispatch} from 'react-redux';
+import {getFavoriteFilms} from '../../store/user/selectors';
+import {fetchFavoriteFilms} from '../../store/api-actions';
 
-function MyList(props) {
-  const {films} = props;
+function MyList() {
+  const films = useSelector(getFavoriteFilms);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchFavoriteFilms());
+  }, []);
 
   return (
     <div className="user-page">
@@ -38,10 +43,5 @@ function MyList(props) {
     </div>
   );
 }
-
-
-MyList.propTypes = {
-  films: PropTypes.arrayOf(filmProp).isRequired,
-};
 
 export default MyList;
