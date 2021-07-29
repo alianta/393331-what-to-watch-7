@@ -2,6 +2,7 @@ import {user} from './user';
 import {ActionType} from '../action';
 import {AuthorizationStatus} from '../../const';
 
+/*eslint-disable */
 const favoriteFilmsServerMock = [
   {
     id: 1,
@@ -22,6 +23,7 @@ const favoriteFilmsServerMock = [
     released: 2014,
     is_favorite: true,
   }];
+/*eslint-enable */
 
 const favoriteFilmsMock = [
   {
