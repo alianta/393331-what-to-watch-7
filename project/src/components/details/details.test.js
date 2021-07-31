@@ -26,7 +26,7 @@ const filmDataMock = {
 const filmDataDurationMock = '1h 39m';
 
 describe('Conponent Film details', () => {
-  it('should render "main-page" when user navigate to "/"', () => {
+  it('should render film details compotent', () => {
     const {getByText} = render(<Details film={filmDataMock}/>);
 
     expect(getByText('Director')).toBeInTheDocument();
