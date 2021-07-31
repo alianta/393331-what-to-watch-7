@@ -87,7 +87,7 @@ function MainPage(props) {
         </header>
 
         <div className="film-card__wrap">
-          <div className="film-card__info">
+          <div className="film-card__info"  data-testid="filmCardInfo">
             <div className="film-card__poster">
               <img src={filmOfDay.poster} alt={filmOfDay.title} width="218" height="327" />
             </div>
@@ -127,7 +127,7 @@ function MainPage(props) {
       </section>
 
       <div className="page-content">
-        <section className="catalog">
+        <section className="catalog" data-testid="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <GenreList genreList={genreList} currentGenre={genre} onGenreChange={onGenreChange} resetShowFilms={resetShowFilms}/>
           <FilmList films={films.slice(0,showFilmCount)}></FilmList>
