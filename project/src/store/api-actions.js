@@ -2,7 +2,7 @@ import {loadFilms, loadFilmInfo, loadSimilarFilms, redirectToRoute, loadPromoFil
 import {AuthorizationStatus, AppRoute, APIRoute, HttpCode} from '../const';
 import { generatePath } from 'react-router';
 
-export const fetchFlms = () => (dispatch, _getState, api) => (
+export const fetchFilms = () => (dispatch, _getState, api) => (
   api.get(APIRoute.FILMS)
     .then(({data}) => dispatch(loadFilms(data)))
 );
@@ -59,7 +59,7 @@ export const logout = () => (dispatch, _getState, api) => (
 );
 
 export const changeFilmFavoriteStatus = (filmId, favoriteStatus) => (dispatch, _getState, api) => (
-  api.post(generatePath(APIRoute.CHANGE_FILM_FAVORITE_STAUS,{filmId:filmId, status: favoriteStatus}))
+  api.post(generatePath(APIRoute.CHANGE_FILM_FAVORITE_STATUS,{filmId:filmId, status: favoriteStatus}))
     .then(({data}) => dispatch(changeFilmInfo(data)))
     .catch((error) => {
       if(error.response.status === HttpCode.UNAUTHORIZED) {

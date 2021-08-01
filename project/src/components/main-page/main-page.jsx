@@ -11,8 +11,11 @@ import { FILMS_LIST_MAX_COUNT} from '../../const';
 import UserBlock from '../user-block/user-block';
 import {getPromoFilm, getGenre, getGenreList, getFilmsFromGenre, getPromoFilmId} from '../../store/film-data/selectors';
 import {changeFilmFavoriteStatus} from '../../store/api-actions';
+import {getAuthorizationStatus} from '../../store/user/selectors';
+import {AuthorizationStatus} from '../../const';
 
 function MainPage(props) {
+  const authorizationStatus =  useSelector(getAuthorizationStatus);
   const genre = useSelector(getGenre);
   const genreList = useSelector(getGenreList);
   const films = useSelector(getFilmsFromGenre);
@@ -84,7 +87,7 @@ function MainPage(props) {
         </header>
 
         <div className="film-card__wrap">
-          <div className="film-card__info">
+          <div className="film-card__info"  data-testid="filmCardInfo">
             <div className="film-card__poster">
               <img src={filmOfDay.poster} alt={filmOfDay.title} width="218" height="327" />
             </div>
@@ -104,7 +107,7 @@ function MainPage(props) {
                   <span>Play</span>
                 </button>
                 <button className="btn btn--list film-card__button" type="button" onClick={onFavoriteClick}>
-                  {filmOfDay.isFavorite
+                  {filmOfDay.isFavorite && authorizationStatus === AuthorizationStatus.AUTH
                     ? (
                       <svg viewBox="0 0 18 14" width="18" height="14">
                         <use xlinkHref="#in-list"></use>
@@ -124,7 +127,7 @@ function MainPage(props) {
       </section>
 
       <div className="page-content">
-        <section className="catalog">
+        <section className="catalog" data-testid="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <GenreList genreList={genreList} currentGenre={genre} onGenreChange={onGenreChange} resetShowFilms={resetShowFilms}/>
           <FilmList films={films.slice(0,showFilmCount)}></FilmList>

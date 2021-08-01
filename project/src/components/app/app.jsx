@@ -1,5 +1,5 @@
 import React from 'react';
-import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import MainPage from '../main-page/main-page';
 import SignIn from '../sign-in/sign-in';
@@ -12,15 +12,13 @@ import LoadingScreen from '../loading-screen/loading-screen';
 import {useSelector} from 'react-redux';
 import {isCheckedAuth} from '../../utils';
 import PrivateRoute from '../private-route/private-route';
-import browserHistory from '../../browserHistory';
 import {getAuthorizationStatus} from '../../store/user/selectors';
-import {getLoadedDataStatus, getFilmOfDayLoadedStatus, getFilms} from '../../store/film-data/selectors';
+import {getLoadedDataStatus, getFilmOfDayLoadedStatus} from '../../store/film-data/selectors';
 
 function App() {
   const authorizationStatus = useSelector(getAuthorizationStatus);
   const isDataLoaded = useSelector(getLoadedDataStatus);
   const isFilmOfDayLoaded = useSelector(getFilmOfDayLoadedStatus);
-  const films = useSelector(getFilms);
 
   if (isCheckedAuth(authorizationStatus) || !isDataLoaded || !isFilmOfDayLoaded) {
     return (
@@ -29,33 +27,31 @@ function App() {
   }
 
   return (
-    <BrowserRouter history={browserHistory}>
-      <Switch>
-        <Route exact path={AppRoute.ROOT}>
-          <MainPage/>
-        </Route>
-        <Route exact path={AppRoute.LOGIN}>
-          <SignIn />
-        </Route>
-        <PrivateRoute
-          exact
-          path={AppRoute.MY_LIST}
-          render={() => <MyList films={films}/>}
-        >
-        </PrivateRoute>
-        <Route path={AppRoute.FILM} exact component={Film} />
-        <PrivateRoute
-          exact
-          path={AppRoute.REVIEW}
-          render={(componentProps) => <AddReview {...componentProps}/>}
-        />
-        <Route path={AppRoute.PLAYER} exact component={Player} />
-        <Route path={AppRoute.NOT_FOUND} exact component={NotFoundScreen}/>
-        <Route>
-          <NotFoundScreen />
-        </Route>
-      </Switch>
-    </BrowserRouter>
+    <Switch>
+      <Route exact path={AppRoute.ROOT}>
+        <MainPage/>
+      </Route>
+      <Route exact path={AppRoute.LOGIN}>
+        <SignIn />
+      </Route>
+      <PrivateRoute
+        exact
+        path={AppRoute.MY_LIST}
+        render={() => <MyList />}
+      >
+      </PrivateRoute>
+      <Route path={AppRoute.FILM} exact component={Film} />
+      <PrivateRoute
+        exact
+        path={AppRoute.REVIEW}
+        render={(componentProps) => <AddReview {...componentProps}/>}
+      />
+      <Route path={AppRoute.PLAYER} exact component={Player} />
+      <Route path={AppRoute.NOT_FOUND} exact component={NotFoundScreen}/>
+      <Route>
+        <NotFoundScreen />
+      </Route>
+    </Switch>
   );
 }
 

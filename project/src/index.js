@@ -6,9 +6,11 @@ import rootReducer from './store/root-reducer';
 import {createAPI} from './services/api';
 import {requireAuthorization} from './store/action';
 import {AuthorizationStatus} from './const';
-import {checkAuth, fetchFlms, fetchPromoFilm} from './store/api-actions';
+import {checkAuth, fetchFilms, fetchPromoFilm} from './store/api-actions';
 import {redirect} from './store/middlewares/redirect';
 import {configureStore} from '@reduxjs/toolkit';
+import browserHistory from './browserHistory';
+import {Router as BrowserRouter} from 'react-router-dom';
 
 const api = createAPI(
   () => store.dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH)),
@@ -25,14 +27,16 @@ const store = configureStore({
 });
 
 store.dispatch(checkAuth());
-store.dispatch(fetchFlms());
+store.dispatch(fetchFilms());
 store.dispatch(fetchPromoFilm());
 
 ReactDOM.render(
-  <Provider store = {store}>
-    <React.StrictMode>
-      <App/>
-    </React.StrictMode>
-  </Provider>,
+  <React.StrictMode>
+    <Provider store = {store}>
+      <BrowserRouter history={browserHistory}>
+        <App/>
+      </BrowserRouter>
+    </Provider>
+  </React.StrictMode>,
   document.getElementById('root'),
 );
