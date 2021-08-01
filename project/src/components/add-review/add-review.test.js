@@ -28,8 +28,8 @@ const filmDataMock = {
   isFavorite: true,
 };
 
-describe('Conponent AddReview', () => {
-  it('should render AddReview compotent', () => {
+describe('Component AddReview', () => {
+  it('should render AddReview component', () => {
     const history = createMemoryHistory();
     const createFakeStore = configureStore({});
     const store = createFakeStore({

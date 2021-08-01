@@ -11,7 +11,7 @@ function Player (props) {
   const history = useHistory();
   const [isPlaying, setIsPlaying] = useState(true);
   const [isVideoLoading , setIsVideoLoading ] = useState(true);
-  const [currentPlaingTime, setCurrentPlaingTime] = useState(0);
+  const [currentPlayingTime, setCurrentPlayingTime] = useState(0);
   const videoRef = useRef();
 
   useEffect(() => {
@@ -33,7 +33,7 @@ function Player (props) {
   };
 
   const videoTimeUpdate = (evt) => {
-    setCurrentPlaingTime(evt.target.currentTime);
+    setCurrentPlayingTime(evt.target.currentTime);
 
     if(evt.target.currentTime >= filmData.time) {
       videoRef.current.pause();
@@ -56,10 +56,10 @@ function Player (props) {
       <div className="player__controls">
         <div className="player__controls-row">
           <div className="player__time">
-            <progress className="player__progress" value={currentPlaingTime*100/(filmData.time*60)} max='100'></progress>
-            <div className="player__toggler" style={{left: (currentPlaingTime*100/(filmData.time*60)).toString().concat('%')}}>Toggler</div>
+            <progress className="player__progress" value={currentPlayingTime*100/(filmData.time*60)} max='100'></progress>
+            <div className="player__toggler" style={{left: (currentPlayingTime*100/(filmData.time*60)).toString().concat('%')}}>Toggler</div>
           </div>
-          <div className="player__time-value">- {formatVideoTime(filmData.time*60-currentPlaingTime)}</div>
+          <div className="player__time-value">- {formatVideoTime(filmData.time*60-currentPlayingTime)}</div>
         </div>
 
         <div className="player__controls-row">

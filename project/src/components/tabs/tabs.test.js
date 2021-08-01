@@ -35,7 +35,7 @@ const filmReviewsMock = {
 };
 const activeTab = 'Details';
 
-describe('Conponent Tabs', () => {
+describe('Component Tabs', () => {
   it('should render Tabs component', () => {
     const history = createMemoryHistory();
     const {getByText} = render(

@@ -28,8 +28,8 @@ const filmDataMock = {
   isFavorite: true,
 };
 
-describe('Conponent Main-Page', () => {
-  it('should render Main-Page compotent', () => {
+describe('Component Main-Page', () => {
+  it('should render Main-Page component', () => {
     const history = createMemoryHistory();
     const createFakeStore = configureStore({});
     const store = createFakeStore({

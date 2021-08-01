@@ -87,7 +87,7 @@ function Film() {
           </symbol>
         </svg>
       </div>
-      <section className="film-card film-card--full" style={{'backgroundClor':filmData.background}} >
+      <section className="film-card film-card--full" style={{'backgroundColor':filmData.background}} >
         <div className="film-card__hero">
           <div className="film-card__bg">
             <img src={filmData.bigImage} alt={filmData.title} />

@@ -25,8 +25,8 @@ const filmDataMock = {
   isFavorite: true,
 };
 
-describe('Conponent Film-card', () => {
-  it('should render Film-card compotent', () => {
+describe('Component Film-card', () => {
+  it('should render Film-card component', () => {
     const history = createMemoryHistory();
     const {getByText} = render(
       <Router history={history}>

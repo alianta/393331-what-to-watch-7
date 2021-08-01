@@ -4,10 +4,10 @@ import GenreList from './genre-list';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 
-const genreListMock = ['All genries', 'Darama', 'Comedy', 'Fantasy', 'Horror'];
+const genreListMock = ['All genres', 'Drama', 'Comedy', 'Fantasy', 'Horror'];
 const currentGenreMock = 'Comedy';
 
-describe('Conponent Genre list', () => {
+describe('Component Genre list', () => {
   it('should render Genre list component', () => {
     const history = createMemoryHistory();
     const {getByText} = render(

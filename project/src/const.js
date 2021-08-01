@@ -29,7 +29,7 @@ export const APIRoute = {
   LOGIN: '/login',
   LOGOUT: '/logout',
   ADD_COMMENT: '/comments/:filmId',
-  CHANGE_FILM_FAVORITE_STAUS: '/favorite/:filmId/:status',
+  CHANGE_FILM_FAVORITE_STATUS: '/favorite/:filmId/:status',
   FAVORITE: '/favorite',
 };
 

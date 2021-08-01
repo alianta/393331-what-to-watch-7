@@ -24,8 +24,8 @@ const filmDataMock = {
   isFavorite: true,
 };
 
-describe('Conponent Overview', () => {
-  it('should render Overview compotent', () => {
+describe('Component Overview', () => {
+  it('should render Overview component', () => {
     const {getByText} = render(<Overview film={filmDataMock}/>);
 
     expect(getByText(filmDataMock.ratingScore.toFixed(RATING_SCORE_PRECISION))).toBeInTheDocument();

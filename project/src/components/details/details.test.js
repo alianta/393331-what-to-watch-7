@@ -25,8 +25,8 @@ const filmDataMock = {
 
 const filmDataDurationMock = '1h 39m';
 
-describe('Conponent Film details', () => {
-  it('should render film details compotent', () => {
+describe('Component Film details', () => {
+  it('should render film details component', () => {
     const {getByText} = render(<Details film={filmDataMock}/>);
 
     expect(getByText('Director')).toBeInTheDocument();

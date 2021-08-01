@@ -47,7 +47,7 @@ const filmDataMock = {
 
 describe('Reducer: film-data', () => {
   it('should update currentFilm by load loadFilmInfo action', () => {
-    const stateUnknuwn = {authorizationStatus: AuthorizationStatus.UNKNOWN, currentFilm: {}};
+    const stateUnknown = {authorizationStatus: AuthorizationStatus.UNKNOWN, currentFilm: {}};
     const stateNoAuth = {authorizationStatus: AuthorizationStatus.NO_AUTH, currentFilm: {}};
     const stateAuth = {authorizationStatus: AuthorizationStatus.AUTH, currentFilm: {}};
 
@@ -56,7 +56,7 @@ describe('Reducer: film-data', () => {
       payload: filmDataServerMock,
     };
 
-    expect(filmData(stateUnknuwn, loadFilmInfoAction))
+    expect(filmData(stateUnknown, loadFilmInfoAction))
       .toEqual({
         currentFilm: filmDataMock,
         authorizationStatus: AuthorizationStatus.UNKNOWN,
@@ -80,7 +80,7 @@ describe('Reducer: film-data', () => {
   });
 
   it('should update promoFilm by load loadPromoFilm action', () => {
-    const stateUnknuwn = {authorizationStatus: AuthorizationStatus.UNKNOWN, promoFilm: {}};
+    const stateUnknown = {authorizationStatus: AuthorizationStatus.UNKNOWN, promoFilm: {}};
     const stateNoAuth = {authorizationStatus: AuthorizationStatus.NO_AUTH, promoFilm: {}};
     const stateAuth = {authorizationStatus: AuthorizationStatus.AUTH, promoFilm: {}};
 
@@ -89,7 +89,7 @@ describe('Reducer: film-data', () => {
       payload: filmDataServerMock,
     };
 
-    expect(filmData(stateUnknuwn, loadPromoFilmAction))
+    expect(filmData(stateUnknown, loadPromoFilmAction))
       .toEqual({
         promoFilm: {
           ...filmDataMock,
@@ -119,7 +119,7 @@ describe('Reducer: film-data', () => {
   });
 
   it('should load similarFilms by load loadSimilarFilms action', () => {
-    const stateUnknuwn = {authorizationStatus: AuthorizationStatus.UNKNOWN, similarFilms: []};
+    const stateUnknown = {authorizationStatus: AuthorizationStatus.UNKNOWN, similarFilms: []};
     const stateNoAuth = {authorizationStatus: AuthorizationStatus.NO_AUTH, similarFilms: []};
     const stateAuth = {authorizationStatus: AuthorizationStatus.AUTH, similarFilms: []};
 
@@ -128,7 +128,7 @@ describe('Reducer: film-data', () => {
       payload: [filmDataServerMock],
     };
 
-    expect(filmData(stateUnknuwn, loadSimilarFilmsAction))
+    expect(filmData(stateUnknown, loadSimilarFilmsAction))
       .toEqual({
         similarFilms: [filmDataMock],
         authorizationStatus: AuthorizationStatus.UNKNOWN,
@@ -149,7 +149,7 @@ describe('Reducer: film-data', () => {
   });
 
   it('should load films by loadFilms action', () => {
-    const stateUnknuwn = {authorizationStatus: AuthorizationStatus.UNKNOWN, films: []};
+    const stateUnknown = {authorizationStatus: AuthorizationStatus.UNKNOWN, films: []};
     const stateNoAuth = {authorizationStatus: AuthorizationStatus.NO_AUTH, films: []};
     const stateAuth = {authorizationStatus: AuthorizationStatus.AUTH, films: []};
 
@@ -158,7 +158,7 @@ describe('Reducer: film-data', () => {
       payload: [filmDataServerMock],
     };
 
-    expect(filmData(stateUnknuwn, loadFilmsAction))
+    expect(filmData(stateUnknown, loadFilmsAction))
       .toEqual({
         films: [filmDataMock],
         authorizationStatus: AuthorizationStatus.UNKNOWN,
@@ -179,7 +179,7 @@ describe('Reducer: film-data', () => {
   });
 
   it('should change genre by changeGenre action', () => {
-    const stateUnknuwn = {authorizationStatus: AuthorizationStatus.UNKNOWN};
+    const stateUnknown = {authorizationStatus: AuthorizationStatus.UNKNOWN};
     const stateNoAuth = {authorizationStatus: AuthorizationStatus.NO_AUTH};
     const stateAuth = {authorizationStatus: AuthorizationStatus.AUTH};
 
@@ -188,7 +188,7 @@ describe('Reducer: film-data', () => {
       payload: 'Drama',
     };
 
-    expect(filmData(stateUnknuwn, changeGenreAction))
+    expect(filmData(stateUnknown, changeGenreAction))
       .toEqual({
         authorizationStatus: AuthorizationStatus.UNKNOWN,
         genre: 'Drama',
@@ -210,7 +210,7 @@ describe('Reducer: film-data', () => {
       ...filmDataMock,
       id:1000,
     };
-    const stateUnknuwn = {
+    const stateUnknown = {
       authorizationStatus: AuthorizationStatus.UNKNOWN,
       currentFilm: filmDataMock,
       promoFilm: promoFilmMock,
@@ -234,7 +234,7 @@ describe('Reducer: film-data', () => {
       payload: filmDataServerMock,
     };
 
-    expect(filmData(stateUnknuwn, changeFilmInfoAction))
+    expect(filmData(stateUnknown, changeFilmInfoAction))
       .toEqual({
         authorizationStatus: AuthorizationStatus.UNKNOWN,
         currentFilm: filmDataMock,
@@ -261,7 +261,7 @@ describe('Reducer: film-data', () => {
       ...filmDataMock,
       id:1000,
     };
-    const stateUnknuwn = {
+    const stateUnknown = {
       authorizationStatus: AuthorizationStatus.UNKNOWN,
       currentFilm: currentFilmMock,
       promoFilm: filmDataMock,
@@ -285,7 +285,7 @@ describe('Reducer: film-data', () => {
       payload: filmDataServerMock,
     };
 
-    expect(filmData(stateUnknuwn, changeFilmInfoAction))
+    expect(filmData(stateUnknown, changeFilmInfoAction))
       .toEqual({
         authorizationStatus: AuthorizationStatus.UNKNOWN,
         currentFilm: currentFilmMock,

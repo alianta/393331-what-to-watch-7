@@ -12,9 +12,9 @@ let store = null;
 let fakeApp = null;
 
 
-describe('Conponent UserBlock', () => {
+describe('Component UserBlock', () => {
 
-  it('should render UserBlock compotent for Authorize user', () => {
+  it('should render UserBlock component for Authorize user', () => {
     history = createMemoryHistory();
     const createFakeStore = configureStore({});
     store = createFakeStore({
@@ -44,7 +44,7 @@ describe('Conponent UserBlock', () => {
     expect(screen.getByText('Sign out')).toBeInTheDocument();
   });
 
-  it('should render UserBlock compotent for Unauthorize user', () => {
+  it('should render UserBlock component for Unauthorize user', () => {
     history = createMemoryHistory();
     const createFakeStore = configureStore({});
     store = createFakeStore({

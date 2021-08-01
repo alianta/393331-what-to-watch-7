@@ -11,8 +11,8 @@ const reviewsMock = [{
   ratingScore: 8.9,
 }];
 
-describe('Conponent Review', () => {
-  it('should render Review compotent', () => {
+describe('Component Review', () => {
+  it('should render Review component', () => {
     const {getByText} = render(<Reviews filmReviews={reviewsMock}/>);
 
     expect(getByText(reviewsMock[0].text)).toBeInTheDocument();

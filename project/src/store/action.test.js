@@ -115,7 +115,7 @@ describe('Actions', () => {
       backgroundImage: 'img/the-grand-budapest-hotel-bg.jpg',
       backgroundColor: '#ffffff',
       videoLink: 'https://some-link',
-      previewVideoLlink: 'https://some-link',
+      previewVideoLink: 'https://some-link',
       description: 'In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave\'s friend and protege.',
       rating: 8.9,
       scoresCount: 240,
@@ -135,7 +135,7 @@ describe('Actions', () => {
     expect(loadPromoFilm(mockData)).toEqual(expectedAction);
   });
 
-  it('action creator for requir authorization returns correct action', () => {
+  it('action creator for required authorization returns correct action', () => {
     const mockData = 'AUTH';
 
     const expectedAction = {

@@ -115,7 +115,7 @@ describe('Reducer: user', () => {
       });
   });
 
-  it('should update favoriteFilms by load favorite gilms', () => {
+  it('should update favoriteFilms by load favorite films', () => {
     const state = {authorizationStatus: AuthorizationStatus.AUTH, favoriteFilms: []};
     const loadFavoriteFilmsAction = {
       type: ActionType.LOAD_FAVORITE_FILMS,

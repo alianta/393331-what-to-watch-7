@@ -1,7 +1,7 @@
 import MockAdapter from 'axios-mock-adapter';
 import {createAPI} from '../services/api';
 import {ActionType} from './action';
-import {checkAuth, login, fetchFlms, fetchFlmInfo, fetchSimilarFilms, fetchPromoFilm, fetchComments, addComment, changeFilmFavoriteStatus, fetchFavoriteFilms} from './api-actions';
+import {checkAuth, login, fetchFilms, fetchFlmInfo, fetchSimilarFilms, fetchPromoFilm, fetchComments, addComment, changeFilmFavoriteStatus, fetchFavoriteFilms} from './api-actions';
 import {APIRoute, AppRoute, AuthorizationStatus} from '../const';
 import { generatePath } from 'react-router';
 
@@ -116,10 +116,10 @@ describe('Async operations', () => {
       });
   });
 
-  it('should make a correct API call to GET /flms', () => {
+  it('should make a correct API call to GET /films', () => {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
-    const filmsLoader = fetchFlms();
+    const filmsLoader = fetchFilms();
 
     apiMock
       .onGet(APIRoute.FILMS)
@@ -253,7 +253,7 @@ describe('Async operations', () => {
     const changeFilmFavoriteStatusLoader = changeFilmFavoriteStatus(filmId,favoriteStatus);
 
     apiMock
-      .onPost(generatePath(APIRoute.CHANGE_FILM_FAVORITE_STAUS,{filmId: filmId, status: favoriteStatus}))
+      .onPost(generatePath(APIRoute.CHANGE_FILM_FAVORITE_STATUS,{filmId: filmId, status: favoriteStatus}))
       .reply(200, filmDataServerMock);
 
     return changeFilmFavoriteStatusLoader(dispatch, () => {}, api)
