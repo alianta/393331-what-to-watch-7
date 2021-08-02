@@ -1,8 +1,11 @@
 import React from 'react';
-import {render} from '@testing-library/react';
+import {render, screen} from '@testing-library/react';
 import Player from './player';
 import {createMemoryHistory} from 'history';
-import {Router} from 'react-router-dom';
+import {Router, Switch, Route} from 'react-router-dom';
+import userEvent from '@testing-library/user-event';
+
+let history = null;
 
 const filmDataMock = {
   id: 1,
@@ -28,19 +31,49 @@ const filmDataMock = {
 describe('Component: Player', () => {
   beforeAll(() => {
     window.HTMLMediaElement.prototype.play = () => {};
+    history = createMemoryHistory();
+    history.push(`/player/${filmDataMock.id}`, filmDataMock);
   });
 
   it('should render correctly', () => {
-    const history = createMemoryHistory();
-    history.push(`/player/${filmDataMock.id}`, filmDataMock);
-
     const {getByText} = render(
       <Router history={history}>
-        <Player />
+        <Player location={history.location}/>
       </Router>
       ,
     );
 
     expect(getByText(filmDataMock.title)).toBeInTheDocument();
+    expect(getByText('Exit')).toBeInTheDocument();
+  });
+
+  it('should switch player to full mode', () => {
+    render(
+      <Router history={history}>
+        <Player location={history.location}/>
+      </Router>,
+    );
+
+    userEvent.click(document.querySelector('.player__full-screen'));
+    expect(Document.fullscreenElement).not.toBe(null);
+  });
+
+  it('should redirect to main screen on exit button click', () => {
+    render(
+      <Router history={history}>
+        <Switch>
+          <Route path="/" exact>
+            <h1>This is main page</h1>
+          </Route>
+          <Route>
+            <Player location={history.location}/>
+          </Route>
+        </Switch>
+      </Router>,
+    );
+
+    expect(screen.queryByText(/This is main page/i)).not.toBeInTheDocument();
+    userEvent.click(document.querySelector('.player__exit'));
+    expect(screen.queryByText(/This is main page/i)).toBeInTheDocument();
   });
 });
