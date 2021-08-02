@@ -14,13 +14,18 @@ import {isCheckedAuth} from '../../utils';
 import PrivateRoute from '../private-route/private-route';
 import {getAuthorizationStatus} from '../../store/user/selectors';
 import {getLoadedDataStatus, getFilmOfDayLoadedStatus} from '../../store/film-data/selectors';
+//import {getServerErrorStatus} from '../../store/server/selectors';
+//import Error from '../error/error';
 
 function App() {
   const authorizationStatus = useSelector(getAuthorizationStatus);
   const isDataLoaded = useSelector(getLoadedDataStatus);
   const isFilmOfDayLoaded = useSelector(getFilmOfDayLoadedStatus);
+  //const isServerError = useSelector(getServerErrorStatus);
 
-  if (isCheckedAuth(authorizationStatus) || !isDataLoaded || !isFilmOfDayLoaded) {
+  /*if (isServerError) {
+    return <Error />;
+  } else */if (isCheckedAuth(authorizationStatus) || !isDataLoaded || !isFilmOfDayLoaded) {
     return (
       <LoadingScreen />
     );

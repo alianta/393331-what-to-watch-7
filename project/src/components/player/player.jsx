@@ -5,9 +5,13 @@ import {useHistory} from 'react-router-dom';
 import {formatVideoTime} from '../../utils';
 import VideoLoadingSpinner from '../video-loading-spinner/video-loading-spinner';
 import {VIDEO_CAN_START_PLAYING_STATE} from '../../const';
+import Error from '../error/error';
+import {getServerErrorStatus} from '../../store/server/selectors';
+import {useSelector} from 'react-redux';
 
 function Player (props) {
   const filmData = props.location.state;
+  const isServerError = useSelector(getServerErrorStatus);
   const history = useHistory();
   const [isPlaying, setIsPlaying] = useState(true);
   const [isVideoLoading , setIsVideoLoading ] = useState(true);
@@ -43,6 +47,7 @@ function Player (props) {
   };
   return (
     <div className="player">
+      {isServerError?<Error />:''}
       <video
         src={filmData.video}
         ref={videoRef}

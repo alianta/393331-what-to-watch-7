@@ -56,6 +56,9 @@ describe('Component AddReview', () => {
           token: 'T2xpdmVyLmNvbm5lckBnbWFpbC5jb20=;',
         },
       },
+      SERVER: {
+        isServerError: false,
+      },
     });
 
     history.push('/film/1/review');

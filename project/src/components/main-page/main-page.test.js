@@ -56,6 +56,9 @@ describe('Component Main-Page', () => {
           token: 'T2xpdmVyLmNvbm5lckBnbWFpbC5jb20=;',
         },
       },
+      SERVER: {
+        isServerError: false,
+      },
     });
 
     history.push(AppRoute.ROOT);

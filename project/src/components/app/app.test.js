@@ -72,6 +72,9 @@ describe('Application Routing', () => {
         },
         favoriteFilms: [filmDataMock],
       },
+      SERVER: {
+        isServerError: false,
+      },
     });
 
     fakeApp = (

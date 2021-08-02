@@ -5,8 +5,12 @@ import {useHistory} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import {login} from '../../store/api-actions';
 import {useDispatch} from 'react-redux';
+import Error from '../error/error';
+import {getServerErrorStatus} from '../../store/server/selectors';
+import {useSelector} from 'react-redux';
 
 function SignIn() {
+  const isServerError = useSelector(getServerErrorStatus);
   const dispatch = useDispatch();
   const onSubmit = (authData) => {
     dispatch(login(authData));
@@ -41,6 +45,7 @@ function SignIn() {
 
   return (
     <div className="user-page">
+      {isServerError?<Error />:''}
       <header className="page-header user-page__head">
         <Logo />
         <h1 className="page-title user-page__title">Sign in</h1>

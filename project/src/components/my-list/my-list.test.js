@@ -50,6 +50,9 @@ describe('Component: NotFoundScreen', () => {
         },
         favoriteFilms: [filmDataMock],
       },
+      SERVER: {
+        isServerError: false,
+      },
     });
 
     const {getByText} = render(

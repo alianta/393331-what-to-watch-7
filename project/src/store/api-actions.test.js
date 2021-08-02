@@ -60,7 +60,7 @@ describe('Async operations', () => {
 
     return checkAuthLoader(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(2);
+        expect(dispatch).toHaveBeenCalledTimes(3);
         expect(dispatch).toHaveBeenNthCalledWith(1,{
           type: ActionType.LOAD_AUTHORIZATION_INFO,
           payload:  {
@@ -71,6 +71,10 @@ describe('Async operations', () => {
           },
         });
         expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: ActionType.CHANGE_SERVER_ERROR_STATUS,
+          payload: false,
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(3, {
           type: ActionType.REQUIRED_AUTHORIZATION,
           payload: AuthorizationStatus.AUTH,
         });
@@ -90,8 +94,12 @@ describe('Async operations', () => {
 
     return logoutLoader(dispatch, jest.fn(() => {}), api)
       .then(() => {
-        expect(dispatch).toBeCalledTimes(1);
-        expect(dispatch).nthCalledWith(1, {
+        expect(dispatch).toBeCalledTimes(2);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.CHANGE_SERVER_ERROR_STATUS,
+          payload: false,
+        });
+        expect(dispatch).nthCalledWith(2, {
           type: ActionType.LOGOUT,
         });
 
@@ -117,7 +125,7 @@ describe('Async operations', () => {
 
     return loginLoader(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(3);
+        expect(dispatch).toHaveBeenCalledTimes(4);
 
         expect(dispatch).toHaveBeenNthCalledWith(1,{
           type: ActionType.LOAD_AUTHORIZATION_INFO,
@@ -129,10 +137,14 @@ describe('Async operations', () => {
           },
         });
         expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: ActionType.CHANGE_SERVER_ERROR_STATUS,
+          payload: false,
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(3, {
           type: ActionType.REQUIRED_AUTHORIZATION,
           payload: AuthorizationStatus.AUTH,
         });
-        expect(dispatch).toHaveBeenNthCalledWith(3, {
+        expect(dispatch).toHaveBeenNthCalledWith(4, {
           type: ActionType.REDIRECT_TO_ROUTE,
           payload: AppRoute.ROOT,
         });
@@ -150,10 +162,14 @@ describe('Async operations', () => {
 
     return filmsLoader(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenCalledTimes(2);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_FILMS,
           payload: [filmDataServerMock],
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: ActionType.CHANGE_SERVER_ERROR_STATUS,
+          payload: false,
         });
       });
   });
@@ -190,10 +206,14 @@ describe('Async operations', () => {
 
     return filmLoader(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenCalledTimes(2);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_SIMILAR_FILMS,
           payload: [filmDataServerMock],
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: ActionType.CHANGE_SERVER_ERROR_STATUS,
+          payload: false,
         });
       });
   });
@@ -209,10 +229,14 @@ describe('Async operations', () => {
 
     return filmLoader(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenCalledTimes(2);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_PROMO_FILM,
           payload: filmDataServerMock,
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: ActionType.CHANGE_SERVER_ERROR_STATUS,
+          payload: false,
         });
       });
   });
@@ -229,10 +253,14 @@ describe('Async operations', () => {
 
     return commentsLoader(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenCalledTimes(2);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_FILM_COMMENTS,
           payload: [filmReviewServerMock],
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: ActionType.CHANGE_SERVER_ERROR_STATUS,
+          payload: false,
         });
       });
   });
@@ -254,13 +282,17 @@ describe('Async operations', () => {
 
     return addCommentLoader(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(2);
+        expect(dispatch).toHaveBeenCalledTimes(3);
 
         expect(dispatch).toHaveBeenNthCalledWith(1,{
           type: ActionType.LOAD_FILM_COMMENTS,
           payload:  filmReviewServerMock,
         });
         expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: ActionType.CHANGE_SERVER_ERROR_STATUS,
+          payload: false,
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(3, {
           type: ActionType.REDIRECT_TO_ROUTE,
           payload: generatePath(AppRoute.FILM, {id:filmId}),
         });
@@ -281,11 +313,15 @@ describe('Async operations', () => {
 
     return changeFilmFavoriteStatusLoader(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenCalledTimes(2);
 
         expect(dispatch).toHaveBeenNthCalledWith(1,{
           type: ActionType.CHANGE_FILM_INFO,
           payload:  filmDataServerMock,
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: ActionType.CHANGE_SERVER_ERROR_STATUS,
+          payload: false,
         });
       });
   });
@@ -301,10 +337,14 @@ describe('Async operations', () => {
 
     return filmsLoader(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenCalledTimes(2);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_FAVORITE_FILMS,
           payload: [filmDataServerMock],
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: ActionType.CHANGE_SERVER_ERROR_STATUS,
+          payload: false,
         });
       });
   });

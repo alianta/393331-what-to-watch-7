@@ -7,15 +7,19 @@ import { Provider } from 'react-redux';
 import userEvent from '@testing-library/user-event';
 import SignIn from './sign-in';
 
-const mockStore = configureStore({});
-
 describe('Component: Sign-in', () => {
   it('should render "Sign-in" when user navigate to "login" url', () => {
     const history = createMemoryHistory();
     history.push('/login');
+    const createFakeStore = configureStore({});
+    const store = createFakeStore({
+      SERVER: {
+        isServerError: false,
+      },
+    });
 
     render(
-      <Provider store={mockStore({})}>
+      <Provider store={store}>
         <Router history={history}>
           <SignIn />
         </Router>

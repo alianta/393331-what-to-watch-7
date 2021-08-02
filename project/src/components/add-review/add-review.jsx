@@ -8,10 +8,13 @@ import UserBlock from '../user-block/user-block';
 import {useSelector, useDispatch} from 'react-redux';
 import {addComment} from '../../store/api-actions';
 import {getCurrentFilm} from '../../store/film-data/selectors';
+import Error from '../error/error';
+import {getServerErrorStatus} from '../../store/server/selectors';
 
 function AddReview (props) {
   const {id} = useParams();
   const filmData = useSelector(getCurrentFilm);
+  const isServerError = useSelector(getServerErrorStatus);
   const dispatch = useDispatch();
   const onSubmit = (comment) => {
     dispatch(addComment(comment));
@@ -19,6 +22,7 @@ function AddReview (props) {
 
   return (
     <section className="film-card film-card--full" style={{'backgroundColor':filmData.background}}>
+      {isServerError?<Error />:''}
       <div className="film-card__header">
         <div className="film-card__bg">
           <img src={filmData.bigImage} alt={filmData.title} />

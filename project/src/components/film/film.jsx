@@ -15,6 +15,8 @@ import UserBlock from '../user-block/user-block';
 import {getAuthorizationStatus} from '../../store/user/selectors';
 import {getCurrentFilm, getFilmLoadedStatus, getSimilarFilms as getSimilarFilmsData, getSimilarFilmLoadedStatus} from '../../store/film-data/selectors';
 import {getCommentsLoadedStatus, getComments as getCommentsData} from '../../store/review-data/selectors';
+import Error from '../error/error';
+import {getServerErrorStatus} from '../../store/server/selectors';
 
 function Film() {
   const {id} = useParams();
@@ -25,6 +27,7 @@ function Film() {
   const isCommentsLoaded = useSelector(getCommentsLoadedStatus);
   const comments = useSelector(getCommentsData);
   const authorizationStatus = useSelector(getAuthorizationStatus);
+  const isServerError = useSelector(getServerErrorStatus);
 
   const onFavoriteClick = () => {
     dispatch(changeFilmFavoriteStatus(id, filmData.isFavorite? 0:1));
@@ -57,6 +60,7 @@ function Film() {
   return (
     <React.Fragment>
       <div className="visually-hidden">
+        {isServerError?<Error />:''}
         <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
           <symbol id="add" viewBox="0 0 19 20">
             <title>+</title>

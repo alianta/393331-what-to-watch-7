@@ -13,6 +13,8 @@ import {getPromoFilm, getGenre, getGenreList, getFilmsFromGenre, getPromoFilmId}
 import {changeFilmFavoriteStatus} from '../../store/api-actions';
 import {getAuthorizationStatus} from '../../store/user/selectors';
 import {AuthorizationStatus} from '../../const';
+import Error from '../error/error';
+import {getServerErrorStatus} from '../../store/server/selectors';
 
 function MainPage(props) {
   const authorizationStatus =  useSelector(getAuthorizationStatus);
@@ -21,6 +23,7 @@ function MainPage(props) {
   const films = useSelector(getFilmsFromGenre);
   const filmOfDay = useSelector(getPromoFilm);
   const currentFilmId = useSelector(getPromoFilmId);
+  const isServerError = useSelector(getServerErrorStatus);
 
   const dispatch = useDispatch();
   const onGenreChange = (newGenre) => {
@@ -42,6 +45,7 @@ function MainPage(props) {
 
   return (
     <div>
+      {isServerError?<Error />:''}
       <div className="visually-hidden">
         <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
           <symbol id="add" viewBox="0 0 19 20">

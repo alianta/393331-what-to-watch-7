@@ -13,6 +13,7 @@ export const ActionType = {
   REDIRECT_TO_ROUTE: 'redirectToRoute',
   CHANGE_FILM_INFO: 'changeFilmInfo',
   LOAD_FAVORITE_FILMS: 'loadFavoriteFilms',
+  CHANGE_SERVER_ERROR_STATUS: 'changeServerErrorStatus',
 };
 
 export const changeGenre = createAction(ActionType.CHANGE_GENRE);
@@ -27,3 +28,4 @@ export const logout = createAction(ActionType.LOGOUT);
 export const redirectToRoute = createAction(ActionType.REDIRECT_TO_ROUTE);
 export const changeFilmInfo = createAction(ActionType.CHANGE_FILM_INFO);
 export const loadFavoriteFilms = createAction(ActionType.LOAD_FAVORITE_FILMS);
+export const changeServerErrorStatus = createAction(ActionType.CHANGE_SERVER_ERROR_STATUS);

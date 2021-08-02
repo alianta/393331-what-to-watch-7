@@ -4,8 +4,11 @@ import Player from './player';
 import {createMemoryHistory} from 'history';
 import {Router, Switch, Route} from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
+import configureStore from 'redux-mock-store';
+import { Provider } from 'react-redux';
 
 let history = null;
+let store = null;
 
 const filmDataMock = {
   id: 1,
@@ -33,13 +36,21 @@ describe('Component: Player', () => {
     window.HTMLMediaElement.prototype.play = () => {};
     history = createMemoryHistory();
     history.push(`/player/${filmDataMock.id}`, filmDataMock);
+    const createFakeStore = configureStore({});
+    store = createFakeStore({
+      SERVER: {
+        isServerError: false,
+      },
+    });
   });
 
   it('should render correctly', () => {
     const {getByText} = render(
-      <Router history={history}>
-        <Player location={history.location}/>
-      </Router>
+      <Provider store={store}>
+        <Router history={history}>
+          <Player location={history.location}/>
+        </Router>
+      </Provider>
       ,
     );
 
@@ -49,9 +60,11 @@ describe('Component: Player', () => {
 
   it('should switch player to full mode', () => {
     render(
-      <Router history={history}>
-        <Player location={history.location}/>
-      </Router>,
+      <Provider store={store}>
+        <Router history={history}>
+          <Player location={history.location}/>
+        </Router>
+      </Provider>,
     );
 
     userEvent.click(document.querySelector('.player__full-screen'));
@@ -60,16 +73,18 @@ describe('Component: Player', () => {
 
   it('should redirect to main screen on exit button click', () => {
     render(
-      <Router history={history}>
-        <Switch>
-          <Route path="/" exact>
-            <h1>This is main page</h1>
-          </Route>
-          <Route>
-            <Player location={history.location}/>
-          </Route>
-        </Switch>
-      </Router>,
+      <Provider store={store}>
+        <Router history={history}>
+          <Switch>
+            <Route path="/" exact>
+              <h1>This is main page</h1>
+            </Route>
+            <Route>
+              <Player location={history.location}/>
+            </Route>
+          </Switch>
+        </Router>
+      </Provider>,
     );
 
     expect(screen.queryByText(/This is main page/i)).not.toBeInTheDocument();
