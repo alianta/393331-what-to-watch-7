@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import filmProp from '../film/filmProp';
-import {COMMENT_MIN_LENGTH, COMMENT_MAX_LENGTH} from '../../const';
+import {COMMENT_MIN_LENGTH, COMMENT_MAX_LENGTH, RATING_STAR_COUNT} from '../../const';
 
-const RATING_STAR_COUNT = 10;
+
 function getSubmitButtonStatus (ratingCount, reviewLength){
   if(ratingCount > 0 && reviewLength >= COMMENT_MIN_LENGTH && reviewLength <= COMMENT_MAX_LENGTH) {
     return false;
@@ -66,6 +66,7 @@ function AddReviewForm (props) {
             setReview(element.target.value);
             setSubmitButtonDisabled(getSubmitButtonStatus(rating, element.target.value.length));
           }}
+          data-testid="review-text"
         >
         </textarea>
         <div className="add-review__submit">

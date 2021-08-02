@@ -9,7 +9,7 @@ import {AuthorizationStatus} from './const';
 import {checkAuth, fetchFilms, fetchPromoFilm} from './store/api-actions';
 import {redirect} from './store/middlewares/redirect';
 import {configureStore} from '@reduxjs/toolkit';
-import browserHistory from './browserHistory';
+import browserHistory from './browser-history';
 import {Router as BrowserRouter} from 'react-router-dom';
 
 const api = createAPI(
