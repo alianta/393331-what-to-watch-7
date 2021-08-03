@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, generatePath } from 'react-router-dom';
 import filmProp from '../film/filmProp';
-import { generatePath } from 'react-router';
 import VideoPlayer from '../video-player/video-player';
 
 function FilmCard(props) {

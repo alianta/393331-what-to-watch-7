@@ -1,12 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, generatePath } from 'react-router-dom';
 import Footer from '../footer/footer';
 import Logo from '../logo/logo';
 import PropTypes from 'prop-types';
 import FilmList from '../film-list/film-list';
 import Tabs from '../tabs/tabs';
 import {useHistory} from 'react-router-dom';
-import { generatePath } from 'react-router';
 import { TabNames, SIMILAR_FILM_COUNT, AuthorizationStatus} from '../../const';
 import {fetchFlmInfo, fetchSimilarFilms, fetchComments, changeFilmFavoriteStatus} from '../../store/api-actions';
 import {useSelector, useDispatch} from 'react-redux';

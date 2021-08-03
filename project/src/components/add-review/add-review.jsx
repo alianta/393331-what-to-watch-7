@@ -1,9 +1,8 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, generatePath } from 'react-router-dom';
 import Logo from '../logo/logo';
 import PropTypes from 'prop-types';
 import AddReviewForm from '../add-review-form/add-review-form';
-import { generatePath } from 'react-router';
 import UserBlock from '../user-block/user-block';
 import {useSelector, useDispatch} from 'react-redux';
 import {addComment} from '../../store/api-actions';

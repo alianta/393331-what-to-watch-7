@@ -1,6 +1,6 @@
 import {loadFilms, loadFilmInfo, loadSimilarFilms, redirectToRoute, loadPromoFilm, loadFilmComments, loadAuthorizationInfo, requireAuthorization, logout as logoutAction, changeFilmInfo, loadFavoriteFilms, changeServerErrorStatus} from './action';
 import {AuthorizationStatus, AppRoute, APIRoute, HttpCode} from '../const';
-import { generatePath } from 'react-router';
+import { generatePath } from 'react-router-dom';
 
 export const fetchFilms = () => (dispatch, _getState, api) => (
   api.get(APIRoute.FILMS)

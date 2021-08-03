@@ -3,7 +3,7 @@ import {createAPI} from '../services/api';
 import {ActionType} from './action';
 import {checkAuth, login, fetchFilms, fetchFlmInfo, fetchSimilarFilms, fetchPromoFilm, fetchComments, addComment, changeFilmFavoriteStatus, fetchFavoriteFilms, logout} from './api-actions';
 import {APIRoute, AppRoute, AuthorizationStatus} from '../const';
-import { generatePath } from 'react-router';
+import { generatePath } from 'react-router-dom';
 
 let api = null;
 /*eslint-disable */
