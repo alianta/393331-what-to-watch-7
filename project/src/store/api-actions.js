@@ -8,7 +8,11 @@ export const fetchFilms = () => (dispatch, _getState, api) => (
       dispatch(loadFilms(data));
       dispatch(changeServerErrorStatus(false));
     })
-    .catch(() => dispatch(changeServerErrorStatus(true)))
+    .catch((error) => {
+      if(error.response.status !== HttpCode.UNAUTHORIZED) {
+        dispatch(changeServerErrorStatus(true));
+      }
+    })
 );
 
 export const fetchFlmInfo = (id) => (dispatch, _getState, api) => (
@@ -23,7 +27,11 @@ export const fetchSimilarFilms = (id) => (dispatch, _getState, api) => (
       dispatch(loadSimilarFilms(data));
       dispatch(changeServerErrorStatus(false));
     })
-    .catch(() => dispatch(changeServerErrorStatus(true)))
+    .catch((error) => {
+      if(error.response.status !== HttpCode.UNAUTHORIZED) {
+        dispatch(changeServerErrorStatus(true));
+      }
+    })
 );
 
 export const fetchPromoFilm = () => (dispatch, _getState, api) => (
@@ -32,7 +40,11 @@ export const fetchPromoFilm = () => (dispatch, _getState, api) => (
       dispatch(loadPromoFilm(data));
       dispatch(changeServerErrorStatus(false));
     })
-    .catch(() => dispatch(changeServerErrorStatus(true)))
+    .catch((error) => {
+      if(error.response.status !== HttpCode.UNAUTHORIZED) {
+        dispatch(changeServerErrorStatus(true));
+      }
+    })
 );
 
 export const fetchComments = (id) => (dispatch, _getState, api) => (
@@ -41,7 +53,11 @@ export const fetchComments = (id) => (dispatch, _getState, api) => (
       dispatch(loadFilmComments(data));
       dispatch(changeServerErrorStatus(false));
     })
-    .catch(() => dispatch(changeServerErrorStatus(true)))
+    .catch((error) => {
+      if(error.response.status !== HttpCode.UNAUTHORIZED) {
+        dispatch(changeServerErrorStatus(true));
+      }
+    })
 );
 
 export const checkAuth = () => (dispatch, _getState, api) => (
@@ -51,7 +67,11 @@ export const checkAuth = () => (dispatch, _getState, api) => (
       dispatch(changeServerErrorStatus(false));
     })
     .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
-    .catch(() => dispatch(changeServerErrorStatus(true)))
+    .catch((error) => {
+      if(error.response.status !== HttpCode.UNAUTHORIZED) {
+        dispatch(changeServerErrorStatus(true));
+      }
+    })
 );
 
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
@@ -63,7 +83,11 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
     })
     .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
     .then(() => dispatch(redirectToRoute(AppRoute.ROOT)))
-    .catch(() => dispatch(changeServerErrorStatus(true)))
+    .catch((error) => {
+      if(error.response.status !== HttpCode.UNAUTHORIZED) {
+        dispatch(changeServerErrorStatus(true));
+      }
+    })
 );
 
 export const addComment = ({rating, comment, filmId}) => (dispatch, _getState, api) => (
@@ -73,7 +97,11 @@ export const addComment = ({rating, comment, filmId}) => (dispatch, _getState, a
       dispatch(changeServerErrorStatus(false));
     })
     .then(() => dispatch(redirectToRoute(generatePath(AppRoute.FILM, {id:filmId}))))
-    .catch(() => dispatch(changeServerErrorStatus(true)))
+    .catch((error) => {
+      if(error.response.status !== HttpCode.UNAUTHORIZED) {
+        dispatch(changeServerErrorStatus(true));
+      }
+    })
 );
 
 export const logout = () => (dispatch, _getState, api) => (
@@ -83,7 +111,11 @@ export const logout = () => (dispatch, _getState, api) => (
       dispatch(changeServerErrorStatus(false));
     })
     .then(() => dispatch(logoutAction()))
-    .catch(() => dispatch(changeServerErrorStatus(true)))
+    .catch((error) => {
+      if(error.response.status !== HttpCode.UNAUTHORIZED) {
+        dispatch(changeServerErrorStatus(true));
+      }
+    })
 );
 
 export const changeFilmFavoriteStatus = (filmId, favoriteStatus) => (dispatch, _getState, api) => (
@@ -107,5 +139,9 @@ export const fetchFavoriteFilms = () => (dispatch, _getState, api) => (
       dispatch(loadFavoriteFilms(data));
       dispatch(changeServerErrorStatus(false));
     })
-    .catch(() => dispatch(changeServerErrorStatus(true)))
+    .catch((error) => {
+      if(error.response.status !== HttpCode.UNAUTHORIZED) {
+        dispatch(changeServerErrorStatus(true));
+      }
+    })
 );
