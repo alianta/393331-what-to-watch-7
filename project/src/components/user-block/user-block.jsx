@@ -6,7 +6,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {logout} from '../../store/api-actions';
 import {getAuthorizationStatus, getAvatar} from '../../store/user/selectors';
 
-function UserBlock (props) {
+function UserBlock () {
   const history = useHistory();
   const authorizationStatus =  useSelector(getAuthorizationStatus);
   const avatar =  useSelector(getAvatar).avatar_url??'';

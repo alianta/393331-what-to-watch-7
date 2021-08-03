@@ -78,11 +78,6 @@ function AddReviewForm (props) {
 }
 
 AddReviewForm.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-    }),
-  }),
   onReview: PropTypes.func.isRequired,
   film: filmProp,
 };

@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import { Link, useParams, generatePath } from 'react-router-dom';
 import Footer from '../footer/footer';
 import Logo from '../logo/logo';
-import PropTypes from 'prop-types';
 import FilmList from '../film-list/film-list';
 import Tabs from '../tabs/tabs';
 import {useHistory} from 'react-router-dom';
@@ -161,13 +160,5 @@ function Film() {
     </React.Fragment>
   );
 }
-
-Film.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-    }),
-  }),
-};
 
 export default Film;

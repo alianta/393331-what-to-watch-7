@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, useParams, generatePath } from 'react-router-dom';
 import Logo from '../logo/logo';
-import PropTypes from 'prop-types';
 import AddReviewForm from '../add-review-form/add-review-form';
 import UserBlock from '../user-block/user-block';
 import {useSelector, useDispatch} from 'react-redux';
@@ -10,7 +9,7 @@ import {getCurrentFilm} from '../../store/film-data/selectors';
 import Error from '../error/error';
 import {getServerErrorStatus} from '../../store/server/selectors';
 
-function AddReview (props) {
+function AddReview () {
   const {id} = useParams();
   const filmData = useSelector(getCurrentFilm);
   const isServerError = useSelector(getServerErrorStatus);
@@ -65,13 +64,5 @@ function AddReview (props) {
     </section>
   );
 }
-
-AddReview.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-    }),
-  }),
-};
 
 export default AddReview;

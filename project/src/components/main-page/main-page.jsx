@@ -16,7 +16,7 @@ import {AuthorizationStatus} from '../../const';
 import Error from '../error/error';
 import {getServerErrorStatus} from '../../store/server/selectors';
 
-function MainPage(props) {
+function MainPage() {
   const authorizationStatus =  useSelector(getAuthorizationStatus);
   const genre = useSelector(getGenre);
   const genreList = useSelector(getGenreList);
