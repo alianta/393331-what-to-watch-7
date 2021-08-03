@@ -15,7 +15,7 @@ function MyList() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchFavoriteFilms());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="user-page">

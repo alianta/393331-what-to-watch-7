@@ -31,21 +31,21 @@ function Film() {
     dispatch(changeFilmFavoriteStatus(id, filmData.isFavorite? 0:1));
   };
   const dispatch = useDispatch();
-  const getFilmInfo = (filmId) => {
-    dispatch(fetchFlmInfo(filmId));
-  };
-  const getSimilarFilms = (filmId) => {
-    dispatch(fetchSimilarFilms(filmId));
-  };
-  const getComments = (filmId) => {
-    dispatch(fetchComments(filmId));
-  };
 
   useEffect(() => {
+    const getFilmInfo = (filmId) => {
+      dispatch(fetchFlmInfo(filmId));
+    };
+    const getSimilarFilms = (filmId) => {
+      dispatch(fetchSimilarFilms(filmId));
+    };
+    const getComments = (filmId) => {
+      dispatch(fetchComments(filmId));
+    };
     getFilmInfo(id);
     getSimilarFilms(id);
     getComments(id);
-  }, [id]);
+  }, [id, dispatch]);
   const history = useHistory();
   const [activeTab, setActiveTab] = useState(TabNames.OVERVIEW);
 
