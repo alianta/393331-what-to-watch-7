@@ -21,7 +21,7 @@ function SignIn() {
   const history = useHistory();
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (evt) => {
+  const handleFormSubmit = (evt) => {
     const userPassword = passwordRef.current.value;
     const userLogin = loginRef.current.value;
     const emailValidateRegularExpression = /[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]+/;
@@ -55,7 +55,7 @@ function SignIn() {
         <form
           action="#"
           className="sign-in__form"
-          onSubmit={handleSubmit}
+          onSubmit={handleFormSubmit}
         >
           <div className="sign-in__message">
             <p>{errorMessage}</p>

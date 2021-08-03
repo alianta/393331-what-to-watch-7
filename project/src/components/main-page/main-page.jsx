@@ -30,7 +30,7 @@ function MainPage() {
     dispatch(changeGenre(newGenre));
   };
 
-  const onFavoriteClick = () => {
+  const handleFavoriteChange = () => {
     dispatch(changeFilmFavoriteStatus(currentFilmId, filmOfDay.isFavorite? 0:1));
   };
 
@@ -110,7 +110,7 @@ function MainPage() {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button" onClick={onFavoriteClick}>
+                <button className="btn btn--list film-card__button" type="button" onClick={handleFavoriteChange}>
                   {filmOfDay.isFavorite && authorizationStatus === AuthorizationStatus.AUTH
                     ? (
                       <svg viewBox="0 0 18 14" width="18" height="14">

@@ -27,7 +27,7 @@ function Film() {
   const authorizationStatus = useSelector(getAuthorizationStatus);
   const isServerError = useSelector(getServerErrorStatus);
 
-  const onFavoriteClick = () => {
+  const handleFavoriteChange = () => {
     dispatch(changeFilmFavoriteStatus(id, filmData.isFavorite? 0:1));
   };
   const dispatch = useDispatch();
@@ -117,7 +117,7 @@ function Film() {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button" onClick={onFavoriteClick}>
+                <button className="btn btn--list film-card__button" type="button" onClick={handleFavoriteChange}>
                   {filmData.isFavorite
                     ? (
                       <svg viewBox="0 0 18 14" width="18" height="14">

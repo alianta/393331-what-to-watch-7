@@ -14,7 +14,7 @@ function AddReview () {
   const filmData = useSelector(getCurrentFilm);
   const isServerError = useSelector(getServerErrorStatus);
   const dispatch = useDispatch();
-  const onSubmit = (comment) => {
+  const handleFormSubmit = (comment) => {
     dispatch(addComment(comment));
   };
 
@@ -52,7 +52,7 @@ function AddReview () {
 
       <div className="add-review">
         <AddReviewForm film={filmData} onReview={(rating, review)=>{
-          onSubmit({
+          handleFormSubmit({
             rating: +rating,
             comment: review,
             filmId: id,

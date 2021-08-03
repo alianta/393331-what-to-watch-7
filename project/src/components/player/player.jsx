@@ -30,7 +30,7 @@ function Player (props) {
     };
   });
 
-  const onFullScreen = () => {
+  const handleFullScreenChange = () => {
     if (videoRef.current.requestFullscreen) {
       videoRef.current.requestFullscreen();
     }
@@ -85,7 +85,7 @@ function Player (props) {
           </button>
           <div className="player__name">{filmData.title}</div>
 
-          <button type="button" className="player__full-screen" onClick={onFullScreen}>
+          <button type="button" className="player__full-screen" onClick={handleFullScreenChange}>
             <svg viewBox="0 0 27 27" width="27" height="27">
               <use xlinkHref="#full-screen"></use>
             </svg>
